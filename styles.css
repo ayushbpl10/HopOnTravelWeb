@@ -164,7 +164,7 @@ body {
 /* ===== FEATURES ===== */
 .features { padding: 7rem 0; text-align: center; }
 .features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1rem;
 }
 .feature-card {
   background: var(--card); border: 1px solid var(--border); border-radius: 20px;
