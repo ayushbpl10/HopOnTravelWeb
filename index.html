@@ -10,8 +10,7 @@
   <meta property="og:image" content="./hero.png" />
   <meta property="og:url" content="https://AbTohGhoomLe.com" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   
   <!-- Structured Data for SEO -->
@@ -100,96 +99,43 @@
   </nav>
 
   <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <img src="./hero.png" alt="Scenic mountain road travel" class="hero-bg" />
-    <div class="hero-content">
-      <div class="hero-badge" data-i18n="hero_badge">🇮🇳 Made for India's Travellers</div>
-      <h1 class="hero-title" data-i18n="hero_title">Your Next <span class="gradient-text">Adventure</span><br/>Starts Here</h1>
-      <p class="hero-sub" data-i18n="hero_sub">Discover curated weekend treks, camping trips & group getaways across India — with live bus tracking, easy booking, and verified trip organizers.</p>
-      <div class="hero-actions">
-        <a href="#download" class="btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.98.07l12.36-6.89-2.93-2.93-10.41 9.75zM.5 1.05C.19 1.4 0 1.94 0 2.64v18.72c0 .7.19 1.24.51 1.59l.08.08 10.49-10.48v-.25L.58.97.5 1.05zM20.96 10.37l-2.95-1.65-3.27 3.28 3.27 3.28 2.98-1.67c.85-.48.85-1.26-.03-1.74zM4.16.24L16.52 7.1l-2.93 2.93L4.16.24z"/></svg>
-          Google Play
-        </a>
+  <!-- ===== HERO ===== -->
+  <section class="tmpl-hero" id="home">
+    <div class="tmpl-hero-overlay"></div>
+    <img src="hero_rickshaw.png" alt="Auto-rickshaw at palace" class="tmpl-hero-bg" />
+    <div class="tmpl-hero-content">
+      <div class="tmpl-small-text" data-i18n="hero_small">Life Bahut Ho Gayi,</div>
+      <h1 class="tmpl-main-title" data-i18n="hero_title">Ab Toh<br/>Ghoom Le!</h1>
+      <p class="tmpl-hero-desc" data-i18n="hero_desc">Escape the routine. Meet amazing people.<br/>Explore incredible places. Make memories.</p>
+      <div class="tmpl-hero-actions">
+        <a href="#book" class="tmpl-btn tmpl-btn-yellow" data-i18n="hero_cta">Explore Trips &rarr;</a>
+        <a href="#" class="tmpl-btn-play"><div class="tmpl-play-icon">&#9654;</div> <span data-i18n="hero_watch">Watch Story</span></a>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-i18n="stat_trips">Trips Listed</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">10K+</span><span class="stat-label" data-i18n="stat_travellers">Happy Travellers</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">50+</span><span class="stat-label" data-i18n="stat_vendors">Verified Vendors</span></div>
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-dot"></div>
-      <span>Scroll to explore</span>
     </div>
   </section>
 
-  <!-- ===== FEATURES ===== -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-label">Why Ab Toh Ghoom Le?</div>
-      <h2 class="section-title">Everything You Need for<br/><span class="gradient-text">Stress-Free Travel</span></h2>
-      <p class="section-sub">From booking your seat to tracking the live bus — we've got every step covered.</p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #00b0ff22, #00b0ff44);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#00b0ff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          </div>
-          <h3>Live Bus Tracking</h3>
-          <p>See the exact location of your bus on a live map. No more anxious waiting — know when your pickup is 5 minutes away.</p>
+  <!-- ===== SECTION 01: THE JOURNEY BEGINS ===== -->
+  <section class="tmpl-split-section" id="journey">
+    <div class="tmpl-split-left">
+      <img src="section1_road.png" alt="Mountain Road" class="tmpl-split-bg" />
+    </div>
+    <div class="tmpl-split-right">
+      <div class="tmpl-section-badge" data-i18n="journey_badge">01 THE JOURNEY BEGINS</div>
+      <h2 data-i18n="journey_title">It's not just a trip,<br/>It's an escape</h2>
+      <p data-i18n="journey_desc">Whether you're solo, with friends or your partner, there's always a seat for you.</p>
+      
+      <div class="tmpl-features">
+        <div class="tmpl-feature">
+          <div class="tmpl-feature-icon">&#9749;</div> <!-- Coffee cup -->
+          <span data-i18n="feat_1">Stress-free<br/>Getaways</span>
         </div>
-        <div class="feature-card feature-card--highlight">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #ff6b6b22, #ff6b6b44);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#ff6b6b"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/></svg>
-          </div>
-          <h3>Instant Booking</h3>
-          <p>Select your batch, choose a package, and confirm your seat instantly. Pay via UPI or WhatsApp the organizer directly.</p>
-          <div class="feature-badge">Popular</div>
+        <div class="tmpl-feature">
+          <div class="tmpl-feature-icon">&#128101;</div> <!-- People -->
+          <span data-i18n="feat_2">Community<br/>of Explorers</span>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #a78bfa22, #a78bfa44);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#a78bfa"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l6 2.67V11c0 3.83-2.62 7.42-6 8.93-3.38-1.51-6-5.1-6-8.93V7.67L12 5z"/></svg>
-          </div>
-          <h3>Verified Vendors</h3>
-          <p>Every trip organizer is verified. View their ratings, reviews, and complete crew details before you board.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #34d39922, #34d39944);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#34d399"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-          </div>
-          <h3>Group Coordination</h3>
-          <p>Join as a guest traveller and share your live location with the captain. No login needed — just enter your name.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #fbbf2422, #fbbf2444);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#fbbf24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
-          </div>
-          <h3>Flexible Schedules</h3>
-          <p>Multiple batches and departure dates for every trip. Pick the date that works for you and book in seconds.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #fb923c22, #fb923c44);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#fb923c"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-          </div>
-          <h3>Dynamic Packages</h3>
-          <p>Customize your experience with ease. Select from different packages and opt for add-ons like a couple's tent or non-veg meals.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #a78bfa22, #a78bfa44);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#a78bfa"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-          </div>
-          <h3>Digital Ticketing</h3>
-          <p>Access your complete booking history with 'My Bookings'. Generate beautiful ticket receipts to share with friends on WhatsApp instantly.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #ec489922, #ec489944);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#ec4899"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-          </div>
-          <h3>Multi-language Support</h3>
-          <p>Experience the app in your native language. Instantly switch between English, Hindi, Marathi, and Kannada.</p>
+        <div class="tmpl-feature">
+          <div class="tmpl-feature-icon">&#128179;</div> <!-- Wallet/Card -->
+          <span data-i18n="feat_3">Budget Friendly<br/>Adventures</span>
         </div>
       </div>
     </div>
@@ -232,188 +178,13 @@
     </div>
   </section>
 
-  <!-- ===== APP SHOWCASE ===== -->
-  <section class="showcase">
-    <div class="container showcase-inner">
-      <div class="showcase-text">
-        <div class="section-label">The App</div>
-        <h2 class="section-title">Everything in One<br/><span class="gradient-text">Powerful App</span></h2>
-        <ul class="showcase-list">
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Live Map Tracking</strong> — Watch the bus move in real-time on Google Maps</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Crew & Vehicle Details</strong> — See driver name, vehicle number, and a photo before boarding</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Detailed Trip Plans</strong> — Expandable day-by-day itineraries, inclusions, and exclusions</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Customizable Bookings</strong> — Select packages, pick add-ons, and adjust seats with dynamic pricing</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Digital Ticketing</strong> — Access 'My Bookings', generate premium receipts, and share them instantly</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Multi-language Support</strong> — Experience the app in English, Hindi, Marathi, and Kannada</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>Offline Mode</strong> — Access your upcoming bookings and tickets even without an internet connection</div>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <div><strong>AI Magic Import (Vendors)</strong> — Instantly create trip listings by pasting your raw WhatsApp broadcast message</div>
-          </li>
-        </ul>
-        <a href="#download" class="btn-primary" style="margin-top: 2rem; display: inline-flex;">Download Free App →</a>
-      </div>
-      <div class="showcase-phones">
-        <div class="phone-mockup phone-back">
-          <div class="phone-screen phone-screen--map">
-            <div class="mock-map">
-              <div class="mock-map-pin bus">🚌</div>
-              <div class="mock-map-pin user">📍</div>
-            </div>
-            <div class="mock-card">
-              <div class="mock-card-dot live"></div>
-              <span>LIVE Tracking Active</span>
-            </div>
-          </div>
-        </div>
-        <div class="phone-mockup phone-front">
-          <div class="phone-screen">
-            <div class="mock-header">
-              <span class="mock-search">🔍 Search trips...</span>
-            </div>
-            <div class="mock-chip-row">
-              <span class="mock-chip active">All</span>
-              <span class="mock-chip">Under ₹1000</span>
-              <span class="mock-chip">Camping</span>
-            </div>
-            <div class="mock-trip-card">
-              <div class="mock-trip-img" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
-                <span style="font-size:2rem">🏔️</span>
-              </div>
-              <div class="mock-trip-info">
-                <div class="mock-trip-title">Rajmachi Fireflies Trek</div>
-                <div class="mock-trip-meta">by Sahyadrikar · <strong style="color:#00b0ff">₹1,499</strong></div>
-                <div class="mock-trip-pill">11 seats left</div>
-              </div>
-            </div>
-            <div class="mock-trip-card" style="margin-top:10px">
-              <div class="mock-trip-img" style="background:linear-gradient(135deg,#0f3460,#533483)">
-                <span style="font-size:2rem">🏕️</span>
-              </div>
-              <div class="mock-trip-info">
-                <div class="mock-trip-title">Honnavar Beach Camping</div>
-                <div class="mock-trip-meta">by TripKarma · <strong style="color:#00b0ff">₹2,199</strong></div>
-                <div class="mock-trip-pill">4 seats left</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Removed old sections -->
 
-  <!-- ===== FOR VENDORS ===== -->
-  <section class="for-vendors" id="for-vendors">
+  <!-- ===== SECTION 02: PICK YOUR ESCAPE ===== -->
+  <section class="tmpl-book-section" id="book">
     <div class="container">
-      <div class="vendor-card-grid">
-        <div class="vendor-text">
-          <div class="section-label" style="color:#a78bfa">For Trip Organizers</div>
-          <h2 class="section-title" style="text-align:left">Grow Your Travel<br/><span style="background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Business with Us</span></h2>
-          <p style="color:#94a3b8;line-height:1.8;margin-bottom:2rem">Ab Toh Ghoom Le gives trip organizers a powerful vendor portal to manage listings, track bookings, start live trips, and reach thousands of travellers — all for free.</p>
-          <div class="vendor-features">
-            <div class="vendor-feat">
-              <span>✨</span> 
-              <div>
-                <strong>AI Magic Import</strong><br/>
-                <small>Paste a WhatsApp message and our Zero-Dependency Local Parser instantly extracts Title, Pricing, Dates, and Inclusions. Zero manual entry required.</small>
-              </div>
-            </div>
-            <div class="vendor-feat">
-              <span>📊</span> 
-              <div>
-                <strong>Hybrid Analytics Dashboard</strong><br/>
-                <small>See all bookings and views for free. Only upgrade to premium for deep demographic insights when you need them.</small>
-              </div>
-            </div>
-            <div class="vendor-feat">
-              <span>🔴</span> 
-              <div>
-                <strong>Live Trip Mode</strong><br/>
-                <small>Start live tracking, broadcast your location, and manage all travellers on a live map.</small>
-              </div>
-            </div>
-            <div class="vendor-feat">
-              <span>🛡️</span> 
-              <div>
-                <strong>Fallback Architecture</strong><br/>
-                <small>Our dual-layer parsing system ensures that API unavailabilities never block your workflow. Always fast, always reliable.</small>
-              </div>
-            </div>
-          </div>
-          <a href="#download" class="btn-vendor">Sign Up as a Vendor →</a>
-        </div>
-        <div class="vendor-visual">
-          <div class="vendor-stat-card">
-            <div class="vsc-icon">🚌</div>
-            <div class="vsc-text">
-              <div class="vsc-num">24</div>
-              <div class="vsc-label">Active Trips</div>
-            </div>
-          </div>
-          <div class="vendor-stat-card" style="margin-top:1rem">
-            <div class="vsc-icon">👥</div>
-            <div class="vsc-text">
-              <div class="vsc-num">348</div>
-              <div class="vsc-label">Total Bookings</div>
-            </div>
-          </div>
-          <div class="vendor-stat-card" style="margin-top:1rem">
-            <div class="vsc-icon">⭐</div>
-            <div class="vsc-text">
-              <div class="vsc-num">4.8</div>
-              <div class="vsc-label">Average Rating</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DOWNLOAD ===== -->
-  <section class="download" id="download">
-    <div class="download-bg-circle c1"></div>
-    <div class="download-bg-circle c2"></div>
-    <div class="container download-inner">
-      <div class="download-icon">🏔️</div>
-      <h2 class="download-title">Ready for Your Next<br/><span class="gradient-text">Adventure?</span></h2>
-      <p class="download-sub">Download Ab Toh Ghoom Le free on Android. Discover trips, track your bus live, and make memories that last a lifetime.</p>
-      <div class="download-btns">
-        <a href="#" class="btn-download">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.3.17.65.19.98.07l12.36-6.89-2.93-2.93-10.41 9.75zM.5 1.05C.19 1.4 0 1.94 0 2.64v18.72c0 .7.19 1.24.51 1.59l.08.08 10.49-10.48v-.25L.58.97.5 1.05zM20.96 10.37l-2.95-1.65-3.27 3.28 3.27 3.28 2.98-1.67c.85-.48.85-1.26-.03-1.74zM4.16.24L16.52 7.1l-2.93 2.93L4.16.24z"/></svg>
-          <div><small>Get it on</small><strong>Google Play</strong></div>
-        </a>
-      </div>
-      <p class="download-note">Free to download · No sign-up required to browse trips</p>
-    </div>
-  </section>
-
-  <!-- ===== BOOK A TRIP ===== -->
-  <section class="book-section" id="book">
-    <div class="container">
-      <div class="section-label" data-i18n="book_label">Book Online</div>
-      <h2 class="section-title" style="text-align:center" data-i18n="book_title">Find Your <span class="gradient-text">Perfect Trip</span></h2>
-      <p class="section-sub" data-i18n="book_sub">Browse real trips, fill your details, and get your booking ID instantly. Same database as the app.</p>
+      <div class="tmpl-section-badge" data-i18n="book_badge">02 PICK YOUR ESCAPE</div>
+      <h2 class="tmpl-section-title" data-i18n="book_title">Handpicked trips<br/>for every kind of<br/>traveller</h2>
 
       <!-- Step Indicators -->
       <div class="book-steps-indicator">
@@ -521,6 +292,27 @@
           <p class="book-ticket-note">📌 Save your Booking ID. You can check your status on the app's "Booking Status" screen at any time.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 03: MORE THAN TRAVEL ===== -->
+  <section class="tmpl-community-section" id="community">
+    <img src="section3_campfire.png" alt="Campfire Community" class="tmpl-bg-img" />
+    <div class="tmpl-content-left">
+      <div class="tmpl-section-badge" data-i18n="comm_badge">03 MORE THAN TRAVEL</div>
+      <h2 data-i18n="comm_title">It's a community<br/>that feels like<br/>home</h2>
+      <p data-i18n="comm_desc">Come solo, leave with stories and friends for life.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 04: COLLECT MOMENTS ===== -->
+  <section class="tmpl-collect-section" id="collect">
+    <img src="section4_group.png" alt="Group in mountains" class="tmpl-bg-img" />
+    <div class="tmpl-content-left">
+      <div class="tmpl-section-badge" data-i18n="coll_badge">04 THE DESTINATION IS JUST THE BEGINNING</div>
+      <h2 data-i18n="coll_title">Collect moments,<br/>not things</h2>
+      <p data-i18n="coll_desc">Every trip writes a story. What's your next chapter?</p>
+      <a href="#book" class="tmpl-btn tmpl-btn-yellow" style="margin-top:2rem" data-i18n="coll_cta">Book Your Escape &rarr;</a>
     </div>
   </section>
 

@@ -1,80 +1,92 @@
 // ===== i18n (Internationalization) =====
 const translations = {
   en: {
-    nav_features: "Features",
-    nav_how_it_works: "How It Works",
-    nav_book_now: "Book Now",
-    nav_for_vendors: "For Vendors",
-    nav_contact: "Contact",
-    nav_book_a_trip: "Book a Trip",
-    hero_badge: "🇮🇳 Made for India's Travellers",
-    hero_title: "Your Next <span class=\"gradient-text\">Adventure</span><br/>Starts Here",
-    hero_sub: "Discover curated weekend treks, camping trips & group getaways across India — with live bus tracking, easy booking, and verified trip organizers.",
-    stat_trips: "Trips Listed",
-    stat_travellers: "Happy Travellers",
-    stat_vendors: "Verified Vendors",
-    hiw_label: "Simple Process",
-    hiw_title: "Go from Browsing to<br/><span class=\"gradient-text\">Boarding in Minutes</span>",
-    book_label: "Book Online",
-    book_title: "Find Your <span class=\"gradient-text\">Perfect Trip</span>",
-    book_sub: "Browse real trips, fill your details, and get your booking ID instantly. Same database as the app."
+    hero_small: "Life Bahut Ho Gayi,",
+    hero_title: "Ab Toh<br/>Ghoom Le!",
+    hero_desc: "Escape the routine. Meet amazing people.<br/>Explore incredible places. Make memories.",
+    hero_cta: "Explore Trips &rarr;",
+    hero_watch: "Watch Story",
+    journey_badge: "01 THE JOURNEY BEGINS",
+    journey_title: "It's not just a trip,<br/>It's an escape",
+    journey_desc: "Whether you're solo, with friends or your partner, there's always a seat for you.",
+    feat_1: "Stress-free<br/>Getaways",
+    feat_2: "Community<br/>of Explorers",
+    feat_3: "Budget Friendly<br/>Adventures",
+    book_badge: "02 PICK YOUR ESCAPE",
+    book_title: "Handpicked trips<br/>for every kind of<br/>traveller",
+    comm_badge: "03 MORE THAN TRAVEL",
+    comm_title: "It's a community<br/>that feels like<br/>home",
+    comm_desc: "Come solo, leave with stories and friends for life.",
+    coll_badge: "04 THE DESTINATION IS JUST THE BEGINNING",
+    coll_title: "Collect moments,<br/>not things",
+    coll_desc: "Every trip writes a story. What's your next chapter?",
+    coll_cta: "Book Your Escape &rarr;"
   },
   hi: {
-    nav_features: "विशेषताएं",
-    nav_how_it_works: "यह कैसे काम करता है",
-    nav_book_now: "अभी बुक करें",
-    nav_for_vendors: "विक्रेताओं के लिए",
-    nav_contact: "संपर्क करें",
-    nav_book_a_trip: "ट्रिप बुक करें",
-    hero_badge: "🇮🇳 भारत के यात्रियों के लिए निर्मित",
-    hero_title: "आपका अगला <span class=\"gradient-text\">रोमांच</span><br/>यहाँ से शुरू होता है",
-    hero_sub: "भारत भर में चुनिंदा वीकेंड ट्रेक, कैंपिंग ट्रिप और ग्रुप गेटवे खोजें — लाइव बस ट्रैकिंग, आसान बुकिंग और सत्यापित ट्रिप आयोजकों के साथ।",
-    stat_trips: "सूचीबद्ध ट्रिप",
-    stat_travellers: "संतुष्ट यात्री",
-    stat_vendors: "सत्यापित विक्रेता",
-    hiw_label: "सरल प्रक्रिया",
-    hiw_title: "ब्राउज़िंग से<br/><span class=\"gradient-text\">मिनटों में बोर्डिंग तक जाएं</span>",
-    book_label: "ऑनलाइन बुक करें",
-    book_title: "अपना <span class=\"gradient-text\">परफेक्ट ट्रिप</span> खोजें",
-    book_sub: "असली ट्रिप ब्राउज़ करें, अपना विवरण भरें, और तुरंत अपनी बुकिंग आईडी प्राप्त करें।"
+    hero_small: "ज़िंदगी बहुत हो गई,",
+    hero_title: "अब तो<br/>घूम ले!",
+    hero_desc: "रूटीन से बचें। अद्भुत लोगों से मिलें।<br/>अविश्वसनीय जगहों की खोज करें। यादें बनाएं।",
+    hero_cta: "ट्रिप्स खोजें &rarr;",
+    hero_watch: "कहानी देखें",
+    journey_badge: "01 यात्रा शुरू होती है",
+    journey_title: "यह सिर्फ एक यात्रा नहीं है,<br/>यह एक पलायन है",
+    journey_desc: "चाहे आप अकेले हों, दोस्तों या अपने साथी के साथ, आपके लिए हमेशा एक सीट होती है।",
+    feat_1: "तनाव मुक्त<br/>छुट्टियां",
+    feat_2: "खोजकर्ताओं का<br/>समुदाय",
+    feat_3: "बजट के अनुकूल<br/>रोमांच",
+    book_badge: "02 अपना पलायन चुनें",
+    book_title: "हर तरह के यात्री के लिए<br/>चुने हुए ट्रिप",
+    comm_badge: "03 यात्रा से अधिक",
+    comm_title: "यह एक समुदाय है<br/>जो घर जैसा लगता है",
+    comm_desc: "अकेले आएं, जीवन भर की कहानियों और दोस्तों के साथ जाएं।",
+    coll_badge: "04 मंजिल सिर्फ एक शुरुआत है",
+    coll_title: "क्षणों को इकट्ठा करें,<br/>चीजों को नहीं",
+    coll_desc: "हर यात्रा एक कहानी लिखती है। आपका अगला अध्याय क्या है?",
+    coll_cta: "अपनी यात्रा बुक करें &rarr;"
   },
   mr: {
-    nav_features: "वैशिष्ट्ये",
-    nav_how_it_works: "हे कसे कार्य करते",
-    nav_book_now: "आता बुक करा",
-    nav_for_vendors: "विक्रेत्यांसाठी",
-    nav_contact: "संपर्क",
-    nav_book_a_trip: "ट्रिप बुक करा",
-    hero_badge: "🇮🇳 भारताच्या प्रवाशांसाठी निर्मित",
-    hero_title: "तुमचा पुढचा <span class=\"gradient-text\">रोमांच</span><br/>येथून सुरू होतो",
-    hero_sub: "संपूर्ण भारतात निवडक वीकेंड ट्रेक, कॅम्पिंग ट्रिप आणि ग्रुप गेटवे शोधा — थेट बस ट्रॅकिंग, सोपे बुकिंग आणि सत्यापित ट्रिप आयोजकांसह।",
-    stat_trips: "सूचीबद्ध ट्रिप",
-    stat_travellers: "आनंदी प्रवासी",
-    stat_vendors: "सत्यापित विक्रेते",
-    hiw_label: "सोपी प्रक्रिया",
-    hiw_title: "शोधण्यापासून<br/><span class=\"gradient-text\">काही मिनिटांत प्रवासापर्यंत</span>",
-    book_label: "ऑनलाइन बुकिंग",
-    book_title: "तुमची <span class=\"gradient-text\">परफेक्ट ट्रिप</span> शोधा",
-    book_sub: "खऱ्या ट्रिप पहा, तुमचे तपशील भरा आणि लगेच तुमचा बुकिंग आयडी मिळवा."
+    hero_small: "आयुष्य खूप झालं,",
+    hero_title: "आता तर<br/>फिरून घे!",
+    hero_desc: "नियमिततेतून बाहेर पडा. अद्भुत लोकांना भेटा.<br/>अविश्वसनीय ठिकाणे एक्सप्लोर करा. आठवणी बनवा.",
+    hero_cta: "ट्रिप्स एक्सप्लोर करा &rarr;",
+    hero_watch: "कथा पहा",
+    journey_badge: "01 प्रवास सुरू होतो",
+    journey_title: "ही फक्त एक ट्रिप नाही,<br/>ही एक सुटका आहे",
+    journey_desc: "तुम्ही एकटे असाल, मित्रांसोबत किंवा तुमच्या जोडीदारासोबत, तुमच्यासाठी नेहमीच एक जागा असते.",
+    feat_1: "तणावमुक्त<br/>सुट्ट्या",
+    feat_2: "अन्वेषकांचा<br/>समुदाय",
+    feat_3: "बजेटसाठी अनुकूल<br/>साहस",
+    book_badge: "02 तुमची सुटका निवडा",
+    book_title: "प्रत्येक प्रकारच्या प्रवाशासाठी<br/>निवडक ट्रिप्स",
+    comm_badge: "03 प्रवासापेक्षा अधिक",
+    comm_title: "हा एक समुदाय आहे<br/>जो घरासारखा वाटतो",
+    comm_desc: "एकटे या, आयुष्यभराच्या कथा आणि मित्रांसह जा.",
+    coll_badge: "04 गंतव्यस्थान ही फक्त एक सुरुवात आहे",
+    coll_title: "क्षण गोळा करा,<br/>वस्तू नाही",
+    coll_desc: "प्रत्येक ट्रिप एक कथा लिहिते. तुमचा पुढचा अध्याय कोणता आहे?",
+    coll_cta: "तुमची ट्रिप बुक करा &rarr;"
   },
   kn: {
-    nav_features: "ವೈಶಿಷ್ಟ್ಯಗಳು",
-    nav_how_it_works: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
-    nav_book_now: "ಈಗ ಬುಕ್ ಮಾಡಿ",
-    nav_for_vendors: "ಮಾರಾಟಗಾರರಿಗೆ",
-    nav_contact: "ಸಂಪರ್ಕಿಸಿ",
-    nav_book_a_trip: "ಟ್ರಿಪ್ ಬುಕ್ ಮಾಡಿ",
-    hero_badge: "🇮🇳 ಭಾರತದ ಪ್ರಯಾಣಿಕರಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ",
-    hero_title: "ನಿಮ್ಮ ಮುಂದಿನ <span class=\"gradient-text\">ಸಾಹಸ</span><br/>ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ",
-    hero_sub: "ಭಾರತದಾದ್ಯಂತ ಆಯ್ದ ವಾರಾಂತ್ಯದ ಟ್ರೆಕ್‌ಗಳು, ಕ್ಯಾಂಪಿಂಗ್ ಟ್ರಿಪ್‌ಗಳು ಮತ್ತು ಗುಂಪು ಗೆಟ್‌ವೇಗಳನ್ನು ಅನ್ವೇಷಿಸಿ — ಲೈವ್ ಬಸ್ ಟ್ರ್ಯಾಕಿಂಗ್, ಸುಲಭ ಬುಕಿಂಗ್ ಮತ್ತು ಪರಿಶೀಲಿಸಿದ ಟ್ರಿಪ್ ಸಂಘಟಕರೊಂದಿಗೆ.",
-    stat_trips: "ಪಟ್ಟಿ ಮಾಡಲಾದ ಪ್ರವಾಸಗಳು",
-    stat_travellers: "ಸಂತೋಷದ ಪ್ರಯಾಣಿಕರು",
-    stat_vendors: "ಪರಿಶೀಲಿಸಿದ ಮಾರಾಟಗಾರರು",
-    hiw_label: "ಸರಳ ಪ್ರಕ್ರಿಯೆ",
-    hiw_title: "ಹುಡುಕುವುದರಿಂದ<br/><span class=\"gradient-text\">ಕೆಲವೇ ನಿಮಿಷಗಳಲ್ಲಿ ಪ್ರಯಾಣದವರೆಗೆ</span>",
-    book_label: "ಆನ್‌ಲೈನ್ ಬುಕ್ ಮಾಡಿ",
-    book_title: "ನಿಮ್ಮ <span class=\"gradient-text\">ಪರ್ಫೆಕ್ಟ್ ಟ್ರಿಪ್</span> ಹುಡುಕಿ",
-    book_sub: "ನೈಜ ಪ್ರವಾಸಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ, ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ತಕ್ಷಣವೇ ನಿಮ್ಮ ಬುಕಿಂಗ್ ಐಡಿ ಪಡೆಯಿರಿ."
+    hero_small: "ಜೀವನ ತುಂಬಾ ಆಯಿತು,",
+    hero_title: "ಈಗಲಾದರೂ<br/>ತಿರುಗಾಡು!",
+    hero_desc: "ದಿನಚರಿಯಿಂದ ತಪ್ಪಿಸಿಕೊಳ್ಳಿ. ಅದ್ಭುತ ಜನರನ್ನು ಭೇಟಿ ಮಾಡಿ.<br/>ನಂಬಲಾಗದ ಸ್ಥಳಗಳನ್ನು ಅನ್ವೇಷಿಸಿ. ನೆನಪುಗಳನ್ನು ಮಾಡಿ.",
+    hero_cta: "ಟ್ರಿಪ್‌ಗಳನ್ನು ಅನ್ವೇಷಿಸಿ &rarr;",
+    hero_watch: "ಕಥೆ ವೀಕ್ಷಿಸಿ",
+    journey_badge: "01 ಪ್ರಯಾಣ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ",
+    journey_title: "ಇದು ಕೇವಲ ಟ್ರಿಪ್ ಅಲ್ಲ,<br/>ಇದು ಒಂದು ಪಲಾಯನ",
+    journey_desc: "ನೀವು ಒಂಟಿಯಾಗಿರಲಿ, ಸ್ನೇಹಿತರೊಂದಿಗೆ ಅಥವಾ ನಿಮ್ಮ ಸಂಗಾತಿಯೊಂದಿಗೆ ಇರಲಿ, ನಿಮಗಾಗಿ ಯಾವಾಗಲೂ ಒಂದು ಆಸನವಿರುತ್ತದೆ.",
+    feat_1: "ಒತ್ತಡ ರಹಿತ<br/>ರಜೆಗಳು",
+    feat_2: "ಅನ್ವೇಷಕರ<br/>ಸಮುದಾಯ",
+    feat_3: "ಬಜೆಟ್ ಸ್ನೇಹಿ<br/>ಸಾಹಸಗಳು",
+    book_badge: "02 ನಿಮ್ಮ ಪಲಾಯನವನ್ನು ಆರಿಸಿ",
+    book_title: "ಪ್ರತಿಯೊಂದು ರೀತಿಯ ಪ್ರಯಾಣಿಕರಿಗಾಗಿ<br/>ಆಯ್ದ ಟ್ರಿಪ್‌ಗಳು",
+    comm_badge: "03 ಪ್ರಯಾಣಕ್ಕಿಂತ ಹೆಚ್ಚು",
+    comm_title: "ಇದು ಮನೆಯಂತೆ ಭಾಸವಾಗುವ<br/>ಸಮುದಾಯ",
+    comm_desc: "ಒಂಟಿಯಾಗಿ ಬನ್ನಿ, ಜೀವನಪರ್ಯಂತ ಕಥೆಗಳು ಮತ್ತು ಸ್ನೇಹಿತರೊಂದಿಗೆ ಹೋಗಿ.",
+    coll_badge: "04 ಗಮ್ಯಸ್ಥಾನವು ಕೇವಲ ಒಂದು ಆರಂಭ",
+    coll_title: "ಕ್ಷಣಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ,<br/>ವಸ್ತುಗಳನ್ನಲ್ಲ",
+    coll_desc: "ಪ್ರತಿ ಟ್ರಿಪ್ ಒಂದು ಕಥೆಯನ್ನು ಬರೆಯುತ್ತದೆ. ನಿಮ್ಮ ಮುಂದಿನ ಅಧ್ಯಾಯ ಯಾವುದು?",
+    coll_cta: "ನಿಮ್ಮ ಟ್ರಿಪ್ ಬುಕ್ ಮಾಡಿ &rarr;"
   }
 };
 
@@ -387,59 +399,60 @@ function initAnimations() {
 
   // 1. Hero Content Load Animation
   const heroTimeline = gsap.timeline();
-  heroTimeline.from('.hero-badge', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 })
-              .from('.hero-title', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
-              .from('.hero-sub', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-              .from('.hero-actions', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
+  heroTimeline.from('.tmpl-small-text', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 })
+              .from('.tmpl-main-title', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
+              .from('.tmpl-hero-desc', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+              .from('.tmpl-hero-actions', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6');
 
-  // 2. Hero Background Parallax
-  gsap.to('.hero-bg', {
-    yPercent: 30,
-    ease: "none",
+  // 2. Split Section Reveal (Journey)
+  gsap.from('.tmpl-split-right > *', {
     scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  // 3. Staggered Stats Reveal
-  gsap.from('.stat', {
-    scrollTrigger: {
-      trigger: '.hero-stats',
-      start: 'top 85%'
+      trigger: '.tmpl-split-section',
+      start: 'top 70%'
     },
-    y: 40,
+    y: 30,
     opacity: 0,
     duration: 0.8,
-    stagger: 0.2,
-    ease: 'back.out(1.7)'
+    stagger: 0.15,
+    ease: 'power3.out'
   });
 
-  // 4. Feature Cards Staggered Reveal
-  gsap.from('.feature-card', {
+  // 3. Book Section Reveal
+  gsap.from('.tmpl-book-section h2, .book-search-row', {
     scrollTrigger: {
-      trigger: '.features',
+      trigger: '.tmpl-book-section',
       start: 'top 75%'
     },
-    y: 50,
+    y: 30,
     opacity: 0,
     duration: 0.8,
     stagger: 0.1,
     ease: 'power3.out'
   });
 
-  // 5. How It Works Steps Sequence
-  gsap.from('.step', {
+  // 4. Community Section Reveal
+  gsap.from('.tmpl-community-section .tmpl-content-left > *', {
     scrollTrigger: {
-      trigger: '.steps',
-      start: 'top 80%'
+      trigger: '.tmpl-community-section',
+      start: 'top 70%'
     },
     x: -30,
     opacity: 0,
     duration: 0.8,
-    stagger: 0.3,
+    stagger: 0.15,
+    ease: 'power3.out'
+  });
+
+  // 5. Collect Moments Section Reveal
+  gsap.from('.tmpl-collect-section .tmpl-content-left > *', {
+    scrollTrigger: {
+      trigger: '.tmpl-collect-section',
+      start: 'top 70%'
+    },
+    x: -30,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15,
     ease: 'power3.out'
   });
 }
