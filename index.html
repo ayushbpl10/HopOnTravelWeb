@@ -35,6 +35,30 @@
     ]
   }
   </script>
+
+  <!-- Firebase SDK via CDN (same project as app) -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCndctKLDOwiT08SYLlB4L2tLQ9roU6948",
+      authDomain: "hopontravel-ddd9b.firebaseapp.com",
+      projectId: "hopontravel-ddd9b",
+      storageBucket: "hopontravel-ddd9b.firebasestorage.app",
+      messagingSenderId: "792083213033",
+      appId: "1:792083213033:web:25bc2d1ed9e6d779015e78"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Expose to global scope for booking script
+    window._fbApp = { db, auth, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, signInAnonymously };
+    window.dispatchEvent(new Event('firebase-ready'));
+  </script>
 </head>
 <body>
 
@@ -45,12 +69,23 @@
         <span class="logo-hop">AbToh</span><span class="logo-on">Ghoom</span><span class="logo-travel">Le</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#for-vendors">For Vendors</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+        <li><a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li><a href="#book" data-i18n="nav_book_now">Book Now</a></li>
+        <li><a href="#for-vendors" data-i18n="nav_for_vendors">For Vendors</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        <li>
+          <div class="lang-selector">
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+              <option value="en">English</option>
+              <option value="hi">हिंदी</option>
+              <option value="mr">मराठी</option>
+              <option value="kn">ಕನ್ನಡ</option>
+            </select>
+          </div>
+        </li>
       </ul>
-      <a href="#download" class="nav-cta">Download App</a>
+      <a href="#book" class="nav-cta" data-i18n="nav_book_a_trip">Book a Trip</a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -69,9 +104,9 @@
     <div class="hero-overlay"></div>
     <img src="./hero.png" alt="Scenic mountain road travel" class="hero-bg" />
     <div class="hero-content">
-      <div class="hero-badge">🇮🇳 Made for India's Travellers</div>
-      <h1 class="hero-title">Your Next <span class="gradient-text">Adventure</span><br/>Starts Here</h1>
-      <p class="hero-sub">Discover curated weekend treks, camping trips & group getaways across India — with live bus tracking, easy booking, and verified trip organizers.</p>
+      <div class="hero-badge" data-i18n="hero_badge">🇮🇳 Made for India's Travellers</div>
+      <h1 class="hero-title" data-i18n="hero_title">Your Next <span class="gradient-text">Adventure</span><br/>Starts Here</h1>
+      <p class="hero-sub" data-i18n="hero_sub">Discover curated weekend treks, camping trips & group getaways across India — with live bus tracking, easy booking, and verified trip organizers.</p>
       <div class="hero-actions">
         <a href="#download" class="btn-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.98.07l12.36-6.89-2.93-2.93-10.41 9.75zM.5 1.05C.19 1.4 0 1.94 0 2.64v18.72c0 .7.19 1.24.51 1.59l.08.08 10.49-10.48v-.25L.58.97.5 1.05zM20.96 10.37l-2.95-1.65-3.27 3.28 3.27 3.28 2.98-1.67c.85-.48.85-1.26-.03-1.74zM4.16.24L16.52 7.1l-2.93 2.93L4.16.24z"/></svg>
@@ -79,11 +114,11 @@
         </a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Trips Listed</span></div>
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-i18n="stat_trips">Trips Listed</span></div>
         <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">10K+</span><span class="stat-label">Happy Travellers</span></div>
+        <div class="stat"><span class="stat-num">10K+</span><span class="stat-label" data-i18n="stat_travellers">Happy Travellers</span></div>
         <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Verified Vendors</span></div>
+        <div class="stat"><span class="stat-num">50+</span><span class="stat-label" data-i18n="stat_vendors">Verified Vendors</span></div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -163,8 +198,8 @@
   <!-- ===== HOW IT WORKS ===== -->
   <section class="how-it-works" id="how-it-works">
     <div class="container">
-      <div class="section-label">Simple Process</div>
-      <h2 class="section-title">Go from Browsing to<br/><span class="gradient-text">Boarding in Minutes</span></h2>
+      <div class="section-label" data-i18n="hiw_label">Simple Process</div>
+      <h2 class="section-title" data-i18n="hiw_title">Go from Browsing to<br/><span class="gradient-text">Boarding in Minutes</span></h2>
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
@@ -373,6 +408,122 @@
     </div>
   </section>
 
+  <!-- ===== BOOK A TRIP ===== -->
+  <section class="book-section" id="book">
+    <div class="container">
+      <div class="section-label" data-i18n="book_label">Book Online</div>
+      <h2 class="section-title" style="text-align:center" data-i18n="book_title">Find Your <span class="gradient-text">Perfect Trip</span></h2>
+      <p class="section-sub" data-i18n="book_sub">Browse real trips, fill your details, and get your booking ID instantly. Same database as the app.</p>
+
+      <!-- Step Indicators -->
+      <div class="book-steps-indicator">
+        <div class="bsi-step active" id="bsi-1"><span class="bsi-num">1</span><span class="bsi-label">Choose Trip</span></div>
+        <div class="bsi-line"></div>
+        <div class="bsi-step" id="bsi-2"><span class="bsi-num">2</span><span class="bsi-label">Your Details</span></div>
+        <div class="bsi-line"></div>
+        <div class="bsi-step" id="bsi-3"><span class="bsi-num">3</span><span class="bsi-label">Confirmation</span></div>
+      </div>
+
+      <!-- Step 1: Browse Trips -->
+      <div class="book-panel" id="step-1">
+        <div class="book-search-row">
+          <input type="text" id="tripSearch" class="book-search-input" placeholder="🔍  Search trips by name..." oninput="filterWebTrips(this.value)" />
+        </div>
+        <div id="tripsLoadingMsg" class="book-loading">
+          <div class="book-spinner"></div>
+          <span>Loading trips from database...</span>
+        </div>
+        <div id="tripsErrorMsg" class="book-error" style="display:none">
+          ⚠️ Could not load trips. Please check your internet connection and try again.
+        </div>
+        <div class="web-trips-grid" id="webTripsGrid"></div>
+      </div>
+
+      <!-- Step 2: Traveller Details -->
+      <div class="book-panel" id="step-2" style="display:none">
+        <div class="book-form-header">
+          <button class="book-back-btn" onclick="goToStep(1)">← Back to Trips</button>
+          <div class="selected-trip-badge" id="selectedTripBadge"></div>
+        </div>
+        <div class="book-form-grid">
+          <div class="book-form-left">
+            <h3 class="book-form-title">Select Package & Batch</h3>
+            <div class="book-field">
+              <label class="book-label">Departure Batch *</label>
+              <select id="batchSelect" class="book-select"></select>
+            </div>
+            <div class="book-field">
+              <label class="book-label">Package *</label>
+              <select id="packageSelect" class="book-select" onchange="updatePriceDisplay()"></select>
+            </div>
+            <div class="book-field">
+              <label class="book-label">Number of Travellers *</label>
+              <input type="number" id="seatsInput" class="book-input" value="1" min="1" max="10" onchange="updatePriceDisplay()" />
+            </div>
+            <div class="book-price-box">
+              <span class="book-price-label">Total Amount</span>
+              <span class="book-price-value" id="priceDisplay">₹0</span>
+            </div>
+          </div>
+          <div class="book-form-right">
+            <h3 class="book-form-title">Traveller Details</h3>
+            <div class="book-field">
+              <label class="book-label">Full Name *</label>
+              <input type="text" id="travelerName" class="book-input" placeholder="Your full name" />
+            </div>
+            <div class="book-field">
+              <label class="book-label">WhatsApp Number *</label>
+              <input type="tel" id="travelerPhone" class="book-input" placeholder="+91 98765 43210" />
+            </div>
+            <div class="book-field">
+              <label class="book-label">Email Address *</label>
+              <input type="email" id="travelerEmail" class="book-input" placeholder="you@example.com" />
+            </div>
+            <div class="book-consent">
+              <input type="checkbox" id="consentCheck" class="book-checkbox" />
+              <label for="consentCheck" class="book-consent-label">I understand and accept the risks involved in treks or physically demanding activities.</label>
+            </div>
+            <div class="book-captcha">
+              <label class="book-label">Security Check: <span id="captchaQ" class="book-captcha-q"></span> = ?</label>
+              <input type="number" id="captchaAns" class="book-input" placeholder="Your answer" style="max-width:120px" />
+            </div>
+            <button class="book-submit-btn" id="bookSubmitBtn" onclick="submitWebBooking()">Confirm Booking →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Confirmation Ticket -->
+      <div class="book-panel" id="step-3" style="display:none">
+        <div class="book-ticket">
+          <div class="book-ticket-header">
+            <span>🎉 BOOKING CONFIRMED</span>
+            <div class="book-ticket-status confirmed">PENDING PAYMENT</div>
+          </div>
+          <div class="book-ticket-body">
+            <div class="book-ticket-row"><span>Traveller</span><strong id="conf-name"></strong></div>
+            <div class="book-ticket-row"><span>Trip</span><strong id="conf-trip"></strong></div>
+            <div class="book-ticket-row"><span>Package</span><strong id="conf-package"></strong></div>
+            <div class="book-ticket-row"><span>Seats</span><strong id="conf-seats"></strong></div>
+            <div class="book-ticket-row total-row"><span>Total</span><strong id="conf-total" class="conf-price"></strong></div>
+          </div>
+          <div class="book-ticket-divider"><div class="notch left"></div><div class="notch right"></div></div>
+          <div class="book-ticket-footer">
+            <div class="book-ticket-id-label">Booking ID</div>
+            <div class="book-ticket-id" id="conf-bookingId"></div>
+          </div>
+          <div class="book-ticket-actions">
+            <a id="conf-whatsapp" href="#" class="book-wa-btn" target="_blank">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pay via WhatsApp
+            </a>
+            <button class="book-new-btn" onclick="goToStep(1); document.getElementById('step-1').scrollIntoView({behavior:'smooth'})">Book Another Trip</button>
+          </div>
+          <p class="book-ticket-note">📌 Save your Booking ID. You can check your status on the app's "Booking Status" screen at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="contact">
     <div class="container footer-inner">
@@ -424,6 +575,8 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
