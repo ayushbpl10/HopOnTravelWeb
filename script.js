@@ -334,14 +334,19 @@ async function submitWebBooking() {
 
     await addDoc(collection(db, 'bookings'), bookingData);
 
-    // Update bookedSeats on the trip batch
-    const tripRef = doc(db, 'trips', _selectedTrip.id);
-    const tripSnap = await getDoc(tripRef);
-    if (tripSnap.exists()) {
-      const updatedBatches = tripSnap.data().batches.map(b =>
-        b.id === batchId ? { ...b, bookedSeats: b.bookedSeats + seats } : b
-      );
-      await updateDoc(tripRef, { batches: updatedBatches });
+    // Update bookedSeats on the trip batch (best-effort — may fail if
+    // Firestore rules don't allow anonymous users to update trips)
+    try {
+      const tripRef = doc(db, 'trips', _selectedTrip.id);
+      const tripSnap = await getDoc(tripRef);
+      if (tripSnap.exists()) {
+        const updatedBatches = tripSnap.data().batches.map(b =>
+          b.id === batchId ? { ...b, bookedSeats: b.bookedSeats + seats } : b
+        );
+        await updateDoc(tripRef, { batches: updatedBatches });
+      }
+    } catch (seatErr) {
+      console.warn('Could not update seat count (non-fatal):', seatErr.message);
     }
 
     // Populate confirmation ticket
