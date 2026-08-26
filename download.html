@@ -38,8 +38,9 @@
     .nav-logo span:first-child { color: #fff; }
     .nav-logo span:nth-child(2) { color: #FFB800; }
     .nav-logo span:last-child { color: #555; font-weight: 400; font-size: 0.95rem; }
-    nav a.back { color: #666; font-size: 0.875rem; text-decoration: none; transition: color 0.2s; }
-    nav a.back:hover { color: #fff; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
 
     /* WRAPPER */
     .page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 7rem 1.5rem 4rem; }
@@ -180,7 +181,9 @@
     <a href="index.html" class="nav-logo">
       <span>AbToh</span><span>Ghoom</span><span>Le</span>
     </a>
-    <a href="index.html" class="back">← Back to Home</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+    </div>
   </nav>
 
   <div class="page">
