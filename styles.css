@@ -101,7 +101,7 @@ body {
 .lang-selector select option { background: var(--bg); color: var(--text); }
 
 .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow-shadow); background: var(--gradient-hover); }
-.hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; position: relative; width: 34px; height: 34px; justify-content: center; }
+.hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; position: relative; width: 34px; height: 34px; justify-content: center; margin-left: auto; }
 .hamburger span { width: 24px; height: 2px; background: var(--text); display: block; border-radius: 2px; transition: all .3s ease-in-out; position: absolute; }
 .hamburger span:nth-child(1) { top: 10px; }
 .hamburger span:nth-child(2) { top: 16px; }
@@ -727,14 +727,94 @@ body {
 }
 
 @media (max-width: 768px) {
-  .tmpl-main-title { font-size: 4rem; }
-  .tmpl-split-section { flex-direction: column; height: auto; }
-  .tmpl-split-left { height: 40vh; }
-  .tmpl-split-right { padding: 40px 20px; }
+  /* Hero */
+  .tmpl-main-title { font-size: 3.5rem; }
+  .tmpl-small-text { font-size: 1.2rem; }
   .tmpl-hero { padding: 0 20px; text-align: center; justify-content: center; }
-  .tmpl-hero-overlay { background: rgba(0,0,0,0.6); }
-  .tmpl-hero-actions { justify-content: center; }
-  .tmpl-community-section, .tmpl-collect-section { padding: 0 20px; text-align: center; }
-  .tmpl-community-section::after, .tmpl-collect-section::after { background: rgba(0,0,0,0.6); }
+  .tmpl-hero-overlay { background: rgba(0,0,0,0.65); }
+  .tmpl-hero-content { max-width: 100%; }
+  .tmpl-hero-actions { justify-content: center; flex-direction: column; gap: 12px; align-items: center; }
+  .tmpl-hero-actions .tmpl-btn-yellow { width: 100%; justify-content: center; }
+  .tmpl-community-section .tmpl-btn-yellow,
+  .tmpl-collect-section .tmpl-btn-yellow,
+  #app-access .tmpl-btn-yellow { width: auto; margin: 0 auto; display: inline-flex; }
+
+  /* Split section */
+  .tmpl-split-section { flex-direction: column; height: auto; }
+  .tmpl-split-left { height: 40vh; width: 100%; }
+  .tmpl-split-right { padding: 40px 20px; }
+  .tmpl-split-right h2 { font-size: 2rem; }
+  .tmpl-features { flex-direction: column; gap: 20px; }
+
+  /* Community / Collect / fullscreen sections */
+  .tmpl-community-section, .tmpl-collect-section {
+    height: auto; min-height: 55vh;
+    padding: 80px 20px; text-align: center;
+  }
+  .tmpl-community-section::after, .tmpl-collect-section::after { background: rgba(0,0,0,0.72); }
   .tmpl-section-badge { justify-content: center; }
+  .tmpl-content-left { max-width: 100%; }
+  .tmpl-content-left p { font-size: 1rem; }
+
+  /* Section 05: VIP App Access */
+  #app-access { flex-direction: column !important; padding: 4rem 5% !important; text-align: center; }
+  #app-access .tmpl-content-left { max-width: 100% !important; padding-bottom: 0.5rem !important; }
+  #app-access h2 { font-size: 2.2rem !important; }
+  .app-screenshots-gallery { flex-direction: row !important; gap: 1rem !important; justify-content: center !important; margin-top: 2rem; }
+  .app-screenshots-gallery img { width: 140px !important; transform: none !important; }
+
+  /* Booking */
+  .book-form-grid { grid-template-columns: 1fr; }
+  .book-steps-indicator { flex-wrap: wrap; gap: 0.5rem; }
+  .bsi-label { display: none; }
+  .bsi-line { max-width: 30px; }
+
+  /* How it works */
+  .steps { flex-direction: column; align-items: center; }
+  .step-arrow { transform: rotate(90deg); margin: 0; }
+
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-brand { grid-column: 1 / -1; }
+
+  /* Nav */
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; margin-left: auto; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  /* Hero */
+  .tmpl-main-title { font-size: 2.6rem; }
+  .tmpl-small-text { font-size: 1rem; }
+  .tmpl-hero-desc { font-size: 0.95rem; }
+
+  /* Section headings */
+  .tmpl-split-right h2,
+  .tmpl-community-section h2,
+  .tmpl-collect-section h2 { font-size: 1.75rem; }
+
+  /* Community sections tighter */
+  .tmpl-community-section, .tmpl-collect-section { min-height: 50vh; padding: 60px 16px; }
+
+  /* VIP screenshots */
+  .app-screenshots-gallery img { width: 110px !important; }
+
+  /* Trip cards */
+  #webTripsGrid { grid-template-columns: 1fr; gap: 16px; }
+  .web-trip-card { height: auto; }
+
+  /* Booking ticket */
+  .book-ticket-actions { flex-direction: column; }
+  .book-price-value { font-size: 1.4rem; }
+
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { font-size: 0.78rem; }
+
+  /* Generic */
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-stats { gap: 1rem; }
+  .stat-divider { display: none; }
+  .download-btns { flex-direction: column; align-items: center; }
 }
