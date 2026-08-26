@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner With Us – Ab Toh Ghoom Le</title>
+  <meta name="description" content="List your trips on Ab Toh Ghoom Le — India's fastest-growing group travel platform. Zero commission, live tracking tools, and instant bookings." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root { --yellow: #FFB800; --dark: #0D0D0D; --dark2: #141414; --glass: rgba(255,255,255,0.05); --border: rgba(255,255,255,0.1); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; }
+
+    /* NAV */
+    .vnav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 6%; display: flex; align-items: center; justify-content: space-between; background: rgba(13,13,13,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .vnav-logo { text-decoration: none; font-size: 1.3rem; font-weight: 800; }
+    .vnav-logo span:first-child { color: #fff; }
+    .vnav-logo span:nth-child(2) { color: var(--yellow); }
+    .vnav-logo span:last-child { color: #666; font-weight: 400; font-size: 1rem; }
+    .vnav-links { display: flex; gap: 2rem; align-items: center; }
+    .vnav-links a { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .vnav-links a:hover { color: #fff; }
+    .vnav-cta { background: var(--yellow); color: #000; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .vnav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,184,0,0.4); }
+
+    /* HERO */
+    .vhero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 6% 5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, #0D0D0D 0%, #1a0f00 60%, #0D0D0D 100%); }
+    .vhero-glow { position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,184,0,0.12) 0%, transparent 70%); top: -200px; right: -200px; pointer-events: none; }
+    .vhero-glow2 { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,100,0,0.08) 0%, transparent 70%); bottom: -100px; left: -100px; pointer-events: none; }
+    .vhero-content { position: relative; z-index: 2; max-width: 680px; }
+    .vhero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,184,0,0.1); border: 1px solid rgba(255,184,0,0.3); color: var(--yellow); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .vhero-badge::before { content: '●'; font-size: 0.5rem; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .vhero h1 { font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.03em; }
+    .vhero h1 span { color: var(--yellow); }
+    .vhero p { font-size: 1.2rem; color: #aaa; line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px; }
+    .vhero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-yellow { background: var(--yellow); color: #000; padding: 1rem 2.2rem; border-radius: 50px; font-weight: 800; font-size: 1rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-yellow:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,184,0,0.4); }
+    .btn-ghost { background: var(--glass); border: 1px solid var(--border); color: #fff; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: background 0.2s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .vhero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .vstat { }
+    .vstat-num { font-size: 2rem; font-weight: 900; color: var(--yellow); display: block; }
+    .vstat-label { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+
+    /* SECTION COMMON */
+    .vsection { padding: 7rem 6%; }
+    .vsection-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem; }
+    .vsection-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .vsection-sub { font-size: 1.1rem; color: #777; max-width: 560px; line-height: 1.7; }
+
+    /* BENEFITS BENTO */
+    .vbento { background: var(--dark2); }
+    .vbento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 1.5rem; margin-top: 4rem; }
+    .vbento-card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .vbento-card:hover { border-color: rgba(255,184,0,0.4); transform: translateY(-4px); }
+    .vbento-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(255,184,0,0.06), transparent 60%); opacity: 0; transition: opacity 0.3s; }
+    .vbento-card:hover::before { opacity: 1; }
+    .vbento-card.featured { grid-column: span 2; background: linear-gradient(135deg, rgba(255,184,0,0.08), rgba(255,100,0,0.05)); border-color: rgba(255,184,0,0.25); }
+    .vbento-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
+    .vbento-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.7rem; }
+    .vbento-card p { color: #777; font-size: 0.95rem; line-height: 1.6; }
+    .vbento-tag { display: inline-block; background: rgba(255,184,0,0.15); color: var(--yellow); border: 1px solid rgba(255,184,0,0.3); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; margin-top: 1rem; }
+
+    /* HOW IT WORKS */
+    .vhow { background: var(--dark); }
+    .vhow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; position: relative; }
+    .vhow-steps::before { content: ''; position: absolute; top: 2rem; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,184,0,0.3), transparent); }
+    .vhow-step { text-align: center; position: relative; }
+    .vhow-num { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,184,0,0.1); border: 2px solid rgba(255,184,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 900; color: var(--yellow); margin: 0 auto 1.5rem; position: relative; z-index: 1; transition: background 0.3s; }
+    .vhow-step:hover .vhow-num { background: rgba(255,184,0,0.2); box-shadow: 0 0 30px rgba(255,184,0,0.3); }
+    .vhow-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .vhow-step p { font-size: 0.875rem; color: #666; line-height: 1.6; }
+
+    /* SCREENSHOTS */
+    .vscreens { background: var(--dark2); overflow: hidden; }
+    .vscreens-inner { display: flex; gap: 5rem; align-items: center; }
+    .vscreens-text { flex: 1; }
+    .vfeature-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+    .vfeature-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.2rem; border-radius: 16px; border: 1px solid transparent; transition: border-color 0.3s, background 0.3s; }
+    .vfeature-item:hover { border-color: var(--border); background: var(--glass); }
+    .vfeature-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .vfeature-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .vfeature-item p { font-size: 0.875rem; color: #666; line-height: 1.5; }
+    .vscreens-phones { flex: 1; display: flex; gap: 1.5rem; justify-content: center; align-items: center; padding: 2rem 0; }
+    .vphone-img { border-radius: 28px; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 4px solid #1a1a1a; transition: transform 0.3s; }
+    .vphone-img:first-child { width: 200px; transform: perspective(800px) rotateY(8deg) rotateZ(-3deg) translateY(20px); }
+    .vphone-img:last-child { width: 200px; transform: perspective(800px) rotateY(-8deg) rotateZ(3deg) translateY(-20px); }
+    .vphone-img:first-child:hover { transform: perspective(800px) rotateY(0) rotateZ(0) scale(1.05); }
+    .vphone-img:last-child:hover { transform: perspective(800px) rotateY(0) rotateZ(0) scale(1.05); }
+
+    /* TESTIMONIAL / TRUST */
+    .vtrust { background: var(--dark); text-align: center; padding: 5rem 6%; }
+    .vtrust-cards { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem; }
+    .vtrust-card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; max-width: 320px; text-align: left; transition: border-color 0.3s; }
+    .vtrust-card:hover { border-color: rgba(255,184,0,0.3); }
+    .vtrust-stars { color: var(--yellow); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+    .vtrust-card p { color: #aaa; font-size: 0.9rem; line-height: 1.6; font-style: italic; margin-bottom: 1.2rem; }
+    .vtrust-author { display: flex; align-items: center; gap: 0.75rem; }
+    .vtrust-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), #ff6400); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: #000; }
+    .vtrust-name { font-weight: 700; font-size: 0.9rem; }
+    .vtrust-role { font-size: 0.8rem; color: #555; }
+
+    /* CTA */
+    .vcta { background: linear-gradient(135deg, #1a0f00, #2d1a00, #1a0f00); padding: 8rem 6%; text-align: center; position: relative; overflow: hidden; }
+    .vcta-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,184,0,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .vcta h2 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; position: relative; }
+    .vcta h2 span { color: var(--yellow); }
+    .vcta p { font-size: 1.15rem; color: #777; margin-bottom: 3rem; max-width: 480px; margin-left: auto; margin-right: auto; position: relative; }
+    .vcta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .vcta-note { margin-top: 1.5rem; font-size: 0.85rem; color: #555; }
+
+    /* FOOTER */
+    .vfooter { background: #080808; padding: 2.5rem 6%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+    .vfooter-logo { font-size: 1.1rem; font-weight: 800; text-decoration: none; }
+    .vfooter-logo span:first-child { color: #fff; }
+    .vfooter-logo span:nth-child(2) { color: var(--yellow); }
+    .vfooter p { color: #444; font-size: 0.85rem; }
+
+    @media (max-width: 900px) {
+      .vbento-grid { grid-template-columns: 1fr 1fr; }
+      .vbento-card.featured { grid-column: span 2; }
+      .vhow-steps { grid-template-columns: 1fr 1fr; }
+      .vhow-steps::before { display: none; }
+      .vscreens-inner { flex-direction: column; }
+      .vnav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .vbento-grid { grid-template-columns: 1fr; }
+      .vbento-card.featured { grid-column: span 1; }
+      .vhow-steps { grid-template-columns: 1fr; }
+      .vhero h1 { font-size: 2.8rem; }
+      .vhero-stats { gap: 1.5rem; }
+      .vscreens-phones { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="vnav">
+    <a href="index.html" class="vnav-logo">
+      <span>AbToh</span><span>Ghoom</span><span>Le</span>
+    </a>
+    <div class="vnav-links">
+      <a href="#benefits">Benefits</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#vendor-app">The App</a>
+    </div>
+    <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="vnav-cta">Apply to List →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="vhero">
+    <div class="vhero-glow"></div>
+    <div class="vhero-glow2"></div>
+    <div class="vhero-content">
+      <div class="vhero-badge">🚀 Now accepting new trip vendors</div>
+      <h1>Grow Your Travel<br/>Business with<br/><span>Ab Toh Ghoom Le</span></h1>
+      <p>List your trips in minutes. Reach thousands of passionate travellers across India. Our platform handles bookings, payments, and live tracking — so you focus on creating unforgettable adventures.</p>
+      <div class="vhero-actions">
+        <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="btn-yellow">Start Listing Trips →</a>
+        <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+      </div>
+      <div class="vhero-stats">
+        <div class="vstat"><span class="vstat-num">100%</span><div class="vstat-label">Revenue yours in beta</div></div>
+        <div class="vstat"><span class="vstat-num">5 min</span><div class="vstat-label">To list your first trip</div></div>
+        <div class="vstat"><span class="vstat-num">Live</span><div class="vstat-label">Bus tracking built-in</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS BENTO -->
+  <section class="vsection vbento" id="benefits">
+    <div class="vsection-label">Why Partner With Us</div>
+    <h2 class="vsection-title">Everything you need,<br/>nothing you don't</h2>
+    <p class="vsection-sub">We built our platform by listening to trip organizers. Every feature solves a real problem vendors face.</p>
+
+    <div class="vbento-grid">
+      <div class="vbento-card featured">
+        <span class="vbento-icon">💰</span>
+        <h3>Zero Commission During Beta</h3>
+        <p>Every rupee your travellers pay goes straight to you. We're growing together — no hidden fees, no platform cuts during our early access phase. Lock in this rate by joining now.</p>
+        <span class="vbento-tag">LIMITED TIME</span>
+      </div>
+      <div class="vbento-card">
+        <span class="vbento-icon">📍</span>
+        <h3>Built-in Live Bus Tracking</h3>
+        <p>Share your real-time location with all passengers. No more "where is the bus?" calls. Reduce stress for you and your travellers on departure day.</p>
+      </div>
+      <div class="vbento-card">
+        <span class="vbento-icon">⚡</span>
+        <h3>Instant Booking Management</h3>
+        <p>See every booking the moment it happens. Manage your passenger list, seat counts, and departure batches all from one dashboard on your phone.</p>
+      </div>
+      <div class="vbento-card">
+        <span class="vbento-icon">🤖</span>
+        <h3>AI Trip Importer</h3>
+        <p>Paste a text description of your trip and our AI builds the entire listing for you — dates, packages, itinerary, pricing. Live in under 2 minutes.</p>
+        <span class="vbento-tag">AI POWERED</span>
+      </div>
+      <div class="vbento-card">
+        <span class="vbento-icon">🛡️</span>
+        <h3>Verified Vendor Badge</h3>
+        <p>Get a "Verified" badge on your profile, building trust with travellers and helping you stand out from unverified trip organizers.</p>
+      </div>
+      <div class="vbento-card">
+        <span class="vbento-icon">📊</span>
+        <h3>Revenue Dashboard</h3>
+        <p>Track your total earnings, seat occupancy, and booking trends in real-time. Know exactly how your trips are performing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="vsection vhow" id="how-it-works">
+    <div class="vsection-label">The Process</div>
+    <h2 class="vsection-title">List your first trip in<br/>under 5 minutes</h2>
+
+    <div class="vhow-steps">
+      <div class="vhow-step">
+        <div class="vhow-num">01</div>
+        <h3>Sign In with Google</h3>
+        <p>Open the Vendor Portal and log in with your Google account. That's your identity, verified instantly.</p>
+      </div>
+      <div class="vhow-step">
+        <div class="vhow-num">02</div>
+        <h3>Create Your Trip</h3>
+        <p>Fill in destination, dates, packages, and pricing. Or paste a description and let AI do it for you.</p>
+      </div>
+      <div class="vhow-step">
+        <div class="vhow-num">03</div>
+        <h3>Go Live Instantly</h3>
+        <p>Your trip appears on the main app for thousands of travellers to discover, filter, and book.</p>
+      </div>
+      <div class="vhow-step">
+        <div class="vhow-num">04</div>
+        <h3>Manage & Track</h3>
+        <p>On trip day, share your live location. Passengers track your bus in real-time. Zero phone calls needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SCREENSHOTS -->
+  <section class="vsection vscreens" id="vendor-app">
+    <div class="vscreens-inner">
+      <div class="vscreens-text">
+        <div class="vsection-label">The Vendor Experience</div>
+        <h2 class="vsection-title">Your command<br/>centre, in your<br/>pocket</h2>
+        <div class="vfeature-list">
+          <div class="vfeature-item">
+            <div class="vfeature-emoji">🎟️</div>
+            <div>
+              <h4>Live Booking Feed</h4>
+              <p>See new bookings appear in real-time. Every passenger's name, seat count, and contact — right there.</p>
+            </div>
+          </div>
+          <div class="vfeature-item">
+            <div class="vfeature-emoji">💬</div>
+            <div>
+              <h4>Direct Traveller Contact</h4>
+              <p>Reach any passenger instantly via email for payment confirmation, updates, or last-minute changes.</p>
+            </div>
+          </div>
+          <div class="vfeature-item">
+            <div class="vfeature-emoji">🗺️</div>
+            <div>
+              <h4>Share Your Live Location</h4>
+              <p>One tap to start broadcasting your real-time GPS position to all passengers on the day of departure.</p>
+            </div>
+          </div>
+        </div>
+        <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="btn-yellow" style="margin-top: 2.5rem; display: inline-flex;">Get Vendor Access →</a>
+      </div>
+
+      <div class="vscreens-phones">
+        <img src="app_screen1.jpg" alt="Vendor Portal Login" class="vphone-img" />
+        <img src="app_screen2.jpg" alt="Booking Status View" class="vphone-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / EARLY VENDORS -->
+  <section class="vtrust">
+    <div class="vsection-label">Early Vendor Stories</div>
+    <h2 class="vsection-title" style="margin-bottom: 0.5rem;">Vendors who joined early<br/>are scaling fast</h2>
+    <p style="color:#555; font-size: 1rem;">Join the pioneers already growing their travel business on our platform.</p>
+
+    <div class="vtrust-cards">
+      <div class="vtrust-card">
+        <div class="vtrust-stars">★★★★★</div>
+        <p>"I listed the Rajmachi trek in 3 minutes using the AI importer. Had 30 bookings within a week. The live tracking feature alone is worth it — no more missed passenger pickups."</p>
+        <div class="vtrust-author">
+          <div class="vtrust-avatar">D</div>
+          <div>
+            <div class="vtrust-name">Dev Vendor</div>
+            <div class="vtrust-role">Trek Organizer, Pune</div>
+          </div>
+        </div>
+      </div>
+      <div class="vtrust-card">
+        <div class="vtrust-stars">★★★★★</div>
+        <p>"Finally a platform that understands what trip vendors actually need. Zero commission is unbelievable. Managing batches, seat counts, and packages all in one place is a game-changer."</p>
+        <div class="vtrust-author">
+          <div class="vtrust-avatar">P</div>
+          <div>
+            <div class="vtrust-name">Priya Travels</div>
+            <div class="vtrust-role">Group Tour Operator, Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="vtrust-card">
+        <div class="vtrust-stars">★★★★★</div>
+        <p>"The Gokarna beach trek listing was live within minutes. My customers love being able to track the bus on their phones. It gives everyone peace of mind on departure day."</p>
+        <div class="vtrust-author">
+          <div class="vtrust-avatar">R</div>
+          <div>
+            <div class="vtrust-name">Rohan Adventures</div>
+            <div class="vtrust-role">Beach Camp Organizer, Goa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="vcta">
+    <div class="vcta-glow"></div>
+    <h2>Ready to grow your<br/><span>travel business?</span></h2>
+    <p>Join India's fastest-growing group travel platform. List your first trip today — it's free during beta.</p>
+    <div class="vcta-actions">
+      <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="btn-yellow" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">Apply to Become a Vendor →</a>
+      <a href="index.html" class="btn-ghost">Explore the App First</a>
+    </div>
+    <p class="vcta-note">📩 Email us at abtohghoomle@gmail.com &nbsp;·&nbsp; We respond within 24 hours</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="vfooter">
+    <a href="index.html" class="vfooter-logo">
+      <span>AbToh</span><span>Ghoom</span>Le
+    </a>
+    <p>© 2026 Ab Toh Ghoom Le. Made with ❤️ in India.</p>
+    <a href="privacy.html" style="color:#444; font-size: 0.85rem; text-decoration: none;">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>
