@@ -307,10 +307,10 @@ async function submitWebBooking() {
     const batchId = batchSel.value;
     const bookingId = 'ATGL-' + Math.floor(10000 + Math.random() * 90000).toString();
 
-    // Find vendorId by matching whatsappNumber
-    let vendorId = null;
+    // Find vendorId (use trip's attached vendorId first, fallback to whatsapp lookup)
+    let vendorId = _selectedTrip.vendorId || null;
     let vendorWhatsApp = _selectedTrip.vendorWhatsApp || '';
-    if (vendorWhatsApp) {
+    if (!vendorId && vendorWhatsApp) {
       const vq = query(collection(db, 'vendors'), where('whatsappNumber', '==', vendorWhatsApp));
       const vSnap = await getDocs(vq);
       if (!vSnap.empty) vendorId = vSnap.docs[0].id;
