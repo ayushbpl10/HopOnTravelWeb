@@ -51,16 +51,64 @@ window.addEventListener('firebase-ready', async () => {
     const openAppBtn = document.getElementById('openAppBtn');
     openAppBtn.href = `hopontravel://trip/${tripId}`;
     
-    // Add fallback timer to deep link in case app is not installed
-    openAppBtn.addEventListener('click', (e) => {
-      // It will try to open hopontravel://
-      // After a timeout, if page is still active, prompt to download
-      setTimeout(() => {
-        // If the app wasn't installed, they might still be here
-        // We can just let them know or redirect to download if needed.
-        // But standard anchor tag behavior is fine.
-      }, 2000);
+    // Inject SEO meta tags dynamically
+    const ogTitle = `${tripData.title} | Ab Toh Ghoom Le`;
+    const ogDesc = tripData.description ? tripData.description.substring(0, 160) : 'Book this amazing trip on Ab Toh Ghoom Le';
+    const ogImage = (tripData.images && tripData.images.length > 0) ? tripData.images[0] : 'https://abtohghoomle.com/hero.png';
+    const ogUrl = `https://abtohghoomle.com/trip.html?id=${tripId}`;
+
+    const metaTags = {
+      'og:title': ogTitle,
+      'og:description': ogDesc,
+      'og:image': ogImage,
+      'og:url': ogUrl,
+      'og:type': 'website',
+      'twitter:card': 'summary_large_image',
+      'twitter:title': ogTitle,
+      'twitter:description': ogDesc,
+      'twitter:image': ogImage,
+    };
+    Object.entries(metaTags).forEach(([property, content]) => {
+      let meta = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(property.startsWith('og:') ? 'property' : 'name', property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
     });
+    // Update description meta
+    let descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', ogDesc);
+
+    // Inject JSON-LD structured data for Google rich results
+    const lowestPrice = (tripData.packages && tripData.packages.length > 0) ? Math.min(...tripData.packages.map(p => p.price || 0)) : 0;
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      'name': tripData.title,
+      'description': tripData.description || '',
+      'image': ogImage,
+      'url': ogUrl,
+      'organizer': {
+        '@type': 'Organization',
+        'name': tripData.vendorName || 'Ab Toh Ghoom Le',
+      },
+      'offers': {
+        '@type': 'Offer',
+        'price': lowestPrice,
+        'priceCurrency': 'INR',
+        'availability': 'https://schema.org/InStock',
+        'url': ogUrl,
+      },
+    };
+    if (tripData.batches && tripData.batches.length > 0) {
+      jsonLd['startDate'] = tripData.batches[0].dateDuration;
+    }
+    const scriptTag = document.createElement('script');
+    scriptTag.type = 'application/ld+json';
+    scriptTag.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(scriptTag);
 
     loadingState.style.display = 'none';
     tripContent.style.display = 'block';

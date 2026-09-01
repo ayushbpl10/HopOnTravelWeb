@@ -386,6 +386,8 @@ window.addEventListener('firebase-ready', async () => {
     _allWebTrips = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     loadingMsg.style.display = 'none';
     renderTripCards(_allWebTrips);
+
+
   } catch (err) {
     console.error('Failed to load trips:', err);
     loadingMsg.style.display = 'none';
