@@ -10,6 +10,9 @@
   <meta property="og:image" content="./hero.png" />
   <meta property="og:url" content="https://AbTohGhoomLe.com" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   
@@ -193,6 +196,8 @@
               <label class="book-label">Security Check: <span id="captchaQ" class="book-captcha-q"></span> = ?</label>
               <input type="number" id="captchaAns" class="book-input" placeholder="Your answer" style="max-width:120px" />
             </div>
+            <!-- Anti-bot Honeypot Field (Hidden from real users, filled by automated bot scripts) -->
+            <input type="text" id="hp_field" name="b_hp_field" style="display:none!important; opacity:0; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" />
             <button class="book-submit-btn" id="bookSubmitBtn" onclick="submitWebBooking()">Confirm Booking →</button>
           </div>
         </div>

@@ -270,11 +270,49 @@ function updatePriceDisplay() {
   document.getElementById('priceDisplay').textContent = `₹${(pricePerSeat * seats).toLocaleString('en-IN')}`;
 }
 
+// Helper for XSS sanitization
+function sanitizeInput(str) {
+  if (typeof str !== 'string') return '';
+  return str.replace(/[<>]/g, '').trim();
+}
+
+// Rate limiter helper (max 3 bookings per 2 minutes per client)
+function checkBookingRateLimit() {
+  const now = Date.now();
+  const attempts = JSON.parse(localStorage.getItem('_b_rate_limit') || '[]');
+  const recentAttempts = attempts.filter(ts => now - ts < 120000); // 2 minutes window
+  if (recentAttempts.length >= 3) {
+    return false;
+  }
+  recentAttempts.push(now);
+  localStorage.setItem('_b_rate_limit', JSON.stringify(recentAttempts));
+  return true;
+}
+
 // Submit booking
 async function submitWebBooking() {
-  const name = document.getElementById('travelerName').value.trim();
-  const phone = document.getElementById('travelerPhone').value.trim();
-  const email = document.getElementById('travelerEmail').value.trim();
+  // 1. Anti-bot honeypot verification
+  const hpField = document.getElementById('hp_field');
+  if (hpField && hpField.value) {
+    console.warn('Bot submission blocked via honeypot.');
+    alert('Booking submitted.'); // Silent trap for automated bots
+    return;
+  }
+
+  // 2. Client-side Rate Limiting against automated spam
+  if (!checkBookingRateLimit()) {
+    return alert('Too many booking requests. Please wait 2 minutes before trying again.');
+  }
+
+  // 3. Input Sanitization
+  const rawName = document.getElementById('travelerName').value;
+  const rawPhone = document.getElementById('travelerPhone').value;
+  const rawEmail = document.getElementById('travelerEmail').value;
+
+  const name = sanitizeInput(rawName);
+  const phone = sanitizeInput(rawPhone);
+  const email = sanitizeInput(rawEmail);
+
   const consent = document.getElementById('consentCheck').checked;
   const captchaAns = parseInt(document.getElementById('captchaAns').value, 10);
   const pkgSel = document.getElementById('packageSelect');
