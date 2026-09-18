@@ -153,6 +153,14 @@ async function onUserSignedIn(user) {
     document.getElementById('profileAvatarBig').innerHTML = `<img src="${user.photoURL}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
   }
 
+  // Instant demo user bypass (avoids Firestore network timeout)
+  if (user.uid === DEMO_TRAVELLER_USER.uid) {
+    document.getElementById('profilePhoneInput').value = DEMO_TRAVELLER_USER.phone;
+    listenToUserBookings(user.email);
+    loadWishlist();
+    return;
+  }
+
   // Ensure record in users/{uid}
   try {
     const { db, doc, getDoc, updateDoc, addDoc } = window._fb;

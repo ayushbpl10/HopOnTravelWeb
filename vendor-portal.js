@@ -265,6 +265,17 @@ async function onVendorSignedIn(user) {
   const storefrontLink = document.getElementById('publicStorefrontLink');
   storefrontLink.href = `vendor.html?id=${encodeURIComponent(user.uid)}`;
 
+  // Instant demo vendor bypass (avoids Firestore network timeout)
+  if (user.uid === DEMO_VENDOR_USER.uid) {
+    document.getElementById('vSetBusinessName').value = 'Sahyadri Trekkers';
+    document.getElementById('vSetWhatsApp').value = '+919876543210';
+    document.getElementById('vSetInstagram').value = 'https://instagram.com/sahyadri_trekkers_demo';
+    document.getElementById('vSetUpi').value = 'sahyadri.trekkers@okhdfcbank';
+    listenToVendorTrips(user.uid);
+    listenToVendorBookings(user.uid);
+    return;
+  }
+
   // Save/Update vendor role in users/{uid} and vendors/{uid}
   try {
     const { db, doc, getDoc, updateDoc } = window._fb;
