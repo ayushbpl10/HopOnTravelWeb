@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor Portal – Ab Toh Ghoom Le</title>
+  <meta name="description" content="Manage trips, approve bookings, track live bus routes, and view revenue analytics on Ab Toh Ghoom Le Vendor Portal." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Firebase SDK via CDN -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCndctKLDOwiT08SYLlB4L2tLQ9roU6948",
+      authDomain: "hopontravel-ddd9b.firebaseapp.com",
+      projectId: "hopontravel-ddd9b",
+      storageBucket: "hopontravel-ddd9b.firebasestorage.app",
+      messagingSenderId: "792083213033",
+      appId: "1:792083213033:web:25bc2d1ed9e6d779015e78"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence).catch(console.error);
+
+    window._fb = {
+      db, auth, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, deleteDoc, onSnapshot,
+      GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+    };
+    window.dispatchEvent(new Event('firebase-vendor-portal-ready'));
+  </script>
+</head>
+<body class="portal-body">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="pnav">
+    <div class="pnav-inner">
+      <a href="index.html" class="pnav-logo">
+        <span class="brand-hop">AbToh</span><span class="brand-on">Ghoom</span><span class="brand-hop">Le</span>
+        <span class="brand-tag">Vendor Hub</span>
+      </a>
+      <div class="pnav-actions">
+        <a href="vendor.html" class="p-btn p-btn-dark p-btn-sm">Public Info Page</a>
+        <div id="vendorNavChip" style="display:none;"></div>
+        <button id="loginDemoVendorNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoVendor()">
+          ⚡ Demo Organiser
+        </button>
+        <button id="vendorLoginBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginVendorWithGoogle()">
+          Vendor Sign in with Google
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN VENDOR PORTAL ===== -->
+  <main class="portal-container">
+    
+    <!-- Logged Out Vendor State -->
+    <div id="vendorLoggedOutBanner" class="p-empty" style="margin-bottom: 2.5rem; text-align: center;">
+      <div class="p-empty-icon">🏕️</div>
+      <h2>Vendor Operations Hub</h2>
+      <p>Sign in with your Google account to list adventures, approve bookings, track passenger manifests, export financial reports, and broadcast live GPS for travellers.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="p-btn p-btn-yellow" onclick="loginVendorWithGoogle()">
+          <span>🔑 Continue with Google as Vendor</span>
+        </button>
+        <button class="p-btn p-btn-yellow" style="background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; box-shadow: 0 4px 15px rgba(16,185,129,0.4);" onclick="loginAsDemoVendor()">
+          <span>⚡ Test as Demo Vendor (Instant Access)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Logged In Vendor View -->
+    <div id="vendorLoggedInView" style="display: none;">
+      
+      <!-- Top Overview Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 id="vendorGreetingTitle" style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem;">Welcome, Partner</h1>
+          <p style="color: var(--portal-muted); font-size: 0.95rem;">Manage your published trips, passenger manifests, and live route status.</p>
+        </div>
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+          <button class="p-btn p-btn-yellow" onclick="openCreateTripModal()">+ Create New Trip</button>
+          <button class="p-btn p-btn-dark" onclick="openAiImportModal()">🤖 AI WhatsApp Import</button>
+          <a id="publicStorefrontLink" href="#" target="_blank" class="p-btn p-btn-dark">🏪 Public Storefront</a>
+        </div>
+      </div>
+
+      <!-- Metrics Overview -->
+      <div class="p-stats-grid">
+        <div class="p-stat-card">
+          <div class="p-stat-label">Active Trips</div>
+          <div class="p-stat-val" id="vStatTotalTrips">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Confirmed Bookings</div>
+          <div class="p-stat-val" id="vStatConfirmedBookings" style="color: var(--portal-success);">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Pending Verifications</div>
+          <div class="p-stat-val" id="vStatPendingBookings" style="color: var(--portal-warning);">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Confirmed Revenue</div>
+          <div class="p-stat-val" id="vStatTotalRevenue" style="color: var(--portal-primary);">₹0</div>
+        </div>
+      </div>
+
+      <!-- Live Broadcast Alert (When broadcasting) -->
+      <div id="liveBroadcastingAlert" style="display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--portal-success); padding: 1.2rem; border-radius: 16px; margin-bottom: 2rem; display: none; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <span style="font-size: 1.8rem; animation: pulse 1.5s infinite;">📡</span>
+          <div>
+            <strong style="color: #fff; font-size: 1.05rem;">Live Captain GPS Broadcasting is ACTIVE</strong>
+            <p id="liveBroadcastingTripTitle" style="color: var(--portal-muted); font-size: 0.85rem; margin-top: 0.2rem;">Broadcasting location for: Harishchandragad Trek</p>
+          </div>
+        </div>
+        <button class="p-btn p-btn-danger p-btn-sm" onclick="stopLiveBroadcast()">■ Stop Broadcasting</button>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="p-tabs">
+        <button class="p-tab-btn active" onclick="switchVendorTab('trips')" id="vTabBtn-trips">
+          🏕️ Trip Management
+        </button>
+        <button class="p-tab-btn" onclick="switchVendorTab('bookings')" id="vTabBtn-bookings">
+          📋 Bookings & Manifests
+        </button>
+        <button class="p-tab-btn" onclick="switchVendorTab('settings')" id="vTabBtn-settings">
+          ⚙️ Settings & Storefront
+        </button>
+      </div>
+
+      <!-- TAB 1: TRIP MANAGEMENT -->
+      <section id="vtab-trips" class="p-tab-content">
+        <div id="vendorTripsListContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+          <div style="text-align: center; padding: 3rem; color: var(--portal-muted); grid-column: 1 / -1;">
+            <div class="book-spinner" style="margin: 0 auto 1rem;"></div>
+            <span>Loading your trips...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: BOOKINGS & MANIFESTS -->
+      <section id="vtab-bookings" class="p-tab-content" style="display: none;">
+        <!-- Filters and Export Actions -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+            <input type="text" id="vBookingSearchInput" class="p-input" placeholder="🔍 Search traveller or ID..." style="max-width: 250px;" oninput="filterVendorBookings()" />
+            <select id="vBookingTripFilter" class="p-select" style="max-width: 220px;" onchange="filterVendorBookings()">
+              <option value="all">All Trips</option>
+            </select>
+            <div id="vBookingStatusPills" style="display: flex; gap: 0.4rem;">
+              <button class="p-btn p-btn-dark p-btn-sm active" onclick="setBookingStatusFilter('all', this)">All</button>
+              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('pending', this)">Pending</button>
+              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('confirmed', this)">Confirmed</button>
+              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('cancelled', this)">Cancelled</button>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 0.6rem;">
+            <button class="p-btn p-btn-yellow p-btn-sm" onclick="exportBookingsToCSV()">📥 Export CSV</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="printPassengerManifest()">🖨️ Print Manifest</button>
+          </div>
+        </div>
+
+        <!-- Bookings Data Table -->
+        <div class="p-table-wrap">
+          <table class="p-table" id="vBookingsTable">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Traveller</th>
+                <th>Trip & Package</th>
+                <th>Seats</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="vBookingsTableBody">
+              <tr>
+                <td colspan="8" style="text-align: center; color: var(--portal-muted); padding: 3rem;">
+                  Loading bookings...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: SETTINGS & STOREFRONT -->
+      <section id="vtab-settings" class="p-tab-content" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+          
+          <!-- Profile Card -->
+          <div class="p-stat-card">
+            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;">Business Profile</h3>
+            
+            <div class="p-field">
+              <label class="p-label">Organiser / Business Name *</label>
+              <input type="text" id="vSetBusinessName" class="p-input" placeholder="e.g. Sahyadri Trekkers" />
+            </div>
+            
+            <div class="p-field">
+              <label class="p-label">Official WhatsApp Number *</label>
+              <input type="tel" id="vSetWhatsApp" class="p-input" placeholder="+91 98765 43210" />
+            </div>
+
+            <div class="p-field">
+              <label class="p-label">Instagram Profile URL</label>
+              <input type="url" id="vSetInstagram" class="p-input" placeholder="https://instagram.com/yourhandle" />
+            </div>
+
+            <div class="p-field">
+              <label class="p-label">UPI ID for Direct Payments</label>
+              <input type="text" id="vSetUpi" class="p-input" placeholder="e.g. yourname@okhdfcbank" />
+            </div>
+
+            <button class="p-btn p-btn-yellow" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()">
+              Save Business Details
+            </button>
+          </div>
+
+          <!-- Payment Gateway & Custom Terms Card -->
+          <div class="p-stat-card">
+            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;">Terms & Online Payments</h3>
+
+            <div class="p-field">
+              <label class="p-label">Razorpay Key ID (Optional for Online Card/UPI Gateway)</label>
+              <input type="text" id="vSetRazorpayKey" class="p-input" placeholder="rzp_live_xxxxxxxxxxxxxx" />
+              <small style="color: var(--portal-muted); font-size: 0.75rem;">Leave blank to use direct UPI transfers.</small>
+            </div>
+
+            <div class="p-field" style="margin-top: 1.2rem;">
+              <label class="p-label">Custom Terms & Cancellation Policy</label>
+              <textarea id="vSetTerms" class="p-textarea" rows="6" placeholder="Enter cancellation rules, guidelines, and refund terms..."></textarea>
+            </div>
+
+            <button class="p-btn p-btn-dark" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()">
+              Save Policy & Terms
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===== MODAL: CREATE / EDIT TRIP ===== -->
+  <div id="tripModalOverlay" class="p-modal-overlay">
+    <div class="p-modal">
+      <div class="p-modal-header">
+        <h3 id="tripModalTitle">Create New Adventure</h3>
+        <button class="p-modal-close" onclick="closeTripModal()">✕</button>
+      </div>
+      <div class="p-modal-body">
+        
+        <!-- Template Picker Row -->
+        <div style="background: rgba(255, 184, 0, 0.08); border: 1px dashed var(--portal-primary); padding: 1rem; border-radius: 14px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <strong style="color: var(--portal-primary); font-size: 0.9rem;">⚡ Quick-Start Templates</strong>
+            <p style="color: var(--portal-muted); font-size: 0.8rem;">Pre-fill details using popular proven itineraries.</p>
+          </div>
+          <select id="templateSelector" class="p-select" style="max-width: 250px;" onchange="applyTripTemplate(this.value)">
+            <option value="">-- Apply a Template --</option>
+            <option value="harishchandragad">Harishchandragad Trek</option>
+            <option value="rajmachi">Rajmachi Fireflies Camp</option>
+            <option value="pawna">Pawna Lake Camping</option>
+            <option value="gokarna">Gokarna Beach Backpacking</option>
+          </select>
+        </div>
+
+        <input type="hidden" id="editTripDocId" value="" />
+
+        <div class="p-grid-2">
+          <div class="p-field">
+            <label class="p-label">Trip Title *</label>
+            <input type="text" id="tripFormTitle" class="p-input" placeholder="e.g. Harishchandragad & Kokankada Trek" required />
+          </div>
+          <div class="p-field">
+            <label class="p-label">Destination *</label>
+            <input type="text" id="tripFormDestination" class="p-input" placeholder="e.g. Harishchandragad, Ahmednagar" required />
+          </div>
+        </div>
+
+        <div class="p-grid-2">
+          <div class="p-field">
+            <label class="p-label">Category</label>
+            <select id="tripFormCategory" class="p-select">
+              <option value="Trekking">Trekking</option>
+              <option value="Camping">Camping</option>
+              <option value="Backpacking">Backpacking</option>
+              <option value="Biking">Biking Tour</option>
+              <option value="Leisure">Weekend Getaway</option>
+            </select>
+          </div>
+          <div class="p-field">
+            <label class="p-label">Starting Price (₹) *</label>
+            <input type="number" id="tripFormPrice" class="p-input" placeholder="999" required />
+          </div>
+        </div>
+
+        <div class="p-field">
+          <label class="p-label">Trip Description *</label>
+          <textarea id="tripFormDesc" class="p-textarea" rows="3" placeholder="Tell travellers what makes this trip special..."></textarea>
+        </div>
+
+        <!-- Batches -->
+        <div class="p-grid-2">
+          <div class="p-field">
+            <label class="p-label">Departure Date Duration *</label>
+            <input type="text" id="tripFormBatchDate" class="p-input" placeholder="e.g. 15-16 Nov (Sat night to Sun)" />
+          </div>
+          <div class="p-field">
+            <label class="p-label">Total Seats</label>
+            <input type="number" id="tripFormTotalSeats" class="p-input" value="30" />
+          </div>
+        </div>
+
+        <!-- Packages & Pricing -->
+        <div class="p-field">
+          <label class="p-label">Package Options (Name:Price separated by commas)</label>
+          <input type="text" id="tripFormPackages" class="p-input" placeholder="e.g. Pune Transport:1299, Mumbai Transport:1499, Base Village:899" />
+          <small style="color: var(--portal-muted); font-size: 0.75rem;">Format: OptionName:Price, OptionName2:Price2</small>
+        </div>
+
+        <!-- Pickup Points -->
+        <div class="p-field">
+          <label class="p-label">Boarding / Pickup Points (Location - Time separated by commas)</label>
+          <input type="text" id="tripFormPickups" class="p-input" placeholder="e.g. Swargate - 10:00 PM, Dadar - 10:30 PM, Thane - 11:15 PM" />
+        </div>
+
+        <!-- Inclusions & Exclusions -->
+        <div class="p-grid-2">
+          <div class="p-field">
+            <label class="p-label">Inclusions (Separated by commas)</label>
+            <textarea id="tripFormInclusions" class="p-textarea" rows="2" placeholder="Bus Transport, Breakfast, Guide, First Aid"></textarea>
+          </div>
+          <div class="p-field">
+            <label class="p-label">Exclusions (Separated by commas)</label>
+            <textarea id="tripFormExclusions" class="p-textarea" rows="2" placeholder="Personal Expenses, Dinner, Water Bottles"></textarea>
+          </div>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="p-field">
+          <label class="p-label">Day-wise Itinerary</label>
+          <textarea id="tripFormItinerary" class="p-textarea" rows="4" placeholder="Day 1: Departure at 10 PM. Overnight travel.&#10;Day 2: Reach base village, trek up, Kokankada sunset, return journey."></textarea>
+        </div>
+
+        <!-- Cover Image URL -->
+        <div class="p-field">
+          <label class="p-label">Cover Image URL</label>
+          <input type="url" id="tripFormImage" class="p-input" placeholder="https://images.unsplash.com/photo-..." />
+        </div>
+
+      </div>
+      <div class="p-modal-footer">
+        <button class="p-btn p-btn-dark" onclick="closeTripModal()">Cancel</button>
+        <button id="saveTripSubmitBtn" class="p-btn p-btn-yellow" onclick="handleSaveTrip()">Save & Publish Trip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: AI WHATSAPP IMPORT ===== -->
+  <div id="aiModalOverlay" class="p-modal-overlay">
+    <div class="p-modal">
+      <div class="p-modal-header">
+        <h3>🤖 AI WhatsApp Itinerary Import</h3>
+        <button class="p-modal-close" onclick="closeAiImportModal()">✕</button>
+      </div>
+      <div class="p-modal-body">
+        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+          Paste your raw trip broadcast message copied from WhatsApp. Our parser will extract the title, pricing, batches, inclusions, and boarding points automatically!
+        </p>
+
+        <div class="p-field">
+          <label class="p-label">Raw WhatsApp Message</label>
+          <textarea id="aiRawMessageInput" class="p-textarea" rows="10" placeholder="Paste itinerary message here... e.g.&#10;*Rajmachi Fireflies Trek*&#10;Dates: 20-21 May&#10;Cost: 1200/- with transport&#10;Pickup: Swargate 10 PM&#10;Includes: Breakfast, Guide, Tents"></textarea>
+        </div>
+      </div>
+      <div class="p-modal-footer">
+        <button class="p-btn p-btn-dark" onclick="closeAiImportModal()">Cancel</button>
+        <button id="aiParseBtn" class="p-btn p-btn-yellow" onclick="handleParseWhatsAppMessage()">
+          ✨ Parse & Auto-Fill Form
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: START TRIP & BROADCAST LIVE LOCATION ===== -->
+  <div id="broadcastModalOverlay" class="p-modal-overlay">
+    <div class="p-modal">
+      <div class="p-modal-header">
+        <h3>🚀 Start Trip & Broadcast GPS</h3>
+        <button class="p-modal-close" onclick="closeBroadcastModal()">✕</button>
+      </div>
+      <div class="p-modal-body">
+        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1.2rem;">
+          Enter vehicle and captain details so travellers can locate you easily. Once started, your browser will broadcast your live GPS location to all booked travellers.
+        </p>
+
+        <input type="hidden" id="broadcastTripId" value="" />
+
+        <div class="p-field">
+          <label class="p-label">Captain Name *</label>
+          <input type="text" id="bcCaptainName" class="p-input" placeholder="Captain name" />
+        </div>
+
+        <div class="p-field">
+          <label class="p-label">Captain Phone / WhatsApp *</label>
+          <input type="tel" id="bcCaptainPhone" class="p-input" placeholder="+91 98765 43210" />
+        </div>
+
+        <div class="p-grid-2">
+          <div class="p-field">
+            <label class="p-label">Driver Name</label>
+            <input type="text" id="bcDriverName" class="p-input" placeholder="Optional" />
+          </div>
+          <div class="p-field">
+            <label class="p-label">Vehicle Registration Number</label>
+            <input type="text" id="bcVehicleNumber" class="p-input" placeholder="e.g. MH 12 AB 1234" />
+          </div>
+        </div>
+
+        <div class="p-field">
+          <label class="p-label">Vehicle Photo URL (Optional)</label>
+          <input type="url" id="bcVehiclePhoto" class="p-input" placeholder="https://..." />
+        </div>
+      </div>
+      <div class="p-modal-footer">
+        <button class="p-btn p-btn-dark" onclick="closeBroadcastModal()">Cancel</button>
+        <button id="startBroadcastBtn" class="p-btn p-btn-success" onclick="confirmStartLiveBroadcast()">
+          📡 Start Live Broadcasting
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Passenger Manifest Sheet -->
+  <div id="printableManifest" style="display: none;"></div>
+
+  <script src="vendor-portal.js"></script>
+</body>
+</html>

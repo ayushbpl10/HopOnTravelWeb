@@ -1,4 +1,4 @@
-window.addEventListener('firebase-ready', async () => {
+async function initTripPage() {
   const urlParams = new URLSearchParams(window.location.search);
   const tripId = urlParams.get('id');
 
@@ -51,7 +51,7 @@ window.addEventListener('firebase-ready', async () => {
       const tripSnap = await getDoc(tripRef);
 
       if (tripSnap.exists()) {
-        tripData = tripSnap.data();
+        tripData = { id: tripSnap.id, ...tripSnap.data() };
       } else {
         tripData = DEMO_TRIP;
       }
@@ -254,7 +254,13 @@ window.addEventListener('firebase-ready', async () => {
     loadingState.style.display = 'none';
     errorState.style.display = 'block';
   }
-});
+}
+
+if (window._fbApp) {
+  initTripPage();
+} else {
+  window.addEventListener('firebase-ready', initTripPage);
+}
 
 // Update Live Price Display on Trip Page
 function updateTripPriceDisplay() {
@@ -326,10 +332,18 @@ async function submitTripPageBooking() {
   btn.textContent = 'Processing Booking...';
 
   try {
+    if (!window._fbApp) {
+      alert('Connecting to database... Please wait a few seconds and try again.');
+      return;
+    }
     const { db, auth, collection, addDoc, signInAnonymously, doc, getDoc, updateDoc } = window._fbApp;
 
     if (auth && !auth.currentUser) {
-      await signInAnonymously(auth);
+      try {
+        await signInAnonymously(auth);
+      } catch (authErr) {
+        console.warn('Anonymous auth failed (non-fatal):', authErr.message);
+      }
     }
 
     const pkgOpt = pkgSel.selectedOptions[0];
@@ -359,12 +373,33 @@ async function submitTripPageBooking() {
       await addDoc(collection(db, 'bookings'), bookingData);
     }
 
+    // Update batch bookedSeats if trip exists in Firestore
+    try {
+      if (tripData.id && tripData.id !== 'demo') {
+        const tripRef = doc(db, 'trips', tripData.id);
+        const tripSnap = await getDoc(tripRef);
+        if (tripSnap.exists() && tripSnap.data().batches) {
+          const updatedBatches = tripSnap.data().batches.map(b =>
+            b.id === batchId ? { ...b, bookedSeats: (b.bookedSeats || 0) + seats } : b
+          );
+          await updateDoc(tripRef, { batches: updatedBatches });
+        }
+      }
+    } catch (seatErr) {
+      console.warn('Could not update batch seat count (non-fatal):', seatErr.message);
+    }
+
     // Populate result ticket
     document.getElementById('tbResBookingId').textContent = bookingId;
     document.getElementById('tbResName').textContent = name;
     document.getElementById('tbResPackage').textContent = packageName;
     document.getElementById('tbResSeats').textContent = seats;
     document.getElementById('tbResTotal').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+
+    const trackLink = document.getElementById('tbResTrackLink');
+    if (trackLink) {
+      trackLink.href = `traveller.html?bookingId=${encodeURIComponent(bookingId)}`;
+    }
 
     document.getElementById('tbTicketResult').style.display = 'block';
     document.getElementById('tbTicketResult').scrollIntoView({ behavior: 'smooth' });

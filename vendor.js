@@ -1,4 +1,4 @@
-window.addEventListener('firebase-ready', async () => {
+async function initVendorStorefront() {
   const urlParams = new URLSearchParams(window.location.search);
   const vendorId = urlParams.get('id') || urlParams.get('vendorId');
 
@@ -78,42 +78,7 @@ window.addEventListener('firebase-ready', async () => {
     let instagramUrl = '';
     let terms = '';
 
-    const userRef = doc(db, 'users', vendorId);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      const u = userSnap.data();
-      vendorName = u.name || u.businessName || vendorName;
-      vendorPhone = u.whatsapp || u.phone || '';
-      instagramUrl = u.instagramUrl || '';
-      terms = u.termsAndConditions || '';
-    }
-
-    // Fetch trips
-    const tripsRef = collection(db, 'trips');
-    const qById = query(tripsRef, where('vendorId', '==', vendorId));
-    const snapById = await getDocs(qById);
-
-    let tripsList = [];
-    snapById.forEach(docSnap => {
-      tripsList.push({ id: docSnap.id, ...docSnap.data() });
-    });
-
-    if (tripsList.length === 0) {
-      const qByName = query(tripsRef, where('vendorName', '==', vendorId));
-      const snapByName = await getDocs(qByName);
-      snapByName.forEach(docSnap => {
-        tripsList.push({ id: docSnap.id, ...docSnap.data() });
-      });
-    }
-
-    if (tripsList.length > 0 && !userSnap.exists()) {
-      vendorName = tripsList[0].vendorName || vendorName;
-      vendorPhone = tripsList[0].vendorWhatsApp || '';
-    }
-
-    // Demo fallback for demo testing or unlisted vendor IDs
-    if (vendorId === 'demo' || (tripsList.length === 0 && !userSnap.exists())) {
+    if (vendorId === 'demo') {
       vendorName = 'Sahyadri Trekkers (Verified Partner)';
       vendorPhone = '+919876543210';
       instagramUrl = 'https://instagram.com';
@@ -127,6 +92,39 @@ window.addEventListener('firebase-ready', async () => {
         packages: [{ price: 999 }],
         images: ['https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80']
       }];
+    } else {
+      const userRef = doc(db, 'users', vendorId);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const u = userSnap.data();
+        vendorName = u.name || u.businessName || vendorName;
+        vendorPhone = u.whatsapp || u.phone || '';
+        instagramUrl = u.instagramUrl || '';
+        terms = u.termsAndConditions || '';
+      }
+
+      // Fetch trips
+      const tripsRef = collection(db, 'trips');
+      const qById = query(tripsRef, where('vendorId', '==', vendorId));
+      const snapById = await getDocs(qById);
+
+      snapById.forEach(docSnap => {
+        tripsList.push({ id: docSnap.id, ...docSnap.data() });
+      });
+
+      if (tripsList.length === 0) {
+        const qByName = query(tripsRef, where('vendorName', '==', vendorId));
+        const snapByName = await getDocs(qByName);
+        snapByName.forEach(docSnap => {
+          tripsList.push({ id: docSnap.id, ...docSnap.data() });
+        });
+      }
+
+      if (tripsList.length > 0 && !userSnap.exists()) {
+        vendorName = tripsList[0].vendorName || vendorName;
+        vendorPhone = tripsList[0].vendorWhatsApp || '';
+      }
     }
 
     // Update DOM
@@ -221,4 +219,10 @@ window.addEventListener('firebase-ready', async () => {
       <p style="color: #888; margin-top: 10px;">Could not load trips for this vendor ID.</p>
     `;
   }
-});
+}
+
+if (window._fbApp) {
+  initVendorStorefront();
+} else {
+  window.addEventListener('firebase-ready', initVendorStorefront);
+}

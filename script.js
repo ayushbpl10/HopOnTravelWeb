@@ -1,6 +1,15 @@
 // ===== i18n (Internationalization) =====
 const translations = {
   en: {
+    nav_features: "Features",
+    nav_how_it_works: "How It Works",
+    nav_book_now: "Book Now",
+    nav_for_vendors: "For Vendors",
+    nav_traveller_portal: "Traveller Portal",
+    nav_contact: "Contact",
+    nav_download: "Download App 🚀",
+    hiw_label: "Simple Process",
+    hiw_title: "Go from Browsing to<br/><span class=\"gradient-text\">Boarding in Minutes</span>",
     hero_small: "Life Bahut Ho Gayi,",
     hero_title: "Ab Toh<br/>Ghoom Le!",
     hero_desc: "Escape the routine. Meet amazing people.<br/>Explore incredible places. Make memories.",
@@ -23,6 +32,15 @@ const translations = {
     coll_cta: "Book Your Escape &rarr;"
   },
   hi: {
+    nav_features: "सुविधाएं",
+    nav_how_it_works: "यह कैसे काम करता है",
+    nav_book_now: "अभी बुक करें",
+    nav_for_vendors: "वेंडर्स के लिए",
+    nav_traveller_portal: "यात्री पोर्टल",
+    nav_contact: "संपर्क करें",
+    nav_download: "ऐप डाउनलोड करें 🚀",
+    hiw_label: "सरल प्रक्रिया",
+    hiw_title: "ब्राउज़िंग से लेकर<br/><span class=\"gradient-text\">बोर्डिंग तक मिनटों में</span>",
     hero_small: "ज़िंदगी बहुत हो गई,",
     hero_title: "अब तो<br/>घूम ले!",
     hero_desc: "रूटीन से बचें। अद्भुत लोगों से मिलें।<br/>अविश्वसनीय जगहों की खोज करें। यादें बनाएं।",
@@ -45,6 +63,15 @@ const translations = {
     coll_cta: "अपनी यात्रा बुक करें &rarr;"
   },
   mr: {
+    nav_features: "वैशिष्ट्ये",
+    nav_how_it_works: "हे कसे कार्य करते",
+    nav_book_now: "आता बुक करा",
+    nav_for_vendors: "व्हेंडर्ससाठी",
+    nav_traveller_portal: "प्रवासी पोर्टल",
+    nav_contact: "संपर्क",
+    nav_download: "ॲप डाउनलोड करा 🚀",
+    hiw_label: "सोपी प्रक्रिया",
+    hiw_title: "ब्राउझिंगपासून ते<br/><span class=\"gradient-text\">बोर्डिंगपर्यंत काही मिनिटांत</span>",
     hero_small: "आयुष्य खूप झालं,",
     hero_title: "आता तर<br/>फिरून घे!",
     hero_desc: "नियमिततेतून बाहेर पडा. अद्भुत लोकांना भेटा.<br/>अविश्वसनीय ठिकाणे एक्सप्लोर करा. आठवणी बनवा.",
@@ -67,6 +94,15 @@ const translations = {
     coll_cta: "तुमची ट्रिप बुक करा &rarr;"
   },
   kn: {
+    nav_features: "ವೈಶಿಷ್ಟ್ಯಗಳು",
+    nav_how_it_works: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
+    nav_book_now: "ಈಗಲೇ ಬುಕ್ ಮಾಡಿ",
+    nav_for_vendors: "ವೆಂಡರ್‌ಗಳಿಗಾಗಿ",
+    nav_traveller_portal: "ಪ್ರಯಾಣಿಕರ ಪೋರ್ಟಲ್",
+    nav_contact: "ಸಂಪರ್ಕಿಸಿ",
+    nav_download: "ಆ್ಯಪ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ 🚀",
+    hiw_label: "ಸರಳ ಪ್ರಕ್ರಿಯೆ",
+    hiw_title: "ಹುಡುಕಾಟದಿಂದ ಹಿಡಿದು<br/><span class=\"gradient-text\">ಬೋರ್ಡಿಂಗ್‌ವರೆಗೆ ಕೆಲವೇ ನಿಮಿಷಗಳಲ್ಲಿ</span>",
     hero_small: "ಜೀವನ ತುಂಬಾ ಆಯಿತು,",
     hero_title: "ಈಗಲಾದರೂ<br/>ತಿರುಗಾಡು!",
     hero_desc: "ದಿನಚರಿಯಿಂದ ತಪ್ಪಿಸಿಕೊಳ್ಳಿ. ಅದ್ಭುತ ಜನರನ್ನು ಭೇಟಿ ಮಾಡಿ.<br/>ನಂಬಲಾಗದ ಸ್ಥಳಗಳನ್ನು ಅನ್ವೇಷಿಸಿ. ನೆನಪುಗಳನ್ನು ಮಾಡಿ.",
@@ -216,7 +252,10 @@ function renderTripCards(tripsArr) {
             <span class="web-trip-price">from ₹${minPrice.toLocaleString('en-IN')}</span>
             <span class="web-trip-seats">${totalSeats} seats left</span>
           </div>
-          <button class="web-trip-book-btn" onclick="selectWebTrip('${trip.id}')">Book This Trip →</button>
+          <div style="display:flex; gap:0.5rem; margin-top:0.8rem;">
+            <button class="web-trip-book-btn" style="flex:1;" onclick="selectWebTrip('${trip.id}')">Book This Trip →</button>
+            <a href="trip.html?id=${encodeURIComponent(trip.id)}" class="p-btn p-btn-dark p-btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:0.6rem 0.9rem; font-size:0.85rem; border-radius:10px;">Details</a>
+          </div>
         </div>
       </div>`;
   }).join('');
@@ -331,6 +370,10 @@ async function submitWebBooking() {
   btn.textContent = 'Creating Booking...';
 
   try {
+    if (!window._fbApp) {
+      alert('Connecting to database... Please wait a few seconds and try again.');
+      return;
+    }
     const { db, auth, collection, addDoc, signInAnonymously, doc, getDoc, updateDoc, query, getDocs, where } = window._fbApp;
 
     // Sign in anonymously so Firestore rules allow writes
@@ -395,8 +438,10 @@ async function submitWebBooking() {
     document.getElementById('conf-total').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
     document.getElementById('conf-bookingId').textContent = bookingId;
 
-    // Removed WhatsApp fallback logic to force users to download the app for payment and status.
-
+    const portalLink = document.getElementById('conf-portal-link');
+    if (portalLink) {
+      portalLink.href = `traveller.html?bookingId=${encodeURIComponent(bookingId)}`;
+    }
 
     goToStep(3);
     document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
@@ -410,8 +455,48 @@ async function submitWebBooking() {
   }
 }
 
+// Curated Fallback Trips for instant browsing & testing
+const CURATED_SAMPLE_TRIPS = [
+  {
+    id: 'demo',
+    title: 'Harishchandragad & Kokankada Trek',
+    vendorName: 'Sahyadri Trekkers (Verified Partner)',
+    vendorId: 'demo',
+    packages: [{ name: 'Pune Transport', price: 1299 }, { name: 'Mumbai Transport', price: 1499 }],
+    batches: [{ id: 'b1', dateDuration: '05-06 Sep (Sat-Sun)', totalSeats: 30, bookedSeats: 8 }],
+    images: ['https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    id: 'rajmachi-demo',
+    title: 'Rajmachi Fireflies & Fort Camping',
+    vendorName: 'Sahyadri Trekkers (Verified Partner)',
+    vendorId: 'demo',
+    packages: [{ name: 'Camping Package', price: 1399 }],
+    batches: [{ id: 'b2', dateDuration: 'Upcoming Weekend', totalSeats: 25, bookedSeats: 6 }],
+    images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    id: 'pawna-demo',
+    title: 'Pawna Lake Lakeside Glamping',
+    vendorName: 'Camp Wanderers',
+    vendorId: 'camp-wanderers',
+    packages: [{ name: 'Lakeside Tent', price: 1099 }],
+    batches: [{ id: 'b3', dateDuration: 'Every Weekend', totalSeats: 40, bookedSeats: 15 }],
+    images: ['https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80']
+  },
+  {
+    id: 'gokarna-demo',
+    title: 'Gokarna Beach Trek & Cafe Hopping',
+    vendorName: 'Coastline Explorers',
+    vendorId: 'coastline-explorers',
+    packages: [{ name: 'Full Trip Ex-Pune', price: 3999 }],
+    batches: [{ id: 'b4', dateDuration: 'Long Weekend', totalSeats: 20, bookedSeats: 5 }],
+    images: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80']
+  }
+];
+
 // ===== LOAD TRIPS ON FIREBASE READY =====
-window.addEventListener('firebase-ready', async () => {
+async function loadTripsOnReady() {
   const grid = document.getElementById('webTripsGrid');
   const loadingMsg = document.getElementById('tripsLoadingMsg');
   const errorMsg = document.getElementById('tripsErrorMsg');
@@ -422,16 +507,25 @@ window.addEventListener('firebase-ready', async () => {
     const snap = await getDocs(q);
 
     _allWebTrips = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    loadingMsg.style.display = 'none';
+    if (!_allWebTrips.length) {
+      _allWebTrips = CURATED_SAMPLE_TRIPS;
+    }
+    if (loadingMsg) loadingMsg.style.display = 'none';
     renderTripCards(_allWebTrips);
 
-
   } catch (err) {
-    console.error('Failed to load trips:', err);
-    loadingMsg.style.display = 'none';
-    errorMsg.style.display = 'block';
+    console.warn('Could not load live trips from Firestore, using curated sample trips:', err);
+    if (loadingMsg) loadingMsg.style.display = 'none';
+    _allWebTrips = CURATED_SAMPLE_TRIPS;
+    renderTripCards(_allWebTrips);
   }
-});
+}
+
+if (window._fbApp) {
+  loadTripsOnReady();
+} else {
+  window.addEventListener('firebase-ready', loadTripsOnReady);
+}
 
 // ===== GSAP ANIMATIONS =====
 function initAnimations() {

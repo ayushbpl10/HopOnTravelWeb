@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveller Portal – Ab Toh Ghoom Le</title>
+  <meta name="description" content="Track your upcoming trips, live bus location, manage bookings, and view your travel tickets on Ab Toh Ghoom Le." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Leaflet CSS for Live Bus Tracking Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  
+  <!-- Firebase SDK via CDN -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCndctKLDOwiT08SYLlB4L2tLQ9roU6948",
+      authDomain: "hopontravel-ddd9b.firebaseapp.com",
+      projectId: "hopontravel-ddd9b",
+      storageBucket: "hopontravel-ddd9b.firebasestorage.app",
+      messagingSenderId: "792083213033",
+      appId: "1:792083213033:web:25bc2d1ed9e6d779015e78"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence).catch(console.error);
+
+    window._fb = {
+      db, auth, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, onSnapshot,
+      GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+    };
+    window.dispatchEvent(new Event('firebase-portal-ready'));
+  </script>
+</head>
+<body class="portal-body">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="pnav">
+    <div class="pnav-inner">
+      <a href="index.html" class="pnav-logo">
+        <span class="brand-hop">AbToh</span><span class="brand-on">Ghoom</span><span class="brand-hop">Le</span>
+        <span class="brand-tag">Traveller Portal</span>
+      </a>
+      <div class="pnav-actions" id="pnavActions">
+        <a href="index.html" class="p-btn p-btn-dark p-btn-sm">← Back to Home</a>
+        <div id="userChipContainer" style="display:none;"></div>
+        <button id="loginDemoTravellerNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoTraveller()">
+          ⚡ Demo Account
+        </button>
+        <button id="loginGoogleBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginWithGoogle()">
+          Sign in with Google
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN PORTAL CONTENT ===== -->
+  <main class="portal-container">
+    
+    <!-- Logged Out State Banner -->
+    <div id="loggedOutBanner" class="p-empty" style="margin-bottom: 2.5rem; text-align: center;">
+      <div class="p-empty-icon">🎒</div>
+      <h2>Welcome to Traveller Hub</h2>
+      <p>Sign in with your Google account to manage your bookings, track live buses in real time, view tickets, and access your saved getaways.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="p-btn p-btn-yellow" onclick="loginWithGoogle()">
+          <span>🔑 Continue with Google</span>
+        </button>
+        <button class="p-btn p-btn-yellow" style="background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; box-shadow: 0 4px 15px rgba(16,185,129,0.4);" onclick="loginAsDemoTraveller()">
+          <span>⚡ Test as Demo Traveller</span>
+        </button>
+        <button class="p-btn p-btn-dark" onclick="document.getElementById('quickTrackCard').scrollIntoView({behavior:'smooth'})">
+          <span>🔍 Track Booking ID Directly</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Status Lookup Card (Accessible with or without login) -->
+    <div class="p-stat-card" id="quickTrackCard" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff;">Track Booking by ID</h3>
+          <p style="font-size: 0.85rem; color: var(--portal-muted);">Enter your 5 or 9-digit Booking ID (e.g. ATGL-12345) to view live confirmation and status.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex: 1; max-width: 400px; min-width: 260px;">
+          <input type="text" id="quickBookingIdInput" class="p-input" placeholder="e.g. ATGL-12345" style="text-transform: uppercase;" />
+          <button class="p-btn p-btn-yellow" onclick="handleQuickLookup()">Track</button>
+        </div>
+      </div>
+      <div id="quickLookupResult" style="margin-top: 1.2rem; display: none;"></div>
+    </div>
+
+    <!-- Logged In Dashboard Section -->
+    <div id="loggedInView" style="display: none;">
+      
+      <!-- Welcome Header -->
+      <div class="portal-hero">
+        <h1 id="welcomeUserTitle">Hello, Explorer! 🌍</h1>
+        <p>Your personal journey dashboard. Access your tickets, live routes, and upcoming departures.</p>
+      </div>
+
+      <!-- Quick Metrics Summary -->
+      <div class="p-stats-grid">
+        <div class="p-stat-card">
+          <div class="p-stat-label">Total Bookings</div>
+          <div class="p-stat-val" id="statTotalBookings">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Confirmed Trips</div>
+          <div class="p-stat-val" id="statConfirmedBookings" style="color: var(--portal-success);">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Pending Verification</div>
+          <div class="p-stat-val" id="statPendingBookings" style="color: var(--portal-warning);">0</div>
+        </div>
+        <div class="p-stat-card">
+          <div class="p-stat-label">Saved to Wishlist</div>
+          <div class="p-stat-val" id="statWishlistCount" style="color: var(--portal-accent);">0</div>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="p-tabs">
+        <button class="p-tab-btn active" onclick="switchTravellerTab('bookings')" id="tabBtn-bookings">
+          🎟️ My Bookings
+        </button>
+        <button class="p-tab-btn" onclick="switchTravellerTab('tracking')" id="tabBtn-tracking">
+          📍 Live Bus Tracking
+        </button>
+        <button class="p-tab-btn" onclick="switchTravellerTab('wishlist')" id="tabBtn-wishlist">
+          ❤️ Saved Trips
+        </button>
+        <button class="p-tab-btn" onclick="switchTravellerTab('profile')" id="tabBtn-profile">
+          👤 My Profile
+        </button>
+      </div>
+
+      <!-- TAB 1: BOOKINGS -->
+      <section id="tab-bookings" class="p-tab-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="bookingFilterPills">
+            <button class="p-btn p-btn-dark p-btn-sm active" onclick="filterBookings('all', this)">All</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('confirmed', this)">Confirmed</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('pending', this)">Pending</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('cancelled', this)">Cancelled</button>
+          </div>
+          <a href="index.html#book" class="p-btn p-btn-yellow p-btn-sm">+ Book New Trip</a>
+        </div>
+
+        <!-- Bookings List Container -->
+        <div id="bookingsListContainer">
+          <div style="text-align: center; padding: 3rem; color: var(--portal-muted);">
+            <div class="book-spinner" style="margin: 0 auto 1rem;"></div>
+            <span>Loading your bookings...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: LIVE BUS TRACKING -->
+      <section id="tab-tracking" class="p-tab-content" style="display: none;">
+        <div class="p-stat-card" style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;">Live Trip Captain & Bus Location</h3>
+          <p style="font-size: 0.88rem; color: var(--portal-muted); margin-bottom: 1rem;">Select one of your active confirmed trips to view the captain's live broadcasted GPS position and vehicle details.</p>
+          
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <select id="trackingTripSelect" class="p-select" style="max-width: 400px;" onchange="loadTripLiveTracking(this.value)">
+              <option value="">-- Choose an active trip to track --</option>
+            </select>
+            <button class="p-btn p-btn-yellow p-btn-sm" onclick="refreshLiveTracking()">🔄 Refresh Location</button>
+          </div>
+        </div>
+
+        <!-- Map and Crew Display -->
+        <div id="liveTrackingViewArea" style="display: none;">
+          <!-- Map Canvas -->
+          <div id="leafletMap" class="p-map-container"></div>
+          
+          <!-- Crew Card -->
+          <div id="crewDetailsCard" class="p-crew-card">
+            <img id="crewVehiclePhoto" src="hero.png" alt="Vehicle Photo" class="p-crew-photo" />
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+                <h4 id="crewCaptainName" style="font-size: 1.1rem; color: #fff;">Captain Name</h4>
+                <span class="p-badge p-badge-confirmed">Trip Captain</span>
+              </div>
+              <p id="crewDriverVehicle" style="font-size: 0.85rem; color: var(--portal-muted); margin-bottom: 0.5rem;">Driver: TBD • Vehicle: TBD</p>
+              <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                <a id="crewCaptainWhatsapp" href="#" target="_blank" class="p-btn p-btn-sm" style="background: #25D366; color: #fff; text-decoration: none;">💬 WhatsApp Captain</a>
+                <a id="crewCaptainCall" href="#" class="p-btn p-btn-dark p-btn-sm">📞 Call Captain</a>
+              </div>
+            </div>
+            <div style="text-align: right; min-width: 140px;">
+              <span style="font-size: 0.75rem; color: var(--portal-muted); display: block;">LAST BROADCAST</span>
+              <strong id="crewLastUpdate" style="color: var(--portal-primary); font-size: 0.95rem;">Just now</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="noActiveTrackingMsg" class="p-empty" style="margin-top: 1rem;">
+          <div class="p-empty-icon">📍</div>
+          <h3>No Trip Selected for Tracking</h3>
+          <p>Once a vendor initiates a trip, their live bus GPS position and arrival status will be broadcasted directly on the map above.</p>
+        </div>
+      </section>
+
+      <!-- TAB 3: WISHLIST -->
+      <section id="tab-wishlist" class="p-tab-content" style="display: none;">
+        <div id="wishlistContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+          <div style="text-align: center; padding: 3rem; color: var(--portal-muted); grid-column: 1 / -1;">
+            <span>Checking saved trips...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PROFILE -->
+      <section id="tab-profile" class="p-tab-content" style="display: none;">
+        <div class="p-stat-card" style="max-width: 600px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="pnav-avatar" id="profileAvatarBig" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;">U</div>
+            <h3 id="profileName" style="font-size: 1.5rem; color: #fff; margin-bottom: 0.3rem;">User Name</h3>
+            <p id="profileEmail" style="color: var(--portal-muted); font-size: 0.9rem;">user@example.com</p>
+            <span class="p-badge p-badge-confirmed" style="margin-top: 0.6rem;">Verified Traveller</span>
+          </div>
+
+          <div class="p-field">
+            <label class="p-label">WhatsApp Contact Number</label>
+            <input type="tel" id="profilePhoneInput" class="p-input" placeholder="+91 98765 43210" />
+          </div>
+
+          <button class="p-btn p-btn-yellow" style="width: 100%; margin-bottom: 1rem;" onclick="saveTravellerProfile()">
+            Save Profile Details
+          </button>
+          
+          <button class="p-btn p-btn-danger" style="width: 100%;" onclick="handleLogout()">
+            Sign Out
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Ticket Print Modal / Hidden Sheet -->
+  <div id="printableManifest" style="display: none;"></div>
+
+  <!-- Leaflet JS for Maps -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="traveller.js"></script>
+</body>
+</html>
