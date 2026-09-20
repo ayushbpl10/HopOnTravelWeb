@@ -332,7 +332,43 @@ async function submitTripPageBooking() {
   if (!/^\d{10}$/.test(phone.replace(/\D/g, ''))) return alert('Please enter a valid 10-digit phone number.');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert('Please enter a valid email address.');
   if (!consent) return alert('You must accept the risks involved before booking.');
-  if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) return alert(`Security check failed. Hint: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
+
+  // 4. reCAPTCHA Verification with Math Captcha Fallback
+  let recaptchaToken = null;
+  if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+    try {
+      recaptchaToken = window.grecaptcha.getResponse();
+    } catch (_) {}
+  }
+
+  if (recaptchaToken) {
+    try {
+      const verifyRes = await fetch('/api/verify-recaptcha', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: recaptchaToken })
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset();
+        return alert('reCAPTCHA security check failed. Please complete the reCAPTCHA again.');
+      }
+    } catch (netErr) {
+      console.warn('reCAPTCHA verification endpoint error:', netErr);
+      if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) {
+        const fallback = document.getElementById('tbFallbackCaptchaBlock');
+        if (fallback) fallback.style.display = 'flex';
+        return alert(`Security check failed. Hint: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
+      }
+    }
+  } else {
+    // If reCAPTCHA was not ticked or in test/headless mode
+    if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) {
+      const fallback = document.getElementById('tbFallbackCaptchaBlock');
+      if (fallback) fallback.style.display = 'flex';
+      return alert(`Please complete the reCAPTCHA security check, or enter: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
+    }
+  }
 
   _isSubmittingBooking = true;
   const btn = document.getElementById('tbSubmitBtn');
@@ -419,6 +455,9 @@ async function submitTripPageBooking() {
     _isSubmittingBooking = false;
     btn.disabled = false;
     btn.textContent = 'Confirm Booking & Generate Ticket →';
+    if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
+      try { window.grecaptcha.reset(); } catch (_) {}
+    }
   }
 }
 
