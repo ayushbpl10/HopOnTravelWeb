@@ -74,10 +74,13 @@ body {
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 1rem 0;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.88) 0%, rgba(2, 6, 23, 0.6) 80%, transparent 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: background .3s, backdrop-filter .3s, box-shadow .3s;
 }
 .navbar.scrolled {
-  background: rgba(2, 6, 23, 0.7);
+  background: rgba(2, 6, 23, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 1px 0 var(--border);
@@ -506,11 +509,11 @@ body {
 /* Hero */
 .tmpl-hero {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0 10%;
+  padding: 120px 10% 60px 10%;
   overflow: hidden;
 }
 .tmpl-hero-bg {
@@ -730,7 +733,7 @@ body {
   /* Hero */
   .tmpl-main-title { font-size: 3.5rem; }
   .tmpl-small-text { font-size: 1.2rem; }
-  .tmpl-hero { padding: 0 20px; text-align: center; justify-content: center; }
+  .tmpl-hero { padding: 95px 20px 40px 20px; text-align: center; justify-content: center; }
   .tmpl-hero-overlay { background: rgba(0,0,0,0.65); }
   .tmpl-hero-content { max-width: 100%; }
   .tmpl-hero-actions { justify-content: center; flex-direction: column; gap: 12px; align-items: center; }
