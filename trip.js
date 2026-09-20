@@ -310,7 +310,10 @@ async function submitTripPageBooking() {
     return;
   }
 
-  // 2. Client Rate Limiting
+  // 2. Client Rate Limiting & Attack Protection
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('submit trip booking')) {
+    return;
+  }
   if (!checkTripRateLimit()) {
     return alert('Too many booking requests. Please wait 2 minutes before trying again.');
   }

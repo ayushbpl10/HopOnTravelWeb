@@ -342,7 +342,10 @@ async function submitWebBooking() {
     return;
   }
 
-  // 2. Client-side Rate Limiting against automated spam
+  // 2. Client-side Rate Limiting & Attack Protection
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('submit booking')) {
+    return;
+  }
   if (!checkBookingRateLimit()) {
     return alert('Too many booking requests. Please wait 2 minutes before trying again.');
   }
