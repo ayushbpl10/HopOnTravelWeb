@@ -146,16 +146,40 @@
       .vbento-card.featured { grid-column: span 2; }
       .vhow-steps { grid-template-columns: 1fr 1fr; }
       .vhow-steps::before { display: none; }
-      .vscreens-inner { flex-direction: column; }
+      .vscreens-inner { flex-direction: column; gap: 3rem; }
       .vnav-links { display: none; }
+    }
+    @media (max-width: 768px) {
+      .vnav { padding: 0.8rem 1rem; }
+      .vnav-logo { font-size: 1.15rem; }
+      .vnav-cta { padding: 0.5rem 1rem; font-size: 0.82rem; }
+      .vhero { padding: 6.5rem 1rem 3.5rem; min-height: auto; }
+      .vhero h1 { font-size: clamp(2rem, 7vw, 3.2rem); }
+      .vhero p { font-size: 1rem; margin-bottom: 2rem; }
+      .vhero-actions { flex-direction: column; width: 100%; }
+      .vhero-actions .btn-yellow, .vhero-actions .btn-ghost { width: 100%; text-align: center; justify-content: center; }
+      .vsection { padding: 4rem 1rem; }
+      .vbento-card { padding: 1.5rem; border-radius: 18px; }
+      .vtrust { padding: 4rem 1rem; }
+      .vcta { padding: 5rem 1rem; }
+      .vfooter { padding: 2rem 1rem; flex-direction: column; text-align: center; gap: 0.8rem; }
     }
     @media (max-width: 600px) {
       .vbento-grid { grid-template-columns: 1fr; }
       .vbento-card.featured { grid-column: span 1; }
       .vhow-steps { grid-template-columns: 1fr; }
-      .vhero h1 { font-size: 2.8rem; }
-      .vhero-stats { gap: 1.5rem; }
+      .vhero-stats { gap: 1.2rem; }
       .vscreens-phones { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .vnav { padding: 0.6rem 0.8rem; }
+      .vnav-logo { font-size: 1rem; }
+      .vnav-cta { padding: 0.4rem 0.75rem; font-size: 0.75rem; }
+      .vhero h1 { font-size: 2.1rem; }
+      .vhero-stats { flex-direction: column; gap: 0.8rem; padding-top: 1.5rem; margin-top: 2rem; }
+      .vstat { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.4rem; }
+      .vstat-num { font-size: 1.5rem; }
+      .vcta-actions .btn-yellow, .vcta-actions .btn-ghost { width: 100%; text-align: center; justify-content: center; }
     }
   </style>
 </head>

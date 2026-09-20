@@ -79,12 +79,12 @@
     <div id="vendorLoggedInView" style="display: none;">
       
       <!-- Top Overview Bar -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div class="portal-header-bar">
         <div>
-          <h1 id="vendorGreetingTitle" style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem;">Welcome, Partner</h1>
+          <h1 id="vendorGreetingTitle" style="font-weight: 900; color: #fff; margin-bottom: 0.3rem;">Welcome, Partner</h1>
           <p style="color: var(--portal-muted); font-size: 0.95rem;">Manage your published trips, passenger manifests, and live route status.</p>
         </div>
-        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+        <div class="portal-header-actions">
           <button class="p-btn p-btn-yellow" onclick="openCreateTripModal()">+ Create New Trip</button>
           <button class="p-btn p-btn-dark" onclick="openAiImportModal()">🤖 AI WhatsApp Import</button>
           <a id="publicStorefrontLink" href="#" target="_blank" class="p-btn p-btn-dark">🏪 Public Storefront</a>
@@ -112,7 +112,7 @@
       </div>
 
       <!-- Live Broadcast Alert (When broadcasting) -->
-      <div id="liveBroadcastingAlert" style="display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--portal-success); padding: 1.2rem; border-radius: 16px; margin-bottom: 2rem; display: none; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div id="liveBroadcastingAlert" style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--portal-success); padding: 1.2rem; border-radius: 16px; margin-bottom: 2rem; display: none; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
         <div style="display: flex; align-items: center; gap: 0.8rem;">
           <span style="font-size: 1.8rem; animation: pulse 1.5s infinite;">📡</span>
           <div>
@@ -138,7 +138,7 @@
 
       <!-- TAB 1: TRIP MANAGEMENT -->
       <section id="vtab-trips" class="p-tab-content">
-        <div id="vendorTripsListContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div id="vendorTripsListContainer" class="v-trips-grid">
           <div style="text-align: center; padding: 3rem; color: var(--portal-muted); grid-column: 1 / -1;">
             <div class="book-spinner" style="margin: 0 auto 1rem;"></div>
             <span>Loading your trips...</span>
@@ -149,13 +149,13 @@
       <!-- TAB 2: BOOKINGS & MANIFESTS -->
       <section id="vtab-bookings" class="p-tab-content" style="display: none;">
         <!-- Filters and Export Actions -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+        <div class="portal-filter-bar">
+          <div class="portal-filter-group" style="flex: 1;">
             <input type="text" id="vBookingSearchInput" class="p-input" placeholder="🔍 Search traveller or ID..." style="max-width: 250px;" oninput="filterVendorBookings()" />
             <select id="vBookingTripFilter" class="p-select" style="max-width: 220px;" onchange="filterVendorBookings()">
               <option value="all">All Trips</option>
             </select>
-            <div id="vBookingStatusPills" style="display: flex; gap: 0.4rem;">
+            <div id="vBookingStatusPills" class="portal-filter-group">
               <button class="p-btn p-btn-dark p-btn-sm active" onclick="setBookingStatusFilter('all', this)">All</button>
               <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('pending', this)">Pending</button>
               <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('confirmed', this)">Confirmed</button>
@@ -163,7 +163,7 @@
             </div>
           </div>
           
-          <div style="display: flex; gap: 0.6rem;">
+          <div class="portal-filter-group">
             <button class="p-btn p-btn-yellow p-btn-sm" onclick="exportBookingsToCSV()">📥 Export CSV</button>
             <button class="p-btn p-btn-dark p-btn-sm" onclick="printPassengerManifest()">🖨️ Print Manifest</button>
           </div>
@@ -197,7 +197,7 @@
 
       <!-- TAB 3: SETTINGS & STOREFRONT -->
       <section id="vtab-settings" class="p-tab-content" style="display: none;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
           <!-- Profile Card -->
           <div class="p-stat-card">

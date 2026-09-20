@@ -33,17 +33,17 @@ async function initVendorStorefront() {
       <div style="font-size: 2.5rem; margin-bottom: 1rem; animation: spin 1s infinite linear;">🧭</div>
       <h2 style="color: #fff; font-size: 1.5rem;">Loading Vendor Storefront...</h2>
     </div>
-    <div id="storefrontContent" style="display: none; max-width: 1100px; margin: 0 auto;">
+    <div id="storefrontContent" style="display: none; max-width: 1100px; margin: 0 auto; width: 100%;">
       <!-- Vendor Header Card -->
-      <div style="background: linear-gradient(135deg, rgba(255,184,0,0.1), rgba(20,20,20,0.9)); border: 1px solid var(--yellow); border-radius: 24px; padding: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; overflow: hidden; backdrop-filter: blur(10px);">
+      <div class="v-storefront-card">
         <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--yellow); color: #000; font-size: 2.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; box-shadow: 0 10px 30px rgba(255,184,0,0.4);" id="vAvatar">V</div>
         <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">
           ✓ Verified Travel Partner
         </div>
-        <h1 id="vName" style="font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Vendor Storefront</h1>
+        <h1 id="vName" style="font-size: clamp(1.6rem, 5vw, 2.5rem); font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Vendor Storefront</h1>
         <p id="vSubtitle" style="color: #aaa; font-size: 1rem; margin-bottom: 1.5rem;">Active Trip Organiser</p>
         
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" id="vActions">
+        <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;" id="vActions">
           <a id="vWhatsapp" href="#" target="_blank" style="display: none; background: #25D366; color: #fff; padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">💬 WhatsApp</a>
           <a id="vInstagram" href="#" target="_blank" style="display: none; background: #E1306C; color: #fff; padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">📸 Instagram</a>
           <button id="vShareBtn" style="background: var(--yellow); color: #000; padding: 0.7rem 1.5rem; border-radius: 50px; border: none; cursor: pointer; font-weight: 700; font-size: 0.9rem;">🔗 Share Profile</button>
@@ -56,7 +56,7 @@ async function initVendorStorefront() {
         <h2 class="vsection-title" id="tripsHeader">Available Trips</h2>
       </div>
 
-      <div id="vendorTripsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+      <div id="vendorTripsGrid" class="v-trips-grid">
       </div>
 
       <!-- Terms & Conditions Section -->

@@ -83,12 +83,12 @@
 
     <!-- Quick Status Lookup Card (Accessible with or without login) -->
     <div class="p-stat-card" id="quickTrackCard" style="margin-bottom: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <div>
+      <div class="portal-header-bar" style="margin-bottom: 0;">
+        <div style="max-width: 540px;">
           <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff;">Track Booking by ID</h3>
           <p style="font-size: 0.85rem; color: var(--portal-muted);">Enter your 5 or 9-digit Booking ID (e.g. ATGL-12345) to view live confirmation and status.</p>
         </div>
-        <div style="display: flex; gap: 0.5rem; flex: 1; max-width: 400px; min-width: 260px;">
+        <div class="portal-filter-group" style="flex: 1; max-width: 420px; width: 100%;">
           <input type="text" id="quickBookingIdInput" class="p-input" placeholder="e.g. ATGL-12345" style="text-transform: uppercase;" />
           <button class="p-btn p-btn-yellow" onclick="handleQuickLookup()">Track</button>
         </div>
@@ -143,8 +143,8 @@
 
       <!-- TAB 1: BOOKINGS -->
       <section id="tab-bookings" class="p-tab-content">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="bookingFilterPills">
+        <div class="portal-filter-bar">
+          <div class="portal-filter-group" id="bookingFilterPills">
             <button class="p-btn p-btn-dark p-btn-sm active" onclick="filterBookings('all', this)">All</button>
             <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('confirmed', this)">Confirmed</button>
             <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('pending', this)">Pending</button>
@@ -168,8 +168,8 @@
           <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;">Live Trip Captain & Bus Location</h3>
           <p style="font-size: 0.88rem; color: var(--portal-muted); margin-bottom: 1rem;">Select one of your active confirmed trips to view the captain's live broadcasted GPS position and vehicle details.</p>
           
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-            <select id="trackingTripSelect" class="p-select" style="max-width: 400px;" onchange="loadTripLiveTracking(this.value)">
+          <div class="portal-filter-group" style="width: 100%;">
+            <select id="trackingTripSelect" class="p-select" style="max-width: 400px; flex: 1;" onchange="loadTripLiveTracking(this.value)">
               <option value="">-- Choose an active trip to track --</option>
             </select>
             <button class="p-btn p-btn-yellow p-btn-sm" onclick="refreshLiveTracking()">🔄 Refresh Location</button>
