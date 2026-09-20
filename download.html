@@ -6,6 +6,7 @@
   <title>Get Exclusive Access – Ab Toh Ghoom Le</title>
   <meta name="description" content="Join the VIP early access club for Ab Toh Ghoom Le — India's premier group travel app. Limited spots available." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+  <script src="i18n.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -38,7 +39,7 @@
     .nav-logo span:first-child { color: #fff; }
     .nav-logo span:nth-child(2) { color: #FFB800; }
     .nav-logo span:last-child { color: #555; font-weight: 400; font-size: 0.95rem; }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
     .nav-links a { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: #fff; }
 
@@ -182,7 +183,13 @@
       <span>AbToh</span><span>Ghoom</span><span>Le</span>
     </a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <select id="langSelect" class="lang-select-dropdown" onchange="changeLanguage(this.value)" aria-label="Language selector" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: #fff; padding: 0.35rem 0.75rem; border-radius: 8px; font-size: 0.85rem; cursor: pointer; outline: none;">
+        <option value="en" style="background:#111;color:#fff;">English</option>
+        <option value="hi" style="background:#111;color:#fff;">हिन्दी (Hindi)</option>
+        <option value="mr" style="background:#111;color:#fff;">मराठी (Marathi)</option>
+        <option value="kn" style="background:#111;color:#fff;">ಕನ್ನಡ (Kannada)</option>
+      </select>
     </div>
   </nav>
 
@@ -191,12 +198,12 @@
     <!-- BADGE -->
     <div class="badge">
       <div class="badge-dot"></div>
-      Limited Early Access — VIP Club
+      <span data-i18n="dl_badge_vip">Limited Early Access — VIP Club</span>
     </div>
 
     <!-- HEADLINE -->
-    <h1>Your next adventure<br/>starts <span class="yellow caveat">right here</span></h1>
-    <p class="hero-sub">Join a community of explorers getting exclusive access to the Ab Toh Ghoom Le app before the world does. Only a limited number of spots available.</p>
+    <h1 data-i18n="dl_hero_h1">Your next adventure<br/>starts <span class="yellow caveat">right here</span></h1>
+    <p class="hero-sub" data-i18n="dl_hero_desc">Join a community of explorers getting exclusive access to the Ab Toh Ghoom Le app before the world does. Only a limited number of spots available.</p>
 
     <!-- APP SCREENSHOTS -->
     <div class="phones-row">
@@ -213,10 +220,10 @@
         <div class="step-glow"></div>
         <div class="step-num">1</div>
         <div class="step-body">
-          <div class="step-label">Step One • Unlock Your Access</div>
-          <div class="step-title">Join the VIP Tester Group</div>
-          <div class="step-desc">Opens Google Groups. Sign in with your Google account, then click the <strong style="color:#FFB800">"Join group"</strong> button. This is what unlocks your Play Store download link.</div>
-          <span class="step-btn yellow">Join the VIP Club →</span>
+          <div class="step-label" data-i18n="dl_step1_label">Step One • Unlock Your Access</div>
+          <div class="step-title" data-i18n="dl_step1_title">Join the VIP Tester Group</div>
+          <div class="step-desc" data-i18n="dl_step1_desc">Opens Google Groups. Sign in with your Google account, then click the <strong style="color:#FFB800">"Join group"</strong> button. This is what unlocks your Play Store download link.</div>
+          <span class="step-btn yellow" data-i18n="dl_step1_btn">Join the VIP Club →</span>
         </div>
         <div class="step-arrow">›</div>
       </a>
@@ -227,10 +234,10 @@
       <a class="step-card" href="https://play.google.com/apps/testing/com.hopontravel.app" target="_blank">
         <div class="step-num">2</div>
         <div class="step-body">
-          <div class="step-label">Step Two • Become a Tester</div>
-          <div class="step-title">Click "Become a Tester" on Play Store</div>
-          <div class="step-desc">Opens the Play Store testing page. Tap the <strong style="color:#FFB800">"Become a tester"</strong> button — then tap <strong style="color:#FFB800">"Download it on Google Play"</strong> that appears right below it.</div>
-          <span class="step-btn ghost">🎯 Open Play Store Tester Page</span>
+          <div class="step-label" data-i18n="dl_step2_label">Step Two • Become a Tester</div>
+          <div class="step-title" data-i18n="dl_step2_title">Click "Become a Tester" on Play Store</div>
+          <div class="step-desc" data-i18n="dl_step2_desc">Opens the Play Store testing page. Tap the <strong style="color:#FFB800">"Become a tester"</strong> button — then tap <strong style="color:#FFB800">"Download it on Google Play"</strong> that appears right below it.</div>
+          <span class="step-btn ghost" data-i18n="dl_step2_btn">🎯 Open Play Store Tester Page</span>
         </div>
         <div class="step-arrow">›</div>
       </a>
@@ -241,13 +248,13 @@
       <div class="step-card">
         <div class="step-num">3</div>
         <div class="step-body">
-          <div class="step-label">Step Three • You're In!</div>
-          <div class="step-title">Install, Open & Start Exploring</div>
-          <div class="step-desc">The app installs like any normal Play Store app. Open it, browse group trips, and book your next adventure. Welcome to the VIP club! 🎉</div>
+          <div class="step-label" data-i18n="dl_step3_label">Step Three • You're In!</div>
+          <div class="step-title" data-i18n="dl_step3_title">Install, Open & Start Exploring</div>
+          <div class="step-desc" data-i18n="dl_step3_desc">The app installs like any normal Play Store app. Open it, browse group trips, and book your next adventure. Welcome to the VIP club! 🎉</div>
           <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem;">
-            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;">✅ Browse trips</span>
-            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;">✅ Book instantly</span>
-            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;">✅ Track your bus live</span>
+            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;" data-i18n="dl_pill_browse">✅ Browse trips</span>
+            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;" data-i18n="dl_pill_book">✅ Book instantly</span>
+            <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem; color:#555; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:0.4rem 0.9rem; border-radius:50px;" data-i18n="dl_pill_track">✅ Track your bus live</span>
           </div>
         </div>
       </div>
@@ -256,25 +263,25 @@
 
     <!-- HELP NOTE -->
     <p style="font-size:0.8rem; color:#444; margin-top:1.5rem; text-align:center; max-width:500px; line-height:1.6;">
-      ⚠️ <strong style="color:#666;">Important:</strong> You must complete Step 1 (join the group) <em>before</em> Step 2 will work. Having trouble? Email us at <a href="mailto:abtohghoomle@gmail.com" style="color:#FFB800; text-decoration:none;">abtohghoomle@gmail.com</a>
+      <span data-i18n="dl_important_note">⚠️ Important: You must complete Step 1 (join the group) before Step 2 will work. Having trouble? Email us at</span> <a href="mailto:abtohghoomle@gmail.com" style="color:#FFB800; text-decoration:none;">abtohghoomle@gmail.com</a>
     </p>
 
     <!-- PERKS -->
     <div class="perks">
       <div class="perk">
         <span class="perk-icon">🎟️</span>
-        <div class="perk-title">Early Bird Prices</div>
-        <div class="perk-desc">VIP members get first access to the lowest-price trip seats.</div>
+        <div class="perk-title" data-i18n="dl_perk1_title">Early Bird Prices</div>
+        <div class="perk-desc" data-i18n="dl_perk1_desc">VIP members get first access to the lowest-price trip seats.</div>
       </div>
       <div class="perk">
         <span class="perk-icon">📍</span>
-        <div class="perk-title">Live Bus Tracking</div>
-        <div class="perk-desc">Track your trip's bus in real-time on trip departure day.</div>
+        <div class="perk-title" data-i18n="dl_perk2_title">Live Bus Tracking</div>
+        <div class="perk-desc" data-i18n="dl_perk2_desc">Track your trip's bus in real-time on trip departure day.</div>
       </div>
       <div class="perk">
         <span class="perk-icon">🌟</span>
-        <div class="perk-title">Founding Member Badge</div>
-        <div class="perk-desc">Be forever recognized as an original Ab Toh Ghoom Le explorer.</div>
+        <div class="perk-title" data-i18n="dl_perk3_title">Founding Member Badge</div>
+        <div class="perk-desc" data-i18n="dl_perk3_desc">Be forever recognized as an original Ab Toh Ghoom Le explorer.</div>
       </div>
     </div>
 
@@ -282,7 +289,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Ab Toh Ghoom Le · Made with ❤️ in India · <a href="privacy.html">Privacy Policy</a> · <a href="mailto:abtohghoomle@gmail.com">abtohghoomle@gmail.com</a></p>
+    <p><span data-i18n="dl_footer_text">© 2026 Ab Toh Ghoom Le · Made with ❤️ in India ·</span> <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a> · <a href="mailto:abtohghoomle@gmail.com">abtohghoomle@gmail.com</a></p>
   </footer>
 
 </body>

@@ -45,7 +45,7 @@ const AppTranslations = {
     dual_label: "EXPERIENCE THE REVOLUTION",
     dual_title: "Built for Wild Explorers.<br/>Supercharged for Organisers.",
     dual_sub: "Escapes for travellers. Zero-commission superpower for tour captains.",
-    dual_traveller_badge: "🎒 FOR TRAVELLERS",
+    dual_traveller_badge: "FOR TRAVELLERS",
     dual_traveller_title: "Turn \"Plan Banate Hain\" into \"Bus Mein Baith Gaya!\"",
     dual_traveller_tagline: "No more cancelled plans. Explore with verified trek captains & friendly tribes.",
     dual_traveller_p1_title: "Solo & Girls Safe",
@@ -524,7 +524,7 @@ const AppTranslations = {
     dual_label: "सफर की नई क्रांति",
     dual_title: "यात्रियों के लिए रोमांच।<br/>आयोजकों के लिए महाशक्ति।",
     dual_sub: "यात्रियों के लिए तनावमुक्त सफर। आयोजकों के लिए 0% कमीशन।",
-    dual_traveller_badge: "🎒 यात्रियों के लिए",
+    dual_traveller_badge: "यात्रियों के लिए",
     dual_traveller_title: "\"प्लान बनाते हैं\" से \"बस में बैठ गया!\"",
     dual_traveller_tagline: "कैंसिल प्लान्स को अलविदा कहें। वेरिफाइड कैप्टन्स के साथ घूमें।",
     dual_traveller_p1_title: "सोलो व लड़कियों के लिए सुरक्षित",
@@ -1003,7 +1003,7 @@ const AppTranslations = {
     dual_label: "प्रवासातील नवी क्रांती",
     dual_title: "भटक्यांसाठी थरार.<br/>आयोजकांसाठी महाशक्ती.",
     dual_sub: "प्रवाशांसाठी तणावमुक्त भ्रमंती. आयोजकांसाठी 0% कमिशन.",
-    dual_traveller_badge: "🎒 प्रवाशांसाठी",
+    dual_traveller_badge: "प्रवाशांसाठी",
     dual_traveller_title: "\"प्लॅन करूया\" वरून थेट \"गाडीत बसलो!\"",
     dual_traveller_tagline: "रद्द होणारे प्लॅन्स विसरा. खात्रीशीर कॅप्टन्ससह सहलीचा आनंद घ्या.",
     dual_traveller_p1_title: "सोलो व मुलींसाठी सुरक्षित",
@@ -1482,7 +1482,7 @@ const AppTranslations = {
     dual_label: "ಪ್ರಯಾಣದ ಹೊಸ ಕ್ರಾಂತಿ",
     dual_title: "ಯಾತ್ರಿಕರಿಗೆ ಸಾಹಸ.<br/>ಆಯೋಜಕರಿಗೆ ಸೂಪರ್‌ಪವರ್.",
     dual_sub: "ಪ್ರಯಾಣಿಕರಿಗೆ ನಿರಾಳ ಪಯಣ. ಆಯೋಜಕರಿಗೆ 0% ಮಧ್ಯವರ್ತಿ ಶುಲ್ಕ.",
-    dual_traveller_badge: "🎒 ಪ್ರಯಾಣಿಕರಿಗಾಗಿ",
+    dual_traveller_badge: "ಪ್ರಯಾಣಿಕರಿಗಾಗಿ",
     dual_traveller_title: "\"ಪ್ಲಾನ್ ಮಾಡೋಣ\" ಇಂದ \"ಬಸ್ ಹತ್ತಿಯಾಯ್ತು!\"",
     dual_traveller_tagline: "ರದ್ದಾಗುವ ಪ್ಲಾನ್‌ಗಳಿಗೆ ಗುಡ್‌ಬೈ ಹೇಳಿ. ಪರಿಶೀಲಿಸಿದ ಕ್ಯಾಪ್ಟನ್‌ಗಳೊಂದಿಗೆ ಹೊರಡಿ.",
     dual_traveller_p1_title: "ಏಕಾಂಗಿ & ಮಹಿಳೆಯರಿಗೆ ಸುರಕ್ಷಿತ",
@@ -1928,9 +1928,13 @@ const AppTranslations = {
  */
 function changeLanguage(lang) {
   const selectedLang = AppTranslations[lang] ? lang : 'en';
-  try {
-    localStorage.setItem('site_lang', selectedLang);
-  } catch (_) {}
+  if (typeof localStorage !== 'undefined') {
+    try {
+      localStorage.setItem('site_lang', selectedLang);
+    } catch (_) {}
+  }
+
+  if (typeof document === 'undefined') return;
 
   // Sync any language select dropdowns on the page
   document.querySelectorAll('select.lang-select-dropdown, #langSelect').forEach(sel => {
@@ -1962,7 +1966,9 @@ function changeLanguage(lang) {
   });
 
   // Dispatch global event for pages rendering dynamic JavaScript templates
-  window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: selectedLang } }));
+  if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: selectedLang } }));
+  }
 }
 
 /**
@@ -1973,26 +1979,34 @@ function changeLanguage(lang) {
  */
 function t(key, fallback = '') {
   let lang = 'en';
-  try {
-    lang = localStorage.getItem('site_lang') || 'en';
-  } catch (_) {}
+  if (typeof localStorage !== 'undefined') {
+    try {
+      lang = localStorage.getItem('site_lang') || 'en';
+    } catch (_) {}
+  }
   if (!AppTranslations[lang]) lang = 'en';
   return AppTranslations[lang][key] !== undefined ? AppTranslations[lang][key] : (fallback || key);
 }
 
 // Auto-initialize language on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-  let initialLang = 'en';
-  try {
-    initialLang = localStorage.getItem('site_lang') || 'en';
-  } catch (_) {}
-  changeLanguage(initialLang);
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    let initialLang = 'en';
+    if (typeof localStorage !== 'undefined') {
+      try {
+        initialLang = localStorage.getItem('site_lang') || 'en';
+      } catch (_) {}
+    }
+    changeLanguage(initialLang);
+  });
+}
 
 // Expose globally
-window.AppTranslations = AppTranslations;
-window.changeLanguage = changeLanguage;
-window.t = t;
+if (typeof window !== 'undefined') {
+  window.AppTranslations = AppTranslations;
+  window.changeLanguage = changeLanguage;
+  window.t = t;
+}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { AppTranslations, changeLanguage, t };

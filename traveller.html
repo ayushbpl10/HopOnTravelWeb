@@ -8,13 +8,16 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com https://www.google.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com https://www.google.com https://www.recaptcha.net; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://www.google.com https://www.recaptcha.net;" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   
   <!-- Leaflet CSS for Live Bus Tracking Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   
+  <!-- i18n Universal Localization Engine -->
+  <script src="i18n.js"></script>
+
   <!-- Firebase SDK via CDN -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
@@ -49,15 +52,26 @@
     <div class="pnav-inner">
       <a href="index.html" class="pnav-logo">
         <span class="brand-hop">AbToh</span><span class="brand-on">Ghoom</span><span class="brand-hop">Le</span>
-        <span class="brand-tag">Traveller Portal</span>
+        <span class="brand-tag" data-i18n="brand_tag_traveller">Traveller Portal</span>
       </a>
       <div class="pnav-actions" id="pnavActions">
-        <a href="index.html" class="p-btn p-btn-dark p-btn-sm">← Back to Home</a>
+        <a href="index.html" class="p-btn p-btn-dark p-btn-sm" data-i18n="btn_back_home">← Back to Home</a>
+        
+        <!-- Language Selector -->
+        <div class="lang-selector" style="display: inline-flex; align-items: center;">
+          <select id="langSelect" class="p-select" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; height: auto; min-height: 34px; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15);" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="mr">मराठी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+        </div>
+
         <div id="userChipContainer" style="display:none;"></div>
-        <button id="loginDemoTravellerNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoTraveller()">
+        <button id="loginDemoTravellerNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoTraveller()" data-i18n="btn_demo_account">
           ⚡ Demo Account
         </button>
-        <button id="loginGoogleBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginWithGoogle()">
+        <button id="loginGoogleBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginWithGoogle()" data-i18n="btn_google_signin">
           Sign in with Google
         </button>
       </div>
@@ -70,17 +84,17 @@
     <!-- Logged Out State Banner -->
     <div id="loggedOutBanner" class="p-empty" style="margin-bottom: 2.5rem; text-align: center;">
       <div class="p-empty-icon">🎒</div>
-      <h2>Welcome to Traveller Hub</h2>
-      <p>Sign in with your Google account to manage your bookings, track live buses in real time, view tickets, and access your saved getaways.</p>
+      <h2 data-i18n="tp_banner_title">Welcome to Traveller Hub</h2>
+      <p data-i18n="tp_banner_desc">Sign in with your Google account to manage your bookings, track live buses in real time, view tickets, and access your saved getaways.</p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <button class="p-btn p-btn-yellow" onclick="loginWithGoogle()">
-          <span>🔑 Continue with Google</span>
+          <span data-i18n="tp_btn_google">🔑 Continue with Google</span>
         </button>
         <button class="p-btn p-btn-yellow" style="background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; box-shadow: 0 4px 15px rgba(16,185,129,0.4);" onclick="loginAsDemoTraveller()">
-          <span>⚡ Test as Demo Traveller</span>
+          <span data-i18n="tp_btn_demo">⚡ Test as Demo Traveller</span>
         </button>
         <button class="p-btn p-btn-dark" onclick="document.getElementById('quickTrackCard').scrollIntoView({behavior:'smooth'})">
-          <span>🔍 Track Booking ID Directly</span>
+          <span data-i18n="tp_btn_track_id">🔍 Track Booking ID Directly</span>
         </button>
       </div>
     </div>
@@ -89,12 +103,12 @@
     <div class="p-stat-card" id="quickTrackCard" style="margin-bottom: 2rem;">
       <div class="portal-header-bar" style="margin-bottom: 0;">
         <div style="max-width: 540px;">
-          <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff;">Track Booking by ID</h3>
-          <p style="font-size: 0.85rem; color: var(--portal-muted);">Enter your 5 or 9-digit Booking ID (e.g. ATGL-12345) to view live confirmation and status.</p>
+          <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem; color: #fff;" data-i18n="tp_card_track_title">Track Booking by ID</h3>
+          <p style="font-size: 0.85rem; color: var(--portal-muted);" data-i18n="tp_card_track_desc">Enter your 5 or 9-digit Booking ID (e.g. ATGL-12345) to view live confirmation and status.</p>
         </div>
         <div class="portal-filter-group" style="flex: 1; max-width: 420px; width: 100%;">
-          <input type="text" id="quickBookingIdInput" class="p-input" placeholder="e.g. ATGL-12345" style="text-transform: uppercase;" />
-          <button class="p-btn p-btn-yellow" onclick="handleQuickLookup()">Track</button>
+          <input type="text" id="quickBookingIdInput" class="p-input" placeholder="e.g. ATGL-12345" data-i18n-placeholder="tp_input_track_ph" style="text-transform: uppercase;" />
+          <button class="p-btn p-btn-yellow" onclick="handleQuickLookup()" data-i18n="tp_btn_track">Track</button>
         </div>
       </div>
       <div id="quickLookupResult" style="margin-top: 1.2rem; display: none;"></div>
@@ -105,42 +119,42 @@
       
       <!-- Welcome Header -->
       <div class="portal-hero">
-        <h1 id="welcomeUserTitle">Hello, Explorer! 🌍</h1>
-        <p>Your personal journey dashboard. Access your tickets, live routes, and upcoming departures.</p>
+        <h1 id="welcomeUserTitle" data-i18n="tp_hero_title">Hello, Explorer! 🌍</h1>
+        <p data-i18n="tp_hero_sub">Your personal journey dashboard. Access your tickets, live routes, and upcoming departures.</p>
       </div>
 
       <!-- Quick Metrics Summary -->
       <div class="p-stats-grid">
         <div class="p-stat-card">
-          <div class="p-stat-label">Total Bookings</div>
+          <div class="p-stat-label" data-i18n="tp_stat_total">Total Bookings</div>
           <div class="p-stat-val" id="statTotalBookings">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Confirmed Trips</div>
+          <div class="p-stat-label" data-i18n="tp_stat_confirmed">Confirmed Trips</div>
           <div class="p-stat-val" id="statConfirmedBookings" style="color: var(--portal-success);">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Pending Verification</div>
+          <div class="p-stat-label" data-i18n="tp_stat_pending">Pending Verification</div>
           <div class="p-stat-val" id="statPendingBookings" style="color: var(--portal-warning);">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Saved to Wishlist</div>
+          <div class="p-stat-label" data-i18n="tp_stat_saved">Saved to Wishlist</div>
           <div class="p-stat-val" id="statWishlistCount" style="color: var(--portal-accent);">0</div>
         </div>
       </div>
 
       <!-- Tabs Navigation -->
       <div class="p-tabs">
-        <button class="p-tab-btn active" onclick="switchTravellerTab('bookings')" id="tabBtn-bookings">
+        <button class="p-tab-btn active" onclick="switchTravellerTab('bookings')" id="tabBtn-bookings" data-i18n="tp_tab_my_bookings">
           🎟️ My Bookings
         </button>
-        <button class="p-tab-btn" onclick="switchTravellerTab('tracking')" id="tabBtn-tracking">
+        <button class="p-tab-btn" onclick="switchTravellerTab('tracking')" id="tabBtn-tracking" data-i18n="tp_tab_live_tracking">
           📍 Live Bus Tracking
         </button>
-        <button class="p-tab-btn" onclick="switchTravellerTab('wishlist')" id="tabBtn-wishlist">
+        <button class="p-tab-btn" onclick="switchTravellerTab('wishlist')" id="tabBtn-wishlist" data-i18n="tp_tab_saved_trips">
           ❤️ Saved Trips
         </button>
-        <button class="p-tab-btn" onclick="switchTravellerTab('profile')" id="tabBtn-profile">
+        <button class="p-tab-btn" onclick="switchTravellerTab('profile')" id="tabBtn-profile" data-i18n="tp_tab_my_profile">
           👤 My Profile
         </button>
       </div>
@@ -149,19 +163,19 @@
       <section id="tab-bookings" class="p-tab-content">
         <div class="portal-filter-bar">
           <div class="portal-filter-group" id="bookingFilterPills">
-            <button class="p-btn p-btn-dark p-btn-sm active" onclick="filterBookings('all', this)">All</button>
-            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('confirmed', this)">Confirmed</button>
-            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('pending', this)">Pending</button>
-            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('cancelled', this)">Cancelled</button>
+            <button class="p-btn p-btn-dark p-btn-sm active" onclick="filterBookings('all', this)" data-i18n="tp_filter_all">All</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('confirmed', this)" data-i18n="tp_filter_confirmed">Confirmed</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('pending', this)" data-i18n="tp_filter_pending">Pending</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="filterBookings('cancelled', this)" data-i18n="tp_filter_cancelled">Cancelled</button>
           </div>
-          <a href="index.html#book" class="p-btn p-btn-yellow p-btn-sm">+ Book New Trip</a>
+          <a href="index.html#book" class="p-btn p-btn-yellow p-btn-sm" data-i18n="tp_btn_book_new">+ Book New Trip</a>
         </div>
 
         <!-- Bookings List Container -->
         <div id="bookingsListContainer">
           <div style="text-align: center; padding: 3rem; color: var(--portal-muted);">
             <div class="book-spinner" style="margin: 0 auto 1rem;"></div>
-            <span>Loading your bookings...</span>
+            <span data-i18n="tp_loading_bookings">Loading your bookings...</span>
           </div>
         </div>
       </section>
@@ -169,14 +183,14 @@
       <!-- TAB 2: LIVE BUS TRACKING -->
       <section id="tab-tracking" class="p-tab-content" style="display: none;">
         <div class="p-stat-card" style="margin-bottom: 1.5rem;">
-          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;">Live Trip Captain & Bus Location</h3>
-          <p style="font-size: 0.88rem; color: var(--portal-muted); margin-bottom: 1rem;">Select one of your active confirmed trips to view the captain's live broadcasted GPS position and vehicle details.</p>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;" data-i18n="tp_tracking_title">Live Trip Captain & Bus Location</h3>
+          <p style="font-size: 0.88rem; color: var(--portal-muted); margin-bottom: 1rem;" data-i18n="tp_tracking_desc">Select one of your active confirmed trips to view the captain's live broadcasted GPS position and vehicle details.</p>
           
           <div class="portal-filter-group" style="width: 100%;">
             <select id="trackingTripSelect" class="p-select" style="max-width: 400px; flex: 1;" onchange="loadTripLiveTracking(this.value)">
-              <option value="">-- Choose an active trip to track --</option>
+              <option value="" data-i18n="tp_tracking_choose">-- Choose an active trip to track --</option>
             </select>
-            <button class="p-btn p-btn-yellow p-btn-sm" onclick="refreshLiveTracking()">🔄 Refresh Location</button>
+            <button class="p-btn p-btn-yellow p-btn-sm" onclick="refreshLiveTracking()" data-i18n="tp_tracking_refresh">🔄 Refresh Location</button>
           </div>
         </div>
 
@@ -191,25 +205,25 @@
             <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
                 <h4 id="crewCaptainName" style="font-size: 1.1rem; color: #fff;">Captain Name</h4>
-                <span class="p-badge p-badge-confirmed">Trip Captain</span>
+                <span class="p-badge p-badge-confirmed" data-i18n="tp_captain_badge">Trip Captain</span>
               </div>
               <p id="crewDriverVehicle" style="font-size: 0.85rem; color: var(--portal-muted); margin-bottom: 0.5rem;">Driver: TBD • Vehicle: TBD</p>
               <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                <a id="crewCaptainWhatsapp" href="#" target="_blank" class="p-btn p-btn-sm" style="background: #25D366; color: #fff; text-decoration: none;">💬 WhatsApp Captain</a>
-                <a id="crewCaptainCall" href="#" class="p-btn p-btn-dark p-btn-sm">📞 Call Captain</a>
+                <a id="crewCaptainWhatsapp" href="#" target="_blank" class="p-btn p-btn-sm" style="background: #25D366; color: #fff; text-decoration: none;" data-i18n="tp_whatsapp_captain">💬 WhatsApp Captain</a>
+                <a id="crewCaptainCall" href="#" class="p-btn p-btn-dark p-btn-sm" data-i18n="tp_call_captain">📞 Call Captain</a>
               </div>
             </div>
             <div style="text-align: right; min-width: 140px;">
-              <span style="font-size: 0.75rem; color: var(--portal-muted); display: block;">LAST BROADCAST</span>
-              <strong id="crewLastUpdate" style="color: var(--portal-primary); font-size: 0.95rem;">Just now</strong>
+              <span style="font-size: 0.75rem; color: var(--portal-muted); display: block;" data-i18n="tp_last_broadcast">LAST BROADCAST</span>
+              <strong id="crewLastUpdate" style="color: var(--portal-primary); font-size: 0.95rem;" data-i18n="tp_just_now">Just now</strong>
             </div>
           </div>
         </div>
 
         <div id="noActiveTrackingMsg" class="p-empty" style="margin-top: 1rem;">
           <div class="p-empty-icon">📍</div>
-          <h3>No Trip Selected for Tracking</h3>
-          <p>Once a vendor initiates a trip, their live bus GPS position and arrival status will be broadcasted directly on the map above.</p>
+          <h3 data-i18n="tp_no_tracking_title">No Trip Selected for Tracking</h3>
+          <p data-i18n="tp_no_tracking_desc">Once a vendor initiates a trip, their live bus GPS position and arrival status will be broadcasted directly on the map above.</p>
         </div>
       </section>
 
@@ -217,7 +231,7 @@
       <section id="tab-wishlist" class="p-tab-content" style="display: none;">
         <div id="wishlistContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
           <div style="text-align: center; padding: 3rem; color: var(--portal-muted); grid-column: 1 / -1;">
-            <span>Checking saved trips...</span>
+            <span data-i18n="tp_checking_saved">Checking saved trips...</span>
           </div>
         </div>
       </section>
@@ -229,19 +243,19 @@
             <div class="pnav-avatar" id="profileAvatarBig" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;">U</div>
             <h3 id="profileName" style="font-size: 1.5rem; color: #fff; margin-bottom: 0.3rem;">User Name</h3>
             <p id="profileEmail" style="color: var(--portal-muted); font-size: 0.9rem;">user@example.com</p>
-            <span class="p-badge p-badge-confirmed" style="margin-top: 0.6rem;">Verified Traveller</span>
+            <span class="p-badge p-badge-confirmed" style="margin-top: 0.6rem;" data-i18n="tp_verified_badge">Verified Traveller</span>
           </div>
 
           <div class="p-field">
-            <label class="p-label">WhatsApp Contact Number</label>
+            <label class="p-label" data-i18n="tp_whatsapp_contact">WhatsApp Contact Number</label>
             <input type="tel" id="profilePhoneInput" class="p-input" placeholder="+91 98765 43210" />
           </div>
 
-          <button class="p-btn p-btn-yellow" style="width: 100%; margin-bottom: 1rem;" onclick="saveTravellerProfile()">
+          <button class="p-btn p-btn-yellow" style="width: 100%; margin-bottom: 1rem;" onclick="saveTravellerProfile()" data-i18n="tp_btn_save_profile">
             Save Profile Details
           </button>
           
-          <button class="p-btn p-btn-danger" style="width: 100%;" onclick="handleLogout()">
+          <button class="p-btn p-btn-danger" style="width: 100%;" onclick="handleLogout()" data-i18n="tp_btn_sign_out">
             Sign Out
           </button>
         </div>
@@ -254,10 +268,10 @@
   <div id="demoAuthModalOverlay" class="p-modal-overlay">
     <div class="p-modal" style="max-width: 480px; text-align: center; padding: 2.5rem 2rem;">
       <div style="font-size: 3.2rem; margin-bottom: 0.8rem;">🔐</div>
-      <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;">
+      <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;" data-i18n="vp_demo_auth_title">
         Google Sign-In Required
       </h3>
-      <p id="demoAuthModalMsg" style="color: var(--portal-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.8rem;">
+      <p id="demoAuthModalMsg" style="color: var(--portal-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.8rem;" data-i18n="tp_demo_auth_desc">
         You are currently exploring in <strong>Demo Mode</strong>. Demo accounts are strictly read-only. To save profile details, book adventures, or manage reservations, please connect your real account via Google login.
       </p>
       <div style="display: flex; flex-direction: column; gap: 0.8rem;">
@@ -268,9 +282,9 @@
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
           </svg>
-          Sign in with Google
+          <span data-i18n="btn_google_signin">Sign in with Google</span>
         </button>
-        <button class="p-btn p-btn-dark" style="width: 100%; justify-content: center;" onclick="closeDemoAuthModal()">
+        <button class="p-btn p-btn-dark" style="width: 100%; justify-content: center;" onclick="closeDemoAuthModal()" data-i18n="vp_demo_keep_exploring">
           Keep Exploring in Demo
         </button>
       </div>
