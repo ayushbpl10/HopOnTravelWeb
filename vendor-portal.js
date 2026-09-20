@@ -564,6 +564,11 @@ function renderVendorBookingsTable(list) {
 
 // Update Booking Status in Firestore
 async function updateBookingStatus(bookingDocId, newStatus, tripId, batchId, seatsCount) {
+  const allowedStatuses = ['confirmed', 'cancelled', 'pending', 'completed'];
+  if (!allowedStatuses.includes(newStatus)) {
+    return alert('Invalid booking status transition.');
+  }
+
   const confirmMsg = newStatus === 'confirmed'
     ? 'Are you sure you want to approve and confirm this booking?'
     : 'Are you sure you want to cancel this booking?';
@@ -781,8 +786,11 @@ function applyTripTemplate(key) {
   document.getElementById('tripFormImage').value = tpl.image;
 }
 
+let _isSavingTrip = false;
+
 // Save Trip to Firestore
 async function handleSaveTrip() {
+  if (_isSavingTrip) return;
   if (!_vendorUser) return alert('You must be logged in as a vendor.');
 
   const editId = document.getElementById('editTripDocId').value;
@@ -842,6 +850,7 @@ async function handleSaveTrip() {
     bookedSeats: 0
   }];
 
+  _isSavingTrip = true;
   const btn = document.getElementById('saveTripSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Saving...';
@@ -884,6 +893,7 @@ async function handleSaveTrip() {
     console.error('Error saving trip:', err);
     alert('Failed to save trip: ' + err.message);
   } finally {
+    _isSavingTrip = false;
     btn.disabled = false;
     btn.textContent = editId ? 'Save Changes' : 'Publish Adventure →';
   }

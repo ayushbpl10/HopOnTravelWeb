@@ -328,8 +328,12 @@ function checkBookingRateLimit() {
   return true;
 }
 
+let _isSubmittingBooking = false;
+
 // Submit booking
 async function submitWebBooking() {
+  if (_isSubmittingBooking) return;
+
   // 1. Anti-bot honeypot verification
   const hpField = document.getElementById('hp_field');
   if (hpField && hpField.value) {
@@ -365,6 +369,7 @@ async function submitWebBooking() {
   if (!consent) return alert('You must accept the risks involved before booking.');
   if (captchaAns !== _captchaA + _captchaB) return alert(`Security check failed. Hint: ${_captchaA} + ${_captchaB} = ?`);
 
+  _isSubmittingBooking = true;
   const btn = document.getElementById('bookSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Creating Booking...';
@@ -450,6 +455,7 @@ async function submitWebBooking() {
     console.error('Booking failed:', err);
     alert('Booking failed: ' + (err.message || 'Unknown error. Please try again.'));
   } finally {
+    _isSubmittingBooking = false;
     btn.disabled = false;
     btn.textContent = 'Confirm Booking →';
   }

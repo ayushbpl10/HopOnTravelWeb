@@ -293,8 +293,12 @@ function checkTripRateLimit() {
   return true;
 }
 
+let _isSubmittingBooking = false;
+
 // Submit Booking from Trip Page
 async function submitTripPageBooking() {
+  if (_isSubmittingBooking) return;
+
   const tripData = window._currentTripData;
   if (!tripData) return alert('Trip details not ready.');
 
@@ -327,6 +331,7 @@ async function submitTripPageBooking() {
   if (!consent) return alert('You must accept the risks involved before booking.');
   if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) return alert(`Security check failed. Hint: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
 
+  _isSubmittingBooking = true;
   const btn = document.getElementById('tbSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Processing Booking...';
@@ -408,6 +413,7 @@ async function submitTripPageBooking() {
     console.error('Trip page booking error:', err);
     alert('Booking error: ' + (err.message || 'Please try again.'));
   } finally {
+    _isSubmittingBooking = false;
     btn.disabled = false;
     btn.textContent = 'Confirm Booking & Generate Ticket →';
   }
