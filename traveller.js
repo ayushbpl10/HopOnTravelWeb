@@ -54,6 +54,33 @@ function loginAsDemoTraveller() {
   onUserSignedIn(DEMO_TRAVELLER_USER);
 }
 
+function isDemoTraveller() {
+  return localStorage.getItem('hopon_demo_traveller') === 'true' || (_currentUser && _currentUser.uid === DEMO_TRAVELLER_USER.uid);
+}
+
+function showDemoAuthModal(actionName) {
+  const overlay = document.getElementById('demoAuthModalOverlay');
+  const msg = document.getElementById('demoAuthModalMsg');
+  if (msg && actionName) {
+    msg.innerHTML = `You are currently exploring in <strong>Demo Mode</strong>. Demo accounts are read-only. To <strong>${escapeHtml(actionName)}</strong>, please create or connect your real account via Google login.`;
+  }
+  if (overlay) {
+    overlay.classList.add('open');
+  } else {
+    alert(`Google Sign-In Required: Demo accounts are read-only. To ${actionName || 'perform this action'}, please sign in with your Google account.`);
+  }
+}
+
+function closeDemoAuthModal() {
+  const overlay = document.getElementById('demoAuthModalOverlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function handleDemoAuthModalLogin() {
+  closeDemoAuthModal();
+  loginWithGoogle();
+}
+
 function initTravellerPortal() {
   // Auto-restore demo traveller if previously active
   if (localStorage.getItem('hopon_demo_traveller') === 'true') {
@@ -713,7 +740,17 @@ function removeWishlistItem(id) {
 
 // ===== PROFILE =====
 async function saveTravellerProfile() {
-  if (!_currentUser) return;
+  if (!_currentUser) return alert('Please sign in first.');
+
+  if (isDemoTraveller()) {
+    showDemoAuthModal('update your profile details');
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('save profile details')) {
+    return;
+  }
+
   const phone = document.getElementById('profilePhoneInput').value.trim();
 
   try {

@@ -177,6 +177,33 @@ function loginAsDemoVendor() {
   onVendorSignedIn(DEMO_VENDOR_USER);
 }
 
+function isDemoAccount() {
+  return localStorage.getItem('hopon_demo_vendor') === 'true' || (_vendorUser && _vendorUser.uid === DEMO_VENDOR_USER.uid);
+}
+
+function showDemoAuthModal(actionName) {
+  const overlay = document.getElementById('demoAuthModalOverlay');
+  const msg = document.getElementById('demoAuthModalMsg');
+  if (msg && actionName) {
+    msg.innerHTML = `You are currently exploring in <strong>Demo Mode</strong>. Demo accounts are read-only. To <strong>${escapeHtml(actionName)}</strong>, please create or connect your real account via Google login.`;
+  }
+  if (overlay) {
+    overlay.classList.add('open');
+  } else {
+    alert(`Google Sign-In Required: Demo accounts are read-only. To ${actionName || 'perform this action'}, please sign in with your Google account.`);
+  }
+}
+
+function closeDemoAuthModal() {
+  const overlay = document.getElementById('demoAuthModalOverlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function handleDemoAuthModalLogin() {
+  closeDemoAuthModal();
+  loginVendorWithGoogle();
+}
+
 function initVendorPortal() {
   // Auto-restore demo vendor if active
   if (localStorage.getItem('hopon_demo_vendor') === 'true') {
@@ -647,19 +674,20 @@ async function updateBookingStatus(bookingDocId, newStatus, tripId, batchId, sea
     return alert('Invalid booking status transition.');
   }
 
+  if (isDemoAccount()) {
+    showDemoAuthModal(`update booking status to ${newStatus}`);
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('update booking status')) {
+    return;
+  }
+
   const confirmMsg = newStatus === 'confirmed'
     ? 'Are you sure you want to approve and confirm this booking?'
     : 'Are you sure you want to cancel this booking?';
 
   if (!confirm(confirmMsg)) return;
-
-  if (_vendorUser && _vendorUser.uid === DEMO_VENDOR_USER.uid) {
-    _vendorBookings = _vendorBookings.map(b => b.id === bookingDocId ? { ...b, status: newStatus } : b);
-    updateBookingMetrics();
-    filterVendorBookings();
-    alert(`[Demo Mode] Booking marked as ${newStatus.toUpperCase()}`);
-    return;
-  }
 
   try {
     const { db, doc, updateDoc, getDoc } = window._fb;
@@ -872,6 +900,15 @@ async function handleSaveTrip() {
   if (!_vendorUser) return alert('You must be logged in as a vendor.');
 
   const editId = document.getElementById('editTripDocId').value;
+
+  if (isDemoAccount()) {
+    showDemoAuthModal(editId ? 'save changes to this trip' : 'create and publish a new trip');
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('save trip')) {
+    return;
+  }
   const title = document.getElementById('tripFormTitle').value.trim();
   const destination = document.getElementById('tripFormDestination').value.trim();
   const category = document.getElementById('tripFormCategory').value;
@@ -979,6 +1016,15 @@ async function handleSaveTrip() {
 
 // Delete Trip
 async function confirmDeleteTrip(tripId) {
+  if (isDemoAccount()) {
+    showDemoAuthModal('delete trips');
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('delete trip')) {
+    return;
+  }
+
   if (!confirm('Are you sure you want to delete this trip listing? This cannot be undone.')) return;
 
   try {
@@ -1108,6 +1154,16 @@ async function confirmStartLiveBroadcast() {
   const vehicleNumber = document.getElementById('bcVehicleNumber').value.trim();
   const vehiclePhoto = document.getElementById('bcVehiclePhoto').value.trim() || 'hero.png';
 
+  if (isDemoAccount()) {
+    closeBroadcastModal();
+    showDemoAuthModal('start live GPS trip broadcasting');
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('start live broadcast')) {
+    return;
+  }
+
   if (!navigator.geolocation) {
     return alert('Geolocation is not supported by your browser.');
   }
@@ -1185,6 +1241,15 @@ function stopLiveBroadcast() {
 // ===== SETTINGS =====
 async function saveVendorProfileSettings() {
   if (!_vendorUser) return alert('Please sign in first.');
+
+  if (isDemoAccount()) {
+    showDemoAuthModal('save business and payment settings');
+    return;
+  }
+
+  if (window.SecurityThrottler && !window.SecurityThrottler.checkAndEnforce('save profile settings')) {
+    return;
+  }
 
   const businessName = document.getElementById('vSetBusinessName').value.trim();
   const whatsappNumber = document.getElementById('vSetWhatsApp').value.trim();
