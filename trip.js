@@ -106,7 +106,7 @@ async function initTripPage() {
       incList.innerHTML = tripData.inclusions.map(item => `
         <div class="tlist-item">
           <span class="ticon-check">✓</span>
-          <span>${item}</span>
+          <span>${escapeHtml(item)}</span>
         </div>
       `).join('');
     }
@@ -117,7 +117,7 @@ async function initTripPage() {
       excList.innerHTML = tripData.exclusions.map(item => `
         <div class="tlist-item">
           <span class="ticon-cross">✕</span>
-          <span>${item}</span>
+          <span>${escapeHtml(item)}</span>
         </div>
       `).join('');
     }
@@ -135,11 +135,11 @@ async function initTripPage() {
       itineraryList.innerHTML = tripData.structuredItinerary.map((dayItem, idx) => `
         <div class="titinerary-card">
           <div class="titinerary-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-            <span>Day ${dayItem.day}: ${dayItem.title}</span>
+            <span>Day ${escapeHtml(dayItem.day)}: ${escapeHtml(dayItem.title)}</span>
             <span style="color: var(--yellow);">▼</span>
           </div>
           <div class="titinerary-body" style="${idx === 0 ? 'display: block;' : 'display: none;'}">
-            <p>${dayItem.description}</p>
+            <p>${escapeHtml(dayItem.description)}</p>
           </div>
         </div>
       `).join('');
@@ -154,11 +154,11 @@ async function initTripPage() {
           return `
             <div class="titinerary-card">
               <div class="titinerary-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-                <span>${title}</span>
+                <span>${escapeHtml(title)}</span>
                 <span style="color: var(--yellow);">▼</span>
               </div>
               <div class="titinerary-body" style="${idx === 0 ? 'display: block;' : 'display: none;'}">
-                <p style="white-space: pre-line;">${desc}</p>
+                <p style="white-space: pre-line;">${escapeHtml(desc)}</p>
               </div>
             </div>
           `;
@@ -175,8 +175,8 @@ async function initTripPage() {
         <div class="tpickup-item">
           <div class="tpickup-icon">📍</div>
           <div>
-            <div class="tpickup-loc">${p.location}</div>
-            <div class="tpickup-time">⏰ Pickup Time: ${p.time}</div>
+            <div class="tpickup-loc">${escapeHtml(p.location)}</div>
+            <div class="tpickup-time">⏰ Pickup Time: ${escapeHtml(p.time)}</div>
           </div>
         </div>
       `).join('');
@@ -411,4 +411,11 @@ async function submitTripPageBooking() {
     btn.disabled = false;
     btn.textContent = 'Confirm Booking & Generate Ticket →';
   }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[m]);
 }

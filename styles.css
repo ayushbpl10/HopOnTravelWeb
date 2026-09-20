@@ -1353,6 +1353,414 @@ body {
   line-height: 1.6;
 }
 
+/* Portal Layout Helpers */
+.portal-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.portal-header-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.portal-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.portal-filter-group {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.v-storefront-card {
+  background: linear-gradient(135deg, rgba(255, 184, 0, 0.1), rgba(20, 20, 20, 0.9));
+  border: 1px solid var(--portal-primary);
+  border-radius: 24px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+.v-trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   PORTAL MOBILE RESPONSIVENESS & TOUCH OPTIMIZATION
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .pnav {
+    padding: 0.85rem 4%;
+  }
+  .portal-container {
+    padding: 1.75rem 4% 4rem;
+  }
+  .v-trips-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pnav {
+    padding: 0.75rem 1rem;
+  }
+  .pnav-inner {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .pnav-logo {
+    font-size: 1.15rem;
+    gap: 0.4rem;
+  }
+  .pnav-logo .brand-tag {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+  }
+  .pnav-actions {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .portal-container {
+    padding: 1.25rem 1rem 3.5rem;
+  }
+  .portal-hero {
+    margin-bottom: 1.5rem;
+  }
+  .portal-hero h1, #vendorGreetingTitle {
+    font-size: clamp(1.4rem, 5vw, 1.9rem) !important;
+    line-height: 1.2;
+  }
+  .portal-hero p {
+    font-size: 0.92rem;
+  }
+  
+  /* Stats Grid: 2 columns on tablets and phones */
+  .p-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .p-stat-card {
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+  }
+  .p-stat-label {
+    font-size: 0.72rem;
+    margin-bottom: 0.35rem;
+  }
+  .p-stat-val {
+    font-size: 1.45rem;
+  }
+  
+  /* Horizontal scrolling touch tabs */
+  .p-tabs {
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+  .p-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .p-tab-btn {
+    flex-shrink: 0;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+  
+  /* Form Grids: Single column stacking on mobile */
+  .p-grid-2, .p-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  /* Modal optimization for mobile */
+  .p-modal-overlay {
+    padding: 0.5rem;
+  }
+  .p-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92dvh;
+    border-radius: 18px;
+  }
+  .p-modal-header {
+    padding: 1rem 1.25rem;
+  }
+  .p-modal-header h3 {
+    font-size: 1.15rem;
+  }
+  .p-modal-body {
+    padding: 1.2rem;
+  }
+  .p-modal-footer {
+    padding: 1rem 1.25rem;
+    flex-direction: column-reverse;
+    gap: 0.6rem;
+  }
+  .p-modal-footer .p-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Data Tables: Touch Scroll & Snug Padding */
+  .p-table-wrap {
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .p-table th, .p-table td {
+    padding: 0.8rem 0.85rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  
+  /* Ticket Cards on Mobile */
+  .p-ticket-card {
+    border-radius: 16px;
+    margin-bottom: 1.25rem;
+  }
+  .p-ticket-header {
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+  .p-ticket-body {
+    padding: 1.1rem 1rem;
+  }
+  .p-ticket-row {
+    font-size: 0.88rem;
+    padding: 0.35rem 0;
+  }
+  
+  /* Map & Crew */
+  .p-map-container {
+    height: 280px;
+    border-radius: 14px;
+  }
+  .p-crew-card {
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 14px;
+  }
+  .p-crew-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+  }
+  
+  /* Empty state */
+  .p-empty {
+    padding: 2.5rem 1rem;
+    border-radius: 16px;
+  }
+  .p-empty-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.6rem;
+  }
+  .p-empty h2, .p-empty h3 {
+    font-size: 1.25rem;
+  }
+  .p-empty p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* Header & Filter Bars */
+  .portal-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .portal-header-actions {
+    width: 100%;
+  }
+  .portal-header-actions .p-btn {
+    flex: 1 1 calc(50% - 0.5rem);
+    justify-content: center;
+  }
+  .portal-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  .portal-filter-group {
+    width: 100%;
+  }
+  .portal-filter-group input, .portal-filter-group select {
+    flex: 1;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .pnav {
+    padding: 0.6rem 0.8rem;
+  }
+  .pnav-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .pnav-logo {
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+  .pnav-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+  .pnav-actions .p-btn {
+    flex: 1 1 auto;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.74rem;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .pnav-user-chip {
+    padding: 0.25rem 0.5rem;
+  }
+  .pnav-user-meta {
+    display: none;
+  }
+  .portal-container {
+    padding: 1rem 0.8rem 3rem;
+  }
+  .p-stat-card {
+    padding: 0.85rem 0.85rem;
+  }
+  .p-stat-val {
+    font-size: 1.25rem;
+  }
+  .p-stat-label {
+    font-size: 0.68rem;
+  }
+  
+  /* Quick Status Lookup Card Stacking */
+  #quickTrackCard {
+    padding: 1.1rem 1rem !important;
+  }
+  #quickTrackCard > div {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.8rem;
+  }
+  #quickTrackCard input {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  #quickTrackCard .p-btn {
+    width: 100% !important;
+  }
+  
+  /* Header Actions: Stack full-width */
+  .portal-header-actions .p-btn {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  #loggedOutBanner .p-btn, #vendorLoggedOutBanner .p-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+  
+  /* Filter bar pills horizontal scroll */
+  #vBookingStatusPills {
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+  #vBookingStatusPills .p-btn {
+    flex-shrink: 0;
+  }
+  
+  /* Touch target sizes & preventing iOS zoom */
+  .p-input, .p-select, .p-textarea {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+  .p-btn {
+    min-height: 40px;
+  }
+  
+  /* Ticket Header stacking */
+  .p-ticket-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .p-ticket-header > div:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .p-ticket-body .p-btn {
+    flex: 1 1 100%;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Dynamic Storefront Header Card */
+  .v-storefront-card {
+    padding: 1.5rem 1rem;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+  }
+  #vAvatar {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 1.8rem !important;
+  }
+  #vName {
+    font-size: 1.6rem !important;
+  }
+  #vActions .p-btn, #vActions a, #vActions button {
+    flex: 1 1 100%;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .v-trips-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .p-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .pnav-logo .brand-tag {
+    display: none;
+  }
+}
+
 /* Print Sheet Override */
 @media print {
   body * { visibility: hidden; }

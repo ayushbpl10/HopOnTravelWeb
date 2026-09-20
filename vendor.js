@@ -183,17 +183,17 @@ async function initVendorStorefront() {
         return `
           <div class="vbento-card" style="padding: 0; overflow: hidden; border-radius: 20px; display: flex; flex-direction: column; height: 100%;">
             <div style="position: relative; height: 200px;">
-              <img src="${img}" alt="${trip.title}" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="${img}" alt="${escapeHtml(trip.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='hero.png'" />
               <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); color: var(--yellow); padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">
-                ${trip.category || 'Trek'}
+                ${escapeHtml(trip.category || 'Trek')}
               </span>
             </div>
             <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">${trip.title}</h3>
-                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 1rem;">📅 ${date}</p>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">${escapeHtml(trip.title)}</h3>
+                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 1rem;">📅 ${escapeHtml(date)}</p>
                 <p style="color: #777; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                  ${trip.description || ''}
+                  ${escapeHtml(trip.description || '')}
                 </p>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
@@ -219,6 +219,13 @@ async function initVendorStorefront() {
       <p style="color: #888; margin-top: 10px;">Could not load trips for this vendor ID.</p>
     `;
   }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[m]);
 }
 
 if (window._fbApp) {

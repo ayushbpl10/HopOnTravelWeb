@@ -240,14 +240,14 @@ function renderTripCards(tripsArr) {
     const emoji = trip.title.toLowerCase().includes('beach') ? '🏖️' :
                   trip.title.toLowerCase().includes('camp') ? '🏕️' : '🏔️';
     const img = trip.images && trip.images[0]
-      ? `<img class="web-trip-img" src="${trip.images[0]}" alt="${trip.title}" loading="lazy" onerror="this.outerHTML='<div class=web-trip-img>${emoji}</div>'" />`
+      ? `<img class="web-trip-img" src="${trip.images[0]}" alt="${escapeHtml(trip.title)}" loading="lazy" onerror="this.outerHTML='<div class=web-trip-img>${emoji}</div>'" />`
       : `<div class="web-trip-img">${emoji}</div>`;
     return `
       <div class="web-trip-card" data-id="${trip.id}">
         ${img}
         <div class="web-trip-body">
-          <div class="web-trip-title">${trip.title}</div>
-          <div class="web-trip-vendor">by ${trip.vendorName}</div>
+          <div class="web-trip-title">${escapeHtml(trip.title)}</div>
+          <div class="web-trip-vendor">by ${escapeHtml(trip.vendorName)}</div>
           <div class="web-trip-meta">
             <span class="web-trip-price">from ₹${minPrice.toLocaleString('en-IN')}</span>
             <span class="web-trip-seats">${totalSeats} seats left</span>
@@ -271,13 +271,13 @@ function selectWebTrip(tripId) {
   // Populate batch selector
   const batchSel = document.getElementById('batchSelect');
   batchSel.innerHTML = (_selectedTrip.batches || []).map(b =>
-    `<option value="${b.id}" data-seats="${b.totalSeats - b.bookedSeats}">${b.dateDuration} (${b.totalSeats - b.bookedSeats} seats left)</option>`
+    `<option value="${b.id}" data-seats="${b.totalSeats - b.bookedSeats}">${escapeHtml(b.dateDuration)} (${b.totalSeats - b.bookedSeats} seats left)</option>`
   ).join('');
 
   // Populate package selector
   const pkgSel = document.getElementById('packageSelect');
   pkgSel.innerHTML = (_selectedTrip.packages || []).map(p =>
-    `<option value="${p.name}" data-price="${p.price}">${p.name} — ₹${p.price.toLocaleString('en-IN')}</option>`
+    `<option value="${p.name}" data-price="${p.price}">${escapeHtml(p.name)} — ₹${p.price.toLocaleString('en-IN')}</option>`
   ).join('');
 
   // Reset form fields
@@ -597,3 +597,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Give a tiny delay to ensure everything is painted
   setTimeout(initAnimations, 100);
 });
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[m]);
+}
