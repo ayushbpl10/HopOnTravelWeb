@@ -213,49 +213,49 @@
           
           <!-- Profile Card -->
           <div class="p-stat-card">
-            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;">Business Profile</h3>
+            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;" data-i18n="vp_settings_biz_profile">Business Profile</h3>
             
             <div class="p-field">
-              <label class="p-label">Organiser / Business Name *</label>
-              <input type="text" id="vSetBusinessName" class="p-input" placeholder="e.g. Sahyadri Trekkers" />
+              <label class="p-label" data-i18n="vp_settings_biz_name_req">Organiser / Business Name *</label>
+              <input type="text" id="vSetBusinessName" class="p-input" placeholder="e.g. Sahyadri Trekkers" data-i18n-placeholder="vp_settings_biz_name_ph" />
             </div>
             
             <div class="p-field">
-              <label class="p-label">Official WhatsApp Number *</label>
-              <input type="tel" id="vSetWhatsApp" class="p-input" placeholder="+91 98765 43210" />
+              <label class="p-label" data-i18n="vp_settings_whatsapp_req">Official WhatsApp Number *</label>
+              <input type="tel" id="vSetWhatsApp" class="p-input" placeholder="+91 98765 43210" data-i18n-placeholder="vp_settings_whatsapp_ph" />
             </div>
 
             <div class="p-field">
-              <label class="p-label">Instagram Profile URL</label>
-              <input type="url" id="vSetInstagram" class="p-input" placeholder="https://instagram.com/yourhandle" />
+              <label class="p-label" data-i18n="vp_settings_instagram">Instagram Profile URL</label>
+              <input type="url" id="vSetInstagram" class="p-input" placeholder="https://instagram.com/yourhandle" data-i18n-placeholder="vp_settings_instagram_ph" />
             </div>
 
             <div class="p-field">
-              <label class="p-label">UPI ID for Direct Payments</label>
-              <input type="text" id="vSetUpi" class="p-input" placeholder="e.g. yourname@okhdfcbank" />
+              <label class="p-label" data-i18n="vp_settings_upi_direct">UPI ID for Direct Payments</label>
+              <input type="text" id="vSetUpi" class="p-input" placeholder="e.g. yourname@okhdfcbank" data-i18n-placeholder="vp_settings_upi_ph" />
             </div>
 
-            <button class="p-btn p-btn-yellow" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()">
+            <button class="p-btn p-btn-yellow" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()" data-i18n="vp_settings_save_biz">
               Save Business Details
             </button>
           </div>
 
           <!-- Payment Gateway & Custom Terms Card -->
           <div class="p-stat-card">
-            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;">Terms & Online Payments</h3>
+            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;" data-i18n="vp_settings_terms_title">Terms & Online Payments</h3>
 
             <div class="p-field">
-              <label class="p-label">Razorpay Key ID (Optional for Online Card/UPI Gateway)</label>
-              <input type="text" id="vSetRazorpayKey" class="p-input" placeholder="rzp_live_xxxxxxxxxxxxxx" />
-              <small style="color: var(--portal-muted); font-size: 0.75rem;">Leave blank to use direct UPI transfers.</small>
+              <label class="p-label" data-i18n="vp_settings_razorpay">Razorpay Key ID (Optional for Online Card/UPI Gateway)</label>
+              <input type="text" id="vSetRazorpayKey" class="p-input" placeholder="rzp_live_xxxxxxxxxxxxxx" data-i18n-placeholder="vp_settings_razorpay_ph" />
+              <small style="color: var(--portal-muted); font-size: 0.75rem;" data-i18n="vp_settings_razorpay_hint">Leave blank to use direct UPI transfers.</small>
             </div>
 
             <div class="p-field" style="margin-top: 1.2rem;">
-              <label class="p-label">Custom Terms & Cancellation Policy</label>
-              <textarea id="vSetTerms" class="p-textarea" rows="6" placeholder="Enter cancellation rules, guidelines, and refund terms..."></textarea>
+              <label class="p-label" data-i18n="vp_settings_terms_label">Custom Terms & Cancellation Policy</label>
+              <textarea id="vSetTerms" class="p-textarea" rows="6" placeholder="Enter cancellation rules, guidelines, and refund terms..." data-i18n-placeholder="vp_settings_terms_ph"></textarea>
             </div>
 
-            <button class="p-btn p-btn-dark" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()">
+            <button class="p-btn p-btn-dark" style="width: 100%; margin-top: 1rem;" onclick="saveVendorProfileSettings()" data-i18n="vp_settings_save_terms">
               Save Policy & Terms
             </button>
           </div>
@@ -270,7 +270,7 @@
   <div id="tripModalOverlay" class="p-modal-overlay">
     <div class="p-modal">
       <div class="p-modal-header">
-        <h3 id="tripModalTitle">Create New Adventure</h3>
+        <h3 id="tripModalTitle" data-i18n="vp_modal_create_title">Create New Adventure</h3>
         <button class="p-modal-close" onclick="closeTripModal()">✕</button>
       </div>
       <div class="p-modal-body">
@@ -278,11 +278,11 @@
         <!-- Template Picker Row -->
         <div style="background: rgba(255, 184, 0, 0.08); border: 1px dashed var(--portal-primary); padding: 1rem; border-radius: 14px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;">
           <div>
-            <strong style="color: var(--portal-primary); font-size: 0.9rem;">⚡ Quick-Start Templates</strong>
-            <p style="color: var(--portal-muted); font-size: 0.8rem;">Pre-fill details using popular proven itineraries.</p>
+            <strong style="color: var(--portal-primary); font-size: 0.9rem;" data-i18n="vp_quick_templates">⚡ Quick-Start Templates</strong>
+            <p style="color: var(--portal-muted); font-size: 0.8rem;" data-i18n="vp_quick_templates_desc">Pre-fill details using popular proven itineraries.</p>
           </div>
           <select id="templateSelector" class="p-select" style="max-width: 250px;" onchange="applyTripTemplate(this.value)">
-            <option value="">-- Apply a Template --</option>
+            <option value="" data-i18n="vp_tpl_apply">-- Apply a Template --</option>
             <option value="harishchandragad">Harishchandragad Trek</option>
             <option value="rajmachi">Rajmachi Fireflies Camp</option>
             <option value="pawna">Pawna Lake Camping</option>
@@ -294,18 +294,18 @@
 
         <div class="p-grid-2">
           <div class="p-field">
-            <label class="p-label">Trip Title *</label>
-            <input type="text" id="tripFormTitle" class="p-input" placeholder="e.g. Harishchandragad & Kokankada Trek" required />
+            <label class="p-label" data-i18n="vp_modal_trip_name">Trip Title *</label>
+            <input type="text" id="tripFormTitle" class="p-input" placeholder="e.g. Harishchandragad & Kokankada Trek" data-i18n-placeholder="vp_modal_trip_name_ph" required />
           </div>
           <div class="p-field">
-            <label class="p-label">Destination *</label>
-            <input type="text" id="tripFormDestination" class="p-input" placeholder="e.g. Harishchandragad, Ahmednagar" required />
+            <label class="p-label" data-i18n="vp_modal_destination">Destination *</label>
+            <input type="text" id="tripFormDestination" class="p-input" placeholder="e.g. Harishchandragad, Ahmednagar" data-i18n-placeholder="vp_modal_destination_ph" required />
           </div>
         </div>
 
         <div class="p-grid-2">
           <div class="p-field">
-            <label class="p-label">Category</label>
+            <label class="p-label" data-i18n="vp_modal_category">Category</label>
             <select id="tripFormCategory" class="p-select">
               <option value="Trekking">Trekking</option>
               <option value="Camping">Camping</option>
@@ -315,69 +315,69 @@
             </select>
           </div>
           <div class="p-field">
-            <label class="p-label">Starting Price (₹) *</label>
+            <label class="p-label" data-i18n="vp_modal_price">Starting Price (₹) *</label>
             <input type="number" id="tripFormPrice" class="p-input" placeholder="999" required />
           </div>
         </div>
 
         <div class="p-field">
-          <label class="p-label">Trip Description *</label>
-          <textarea id="tripFormDesc" class="p-textarea" rows="3" placeholder="Tell travellers what makes this trip special..."></textarea>
+          <label class="p-label" data-i18n="vp_modal_desc">Trip Description *</label>
+          <textarea id="tripFormDesc" class="p-textarea" rows="3" placeholder="Tell travellers what makes this trip special..." data-i18n-placeholder="vp_modal_desc_ph"></textarea>
         </div>
 
         <!-- Batches -->
         <div class="p-grid-2">
           <div class="p-field">
-            <label class="p-label">Departure Date Duration *</label>
-            <input type="text" id="tripFormBatchDate" class="p-input" placeholder="e.g. 15-16 Nov (Sat night to Sun)" />
+            <label class="p-label" data-i18n="vp_modal_batch_date_req">Departure Date Duration *</label>
+            <input type="text" id="tripFormBatchDate" class="p-input" placeholder="e.g. 15-16 Nov (Sat night to Sun)" data-i18n-placeholder="vp_modal_batch_date_ph" />
           </div>
           <div class="p-field">
-            <label class="p-label">Total Seats</label>
+            <label class="p-label" data-i18n="vp_modal_seats">Total Seats</label>
             <input type="number" id="tripFormTotalSeats" class="p-input" value="30" />
           </div>
         </div>
 
         <!-- Packages & Pricing -->
         <div class="p-field">
-          <label class="p-label">Package Options (Name:Price separated by commas)</label>
-          <input type="text" id="tripFormPackages" class="p-input" placeholder="e.g. Pune Transport:1299, Mumbai Transport:1499, Base Village:899" />
-          <small style="color: var(--portal-muted); font-size: 0.75rem;">Format: OptionName:Price, OptionName2:Price2</small>
+          <label class="p-label" data-i18n="vp_modal_pkg_options">Package Options (Name:Price separated by commas)</label>
+          <input type="text" id="tripFormPackages" class="p-input" placeholder="e.g. Pune Transport:1299, Mumbai Transport:1499, Base Village:899" data-i18n-placeholder="vp_modal_pkg_options_ph" />
+          <small style="color: var(--portal-muted); font-size: 0.75rem;" data-i18n="vp_modal_pkg_hint">Format: OptionName:Price, OptionName2:Price2</small>
         </div>
 
         <!-- Pickup Points -->
         <div class="p-field">
-          <label class="p-label">Boarding / Pickup Points (Location - Time separated by commas)</label>
-          <input type="text" id="tripFormPickups" class="p-input" placeholder="e.g. Swargate - 10:00 PM, Dadar - 10:30 PM, Thane - 11:15 PM" />
+          <label class="p-label" data-i18n="vp_modal_pickups">Boarding / Pickup Points (Location - Time separated by commas)</label>
+          <input type="text" id="tripFormPickups" class="p-input" placeholder="e.g. Swargate - 10:00 PM, Dadar - 10:30 PM, Thane - 11:15 PM" data-i18n-placeholder="vp_modal_pickups_ph" />
         </div>
 
         <!-- Inclusions & Exclusions -->
         <div class="p-grid-2">
           <div class="p-field">
-            <label class="p-label">Inclusions (Separated by commas)</label>
-            <textarea id="tripFormInclusions" class="p-textarea" rows="2" placeholder="Bus Transport, Breakfast, Guide, First Aid"></textarea>
+            <label class="p-label" data-i18n="vp_modal_inclusions">Inclusions (Separated by commas)</label>
+            <textarea id="tripFormInclusions" class="p-textarea" rows="2" placeholder="Bus Transport, Breakfast, Guide, First Aid" data-i18n-placeholder="vp_modal_inclusions_ph"></textarea>
           </div>
           <div class="p-field">
-            <label class="p-label">Exclusions (Separated by commas)</label>
-            <textarea id="tripFormExclusions" class="p-textarea" rows="2" placeholder="Personal Expenses, Dinner, Water Bottles"></textarea>
+            <label class="p-label" data-i18n="vp_modal_exclusions">Exclusions (Separated by commas)</label>
+            <textarea id="tripFormExclusions" class="p-textarea" rows="2" placeholder="Personal Expenses, Dinner, Water Bottles" data-i18n-placeholder="vp_modal_exclusions_ph"></textarea>
           </div>
         </div>
 
         <!-- Itinerary -->
         <div class="p-field">
-          <label class="p-label">Day-wise Itinerary</label>
-          <textarea id="tripFormItinerary" class="p-textarea" rows="4" placeholder="Day 1: Departure at 10 PM. Overnight travel.&#10;Day 2: Reach base village, trek up, Kokankada sunset, return journey."></textarea>
+          <label class="p-label" data-i18n="vp_modal_itinerary_label">Day-wise Itinerary</label>
+          <textarea id="tripFormItinerary" class="p-textarea" rows="4" placeholder="Day 1: Departure at 10 PM. Overnight travel.&#10;Day 2: Reach base village, trek up, Kokankada sunset, return journey." data-i18n-placeholder="vp_modal_itinerary_ph"></textarea>
         </div>
 
         <!-- Cover Image URL -->
         <div class="p-field">
-          <label class="p-label">Cover Image URL</label>
+          <label class="p-label" data-i18n="vp_modal_image_label">Cover Image URL</label>
           <input type="url" id="tripFormImage" class="p-input" placeholder="https://images.unsplash.com/photo-..." />
         </div>
 
       </div>
       <div class="p-modal-footer">
-        <button class="p-btn p-btn-dark" onclick="closeTripModal()">Cancel</button>
-        <button id="saveTripSubmitBtn" class="p-btn p-btn-yellow" onclick="handleSaveTrip()">Save & Publish Trip</button>
+        <button class="p-btn p-btn-dark" onclick="closeTripModal()" data-i18n="vp_modal_cancel_btn">Cancel</button>
+        <button id="saveTripSubmitBtn" class="p-btn p-btn-yellow" onclick="handleSaveTrip()" data-i18n="vp_modal_save_publish">Save & Publish Trip</button>
       </div>
     </div>
   </div>
@@ -386,22 +386,22 @@
   <div id="aiModalOverlay" class="p-modal-overlay">
     <div class="p-modal">
       <div class="p-modal-header">
-        <h3>🤖 AI WhatsApp Itinerary Import</h3>
+        <h3 data-i18n="vp_ai_header">🤖 AI WhatsApp Itinerary Import</h3>
         <button class="p-modal-close" onclick="closeAiImportModal()">✕</button>
       </div>
       <div class="p-modal-body">
-        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1rem;" data-i18n="vp_ai_instructions">
           Paste your raw trip broadcast message copied from WhatsApp. Our parser will extract the title, pricing, batches, inclusions, and boarding points automatically!
         </p>
 
         <div class="p-field">
-          <label class="p-label">Raw WhatsApp Message</label>
+          <label class="p-label" data-i18n="vp_ai_raw_label">Raw WhatsApp Message</label>
           <textarea id="aiRawMessageInput" class="p-textarea" rows="10" placeholder="Paste itinerary message here... e.g.&#10;*Rajmachi Fireflies Trek*&#10;Dates: 20-21 May&#10;Cost: 1200/- with transport&#10;Pickup: Swargate 10 PM&#10;Includes: Breakfast, Guide, Tents"></textarea>
         </div>
       </div>
       <div class="p-modal-footer">
-        <button class="p-btn p-btn-dark" onclick="closeAiImportModal()">Cancel</button>
-        <button id="aiParseBtn" class="p-btn p-btn-yellow" onclick="handleParseWhatsAppMessage()">
+        <button class="p-btn p-btn-dark" onclick="closeAiImportModal()" data-i18n="vp_modal_cancel_btn">Cancel</button>
+        <button id="aiParseBtn" class="p-btn p-btn-yellow" onclick="handleParseWhatsAppMessage()" data-i18n="vp_ai_parse_autofill">
           ✨ Parse & Auto-Fill Form
         </button>
       </div>
@@ -412,45 +412,45 @@
   <div id="broadcastModalOverlay" class="p-modal-overlay">
     <div class="p-modal">
       <div class="p-modal-header">
-        <h3>🚀 Start Trip & Broadcast GPS</h3>
+        <h3 data-i18n="vp_bc_header">🚀 Start Trip & Broadcast GPS</h3>
         <button class="p-modal-close" onclick="closeBroadcastModal()">✕</button>
       </div>
       <div class="p-modal-body">
-        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1.2rem;">
+        <p style="color: var(--portal-muted); font-size: 0.9rem; margin-bottom: 1.2rem;" data-i18n="vp_bc_desc">
           Enter vehicle and captain details so travellers can locate you easily. Once started, your browser will broadcast your live GPS location to all booked travellers.
         </p>
 
         <input type="hidden" id="broadcastTripId" value="" />
 
         <div class="p-field">
-          <label class="p-label">Captain Name *</label>
-          <input type="text" id="bcCaptainName" class="p-input" placeholder="Captain name" />
+          <label class="p-label" data-i18n="vp_bc_captain_name">Captain Name *</label>
+          <input type="text" id="bcCaptainName" class="p-input" placeholder="Captain name" data-i18n-placeholder="vp_bc_captain_name_ph" />
         </div>
 
         <div class="p-field">
-          <label class="p-label">Captain Phone / WhatsApp *</label>
-          <input type="tel" id="bcCaptainPhone" class="p-input" placeholder="+91 98765 43210" />
+          <label class="p-label" data-i18n="vp_bc_captain_phone">Captain Phone / WhatsApp *</label>
+          <input type="tel" id="bcCaptainPhone" class="p-input" placeholder="+91 98765 43210" data-i18n-placeholder="vp_bc_captain_phone_ph" />
         </div>
 
         <div class="p-grid-2">
           <div class="p-field">
-            <label class="p-label">Driver Name</label>
-            <input type="text" id="bcDriverName" class="p-input" placeholder="Optional" />
+            <label class="p-label" data-i18n="vp_bc_driver_name">Driver Name</label>
+            <input type="text" id="bcDriverName" class="p-input" placeholder="Optional" data-i18n-placeholder="vp_bc_driver_name_ph" />
           </div>
           <div class="p-field">
-            <label class="p-label">Vehicle Registration Number</label>
-            <input type="text" id="bcVehicleNumber" class="p-input" placeholder="e.g. MH 12 AB 1234" />
+            <label class="p-label" data-i18n="vp_bc_vehicle_no">Vehicle Registration Number</label>
+            <input type="text" id="bcVehicleNumber" class="p-input" placeholder="e.g. MH 12 AB 1234" data-i18n-placeholder="vp_bc_vehicle_no_ph" />
           </div>
         </div>
 
         <div class="p-field">
-          <label class="p-label">Vehicle Photo URL (Optional)</label>
+          <label class="p-label" data-i18n="vp_bc_vehicle_photo">Vehicle Photo URL (Optional)</label>
           <input type="url" id="bcVehiclePhoto" class="p-input" placeholder="https://..." />
         </div>
       </div>
       <div class="p-modal-footer">
-        <button class="p-btn p-btn-dark" onclick="closeBroadcastModal()">Cancel</button>
-        <button id="startBroadcastBtn" class="p-btn p-btn-success" onclick="confirmStartLiveBroadcast()">
+        <button class="p-btn p-btn-dark" onclick="closeBroadcastModal()" data-i18n="vp_modal_cancel_btn">Cancel</button>
+        <button id="startBroadcastBtn" class="p-btn p-btn-success" onclick="confirmStartLiveBroadcast()" data-i18n="vp_bc_start_broadcast">
           📡 Start Live Broadcasting
         </button>
       </div>
@@ -461,10 +461,10 @@
   <div id="demoAuthModalOverlay" class="p-modal-overlay">
     <div class="p-modal" style="max-width: 480px; text-align: center; padding: 2.5rem 2rem;">
       <div style="font-size: 3.2rem; margin-bottom: 0.8rem;">🔐</div>
-      <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;">
+      <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;" data-i18n="vp_demo_auth_title">
         Google Sign-In Required
       </h3>
-      <p id="demoAuthModalMsg" style="color: var(--portal-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.8rem;">
+      <p id="demoAuthModalMsg" style="color: var(--portal-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.8rem;" data-i18n="vp_demo_auth_desc">
         You are currently exploring in <strong>Demo Mode</strong>. Demo accounts are strictly read-only. To create trips, update bookings, broadcast live tracking, or modify business settings, please connect your real account via Google login.
       </p>
       <div style="display: flex; flex-direction: column; gap: 0.8rem;">
@@ -475,9 +475,9 @@
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
           </svg>
-          Sign in with Google
+          <span data-i18n="btn_google_signin">Sign in with Google</span>
         </button>
-        <button class="p-btn p-btn-dark" style="width: 100%; justify-content: center;" onclick="closeDemoAuthModal()">
+        <button class="p-btn p-btn-dark" style="width: 100%; justify-content: center;" onclick="closeDemoAuthModal()" data-i18n="vp_demo_keep_exploring">
           Keep Exploring in Demo
         </button>
       </div>
