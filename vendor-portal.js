@@ -185,7 +185,25 @@ function initVendorPortal() {
     return;
   }
 
-  const { auth, onAuthStateChanged } = window._fb;
+  const { auth, onAuthStateChanged, getRedirectResult } = window._fb;
+
+  // Handle redirect login result if returning from redirect sign-in
+  if (getRedirectResult) {
+    getRedirectResult(auth).then(async (result) => {
+      if (result && result.user) {
+        _vendorUser = result.user;
+        await onVendorSignedIn(result.user);
+      }
+    }).catch(err => {
+      console.warn('Vendor redirect auth check:', err.message);
+    });
+  }
+
+  // If already authenticated in current session, sign in immediately
+  if (auth && auth.currentUser) {
+    _vendorUser = auth.currentUser;
+    onVendorSignedIn(auth.currentUser);
+  }
 
   onAuthStateChanged(auth, async (user) => {
     if (localStorage.getItem('hopon_demo_vendor') === 'true') return;
@@ -207,13 +225,73 @@ if (window._fb) {
 
 // ===== VENDOR GOOGLE AUTHENTICATION =====
 async function loginVendorWithGoogle() {
-  const { auth, GoogleAuthProvider, signInWithPopup } = window._fb;
+  const { auth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } = window._fb;
   const provider = new GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+
+  const btn = document.getElementById('vendorLoginBtn');
+  const origText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Signing in...</span>';
+  }
+
+  // Active watcher: handles COOP isolation gracefully so user doesn't need to reload
+  let authWatcher = null;
+  const clearWatcher = () => {
+    if (authWatcher) {
+      clearInterval(authWatcher);
+      authWatcher = null;
+    }
+  };
+
+  authWatcher = setInterval(async () => {
+    if (auth.currentUser) {
+      clearWatcher();
+      _vendorUser = auth.currentUser;
+      await onVendorSignedIn(auth.currentUser);
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+  }, 400);
+
+  setTimeout(clearWatcher, 45000);
+
   try {
-    await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    clearWatcher();
+    if (result && result.user) {
+      _vendorUser = result.user;
+      await onVendorSignedIn(result.user);
+    }
   } catch (err) {
-    console.error('Vendor Google Sign In error:', err);
-    alert('Could not sign in: ' + (err.message || 'Please check popup permissions.'));
+    clearWatcher();
+    if (auth.currentUser) {
+      _vendorUser = auth.currentUser;
+      await onVendorSignedIn(auth.currentUser);
+      return;
+    }
+
+    console.warn('Vendor popup sign in error/warning:', err);
+    if (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request') {
+      if (signInWithRedirect) {
+        console.log('Falling back to vendor signInWithRedirect...');
+        await signInWithRedirect(auth, provider);
+        return;
+      }
+    }
+
+    if (err.code !== 'auth/popup-closed-by-user') {
+      alert('Could not sign in: ' + (err.message || 'Please check popup permissions.'));
+    }
+  } finally {
+    if (btn && !_vendorUser) {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
   }
 }
 

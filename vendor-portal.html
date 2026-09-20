@@ -16,7 +16,7 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getFirestore, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
     const firebaseConfig = {
       apiKey: "AIzaSyCndctKLDOwiT08SYLlB4L2tLQ9roU6948",
@@ -34,7 +34,7 @@
 
     window._fb = {
       db, auth, collection, getDocs, query, where, addDoc, getDoc, doc, updateDoc, deleteDoc, onSnapshot,
-      GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+      GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged
     };
     window.dispatchEvent(new Event('firebase-vendor-portal-ready'));
   </script>

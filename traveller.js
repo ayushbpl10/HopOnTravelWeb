@@ -62,7 +62,25 @@ function initTravellerPortal() {
     return;
   }
 
-  const { auth, onAuthStateChanged } = window._fb;
+  const { auth, onAuthStateChanged, getRedirectResult } = window._fb;
+
+  // Handle redirect login result if user was redirected back from Google
+  if (getRedirectResult) {
+    getRedirectResult(auth).then(async (result) => {
+      if (result && result.user) {
+        _currentUser = result.user;
+        await onUserSignedIn(result.user);
+      }
+    }).catch(err => {
+      console.warn('Redirect auth result check:', err.message);
+    });
+  }
+
+  // If already authenticated in current session, sign in immediately
+  if (auth && auth.currentUser) {
+    _currentUser = auth.currentUser;
+    onUserSignedIn(auth.currentUser);
+  }
 
   onAuthStateChanged(auth, async (user) => {
     if (localStorage.getItem('hopon_demo_traveller') === 'true') return;
@@ -93,14 +111,77 @@ if (window._fb) {
 
 // ===== GOOGLE AUTHENTICATION =====
 async function loginWithGoogle() {
-  const { auth, GoogleAuthProvider, signInWithPopup } = window._fb;
+  const { auth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } = window._fb;
   const provider = new GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+
+  const btn = document.getElementById('loginGoogleBtn');
+  const origText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Signing in with Google...</span>';
+  }
+
+  // Active watcher: even if Chrome COOP blocks popup.closed from resolving the promise,
+  // Firebase Auth syncs the user token into storage. This polling listener guarantees
+  // the UI transitions immediately without requiring the user to reload!
+  let authWatcher = null;
+  const clearWatcher = () => {
+    if (authWatcher) {
+      clearInterval(authWatcher);
+      authWatcher = null;
+    }
+  };
+
+  authWatcher = setInterval(async () => {
+    if (auth.currentUser) {
+      clearWatcher();
+      _currentUser = auth.currentUser;
+      await onUserSignedIn(auth.currentUser);
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+  }, 400);
+
+  setTimeout(clearWatcher, 45000);
+
   try {
     const result = await signInWithPopup(auth, provider);
-    // onAuthStateChanged will handle the UI update
+    clearWatcher();
+    if (result && result.user) {
+      _currentUser = result.user;
+      await onUserSignedIn(result.user);
+    }
   } catch (err) {
-    console.error('Google Sign In error:', err);
-    alert('Could not sign in with Google: ' + (err.message || 'Please check popup settings.'));
+    clearWatcher();
+    // If user is actually signed in despite popup communication error (e.g. COOP window.closed warning)
+    if (auth.currentUser) {
+      _currentUser = auth.currentUser;
+      await onUserSignedIn(auth.currentUser);
+      return;
+    }
+
+    console.warn('Popup sign in did not complete directly:', err);
+    // If popup was blocked by browser or COOP prevented popup, fallback to redirect
+    if (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request') {
+      if (signInWithRedirect) {
+        console.log('Falling back to signInWithRedirect...');
+        await signInWithRedirect(auth, provider);
+        return;
+      }
+    }
+
+    if (err.code !== 'auth/popup-closed-by-user') {
+      alert('Could not complete Google Sign-In: ' + (err.message || 'Please enable popups or try again.'));
+    }
+  } finally {
+    if (btn && !_currentUser) {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
   }
 }
 
