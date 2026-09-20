@@ -1,147 +1,6 @@
-// ===== i18n (Internationalization) =====
-const translations = {
-  en: {
-    nav_features: "Features",
-    nav_how_it_works: "How It Works",
-    nav_book_now: "Book Trips",
-    nav_for_vendors: "For Organisers",
-    nav_traveller_portal: "Traveller Portal",
-    nav_contact: "Contact",
-    nav_download: "Download App 🚀",
-    hiw_label: "Simple 4-Step Journey",
-    hiw_title: "Go from Couch to<br/><span class=\"gradient-text\">Boarding in Minutes 🚌</span>",
-    hero_small: "Zindagi Laptop Screen Par Nahi,",
-    hero_title: "Ab Toh<br/>Ghoom Le! 🏔️🎒",
-    hero_desc: "Break free from 9-to-5 cubicles, endless spreadsheets, and cancelled plans. Chase golden Sahyadri sunrises, chill around starlit campfires, and find your lifelong travel tribe. Verified trek captains, direct UPI booking, and live bus GPS tracking.",
-    hero_cta: "🎒 Find Your Weekend Escape &rarr;",
-    hero_watch: "Watch Story",
-    journey_badge: "01 THE JOURNEY BEGINS",
-    journey_title: "It's not just a trip,<br/>It's an escape",
-    journey_desc: "Whether you're solo, with friends or your partner, there's always a seat for you.",
-    feat_1: "Stress-free<br/>Getaways",
-    feat_2: "Community<br/>of Explorers",
-    feat_3: "Budget Friendly<br/>Adventures",
-    book_badge: "02 HANDPICKED WEEKEND ADVENTURES",
-    book_title: "Handpicked trips<br/>for every kind of<br/>traveller",
-    comm_badge: "03 MORE THAN TRAVEL",
-    comm_title: "It's a community<br/>that feels like<br/>home",
-    comm_desc: "Come solo, leave with stories, laughter, and friends for life.",
-    coll_badge: "04 THE DESTINATION IS JUST THE BEGINNING",
-    coll_title: "Collect moments,<br/>not things",
-    coll_desc: "Every weekend writes a story. What's your next chapter?",
-    coll_cta: "Book Your Escape &rarr;"
-  },
-  hi: {
-    nav_features: "सुविधाएं",
-    nav_how_it_works: "यह कैसे काम करता है",
-    nav_book_now: "ट्रिप बुक करें",
-    nav_for_vendors: "आयोजकों / वेंडर्स के लिए",
-    nav_traveller_portal: "यात्री पोर्टल",
-    nav_contact: "संपर्क करें",
-    nav_download: "ऐप डाउनलोड करें 🚀",
-    hiw_label: "सरल 4-चरणीय यात्रा",
-    hiw_title: "सोफे से उठकर<br/><span class=\"gradient-text\">मिनटों में बस बोर्डिंग तक 🚌</span>",
-    hero_small: "ज़िंदगी लैपटॉप स्क्रीन पर नहीं,",
-    hero_title: "अब तो<br/>घूम ले! 🏔️🎒",
-    hero_desc: "ऑफिस के 9-से-5 रूटीन, एक्सेल शीट्स और कैंसल हुए प्लान्स को छोड़िए। सह्याद्रि के सुनहरे सूर्योदय, तारों भरी रातों में कैंपफायर और सच्चे दोस्तों से मिलिए। वेरिफाइड कैप्टन्स, लाइव बस जीपीएस और डायरेक्ट यूपीआई बुकिंग।",
-    hero_cta: "🎒 वीकेंड ट्रिप चुनें &rarr;",
-    hero_watch: "कहानी देखें",
-    journey_badge: "01 यात्रा शुरू होती है",
-    journey_title: "यह सिर्फ एक ट्रिप नहीं,<br/>एक असली आजादी है",
-    journey_desc: "चाहे आप अकेले आएं या दोस्तों के साथ, हमारे पास आपके लिए हमेशा एक सुरक्षित सीट तैयार है।",
-    feat_1: "तनाव मुक्त<br/>छुट्टियां",
-    feat_2: "सच्चे खोजकर्ताओं<br/>का समुदाय",
-    feat_3: "बजट फ्रेंडली<br/>रोमांच",
-    book_badge: "02 अपना वीकेंड रोमांच चुनें",
-    book_title: "हर तरह के घुमक्कड़ के लिए<br/>हैंडपिक्ड ट्रिप्स",
-    comm_badge: "03 सिर्फ सफर नहीं, परिवार",
-    comm_title: "अजनबियों का वो सफर<br/>जो घर जैसा लगे",
-    comm_desc: "अकेले आएं, जीवन भर की यादें और सच्चे दोस्त लेकर जाएं।",
-    coll_badge: "04 मंजिल तो बस शुरुआत है",
-    coll_title: "यादें बटोरें,<br/>चीजें नहीं",
-    coll_desc: "हर वीकेंड एक नई कहानी लिखता है। आपका अगला अध्याय कौन सा है?",
-    coll_cta: "अपनी सीट बुक करें &rarr;"
-  },
-  mr: {
-    nav_features: "वैशिष्ट्ये",
-    nav_how_it_works: "हे कसे कार्य करते",
-    nav_book_now: "आता बुक करा",
-    nav_for_vendors: "व्हेंडर्ससाठी",
-    nav_traveller_portal: "प्रवासी पोर्टल",
-    nav_contact: "संपर्क",
-    nav_download: "ॲप डाउनलोड करा 🚀",
-    hiw_label: "सोपी प्रक्रिया",
-    hiw_title: "ब्राउझिंगपासून ते<br/><span class=\"gradient-text\">बोर्डिंगपर्यंत काही मिनिटांत</span>",
-    hero_small: "आयुष्य खूप झालं,",
-    hero_title: "आता तर<br/>फिरून घे!",
-    hero_desc: "नियमिततेतून बाहेर पडा. अद्भुत लोकांना भेटा.<br/>अविश्वसनीय ठिकाणे एक्सप्लोर करा. आठवणी बनवा.",
-    hero_cta: "ट्रिप्स एक्सप्लोर करा &rarr;",
-    hero_watch: "कथा पहा",
-    journey_badge: "01 प्रवास सुरू होतो",
-    journey_title: "ही फक्त एक ट्रिप नाही,<br/>ही एक सुटका आहे",
-    journey_desc: "तुम्ही एकटे असाल, मित्रांसोबत किंवा तुमच्या जोडीदारासोबत, तुमच्यासाठी नेहमीच एक जागा असते.",
-    feat_1: "तणावमुक्त<br/>सुट्ट्या",
-    feat_2: "अन्वेषकांचा<br/>समुदाय",
-    feat_3: "बजेटसाठी अनुकूल<br/>साहस",
-    book_badge: "02 तुमची सुटका निवडा",
-    book_title: "प्रत्येक प्रकारच्या प्रवाशासाठी<br/>निवडक ट्रिप्स",
-    comm_badge: "03 प्रवासापेक्षा अधिक",
-    comm_title: "हा एक समुदाय आहे<br/>जो घरासारखा वाटतो",
-    comm_desc: "एकटे या, आयुष्यभराच्या कथा आणि मित्रांसह जा.",
-    coll_badge: "04 गंतव्यस्थान ही फक्त एक सुरुवात आहे",
-    coll_title: "क्षण गोळा करा,<br/>वस्तू नाही",
-    coll_desc: "प्रत्येक ट्रिप एक कथा लिहिते. तुमचा पुढचा अध्याय कोणता आहे?",
-    coll_cta: "तुमची ट्रिप बुक करा &rarr;"
-  },
-  kn: {
-    nav_features: "ವೈಶಿಷ್ಟ್ಯಗಳು",
-    nav_how_it_works: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
-    nav_book_now: "ಈಗಲೇ ಬುಕ್ ಮಾಡಿ",
-    nav_for_vendors: "ವೆಂಡರ್‌ಗಳಿಗಾಗಿ",
-    nav_traveller_portal: "ಪ್ರಯಾಣಿಕರ ಪೋರ್ಟಲ್",
-    nav_contact: "ಸಂಪರ್ಕಿಸಿ",
-    nav_download: "ಆ್ಯಪ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ 🚀",
-    hiw_label: "ಸರಳ ಪ್ರಕ್ರಿಯೆ",
-    hiw_title: "ಹುಡುಕಾಟದಿಂದ ಹಿಡಿದು<br/><span class=\"gradient-text\">ಬೋರ್ಡಿಂಗ್‌ವರೆಗೆ ಕೆಲವೇ ನಿಮಿಷಗಳಲ್ಲಿ</span>",
-    hero_small: "ಜೀವನ ತುಂಬಾ ಆಯಿತು,",
-    hero_title: "ಈಗಲಾದರೂ<br/>ತಿರುಗಾಡು!",
-    hero_desc: "ದಿನಚರಿಯಿಂದ ತಪ್ಪಿಸಿಕೊಳ್ಳಿ. ಅದ್ಭುತ ಜನರನ್ನು ಭೇಟಿ ಮಾಡಿ.<br/>ನಂಬಲಾಗದ ಸ್ಥಳಗಳನ್ನು ಅನ್ವೇಷಿಸಿ. ನೆನಪುಗಳನ್ನು ಮಾಡಿ.",
-    hero_cta: "ಟ್ರಿಪ್‌ಗಳನ್ನು ಅನ್ವೇಷಿಸಿ &rarr;",
-    hero_watch: "ಕಥೆ ವೀಕ್ಷಿಸಿ",
-    journey_badge: "01 ಪ್ರಯಾಣ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ",
-    journey_title: "ಇದು ಕೇವಲ ಟ್ರಿಪ್ ಅಲ್ಲ,<br/>ಇದು ಒಂದು ಪಲಾಯನ",
-    journey_desc: "ನೀವು ಒಂಟಿಯಾಗಿರಲಿ, ಸ್ನೇಹಿತರೊಂದಿಗೆ ಅಥವಾ ನಿಮ್ಮ ಸಂಗಾತಿಯೊಂದಿಗೆ ಇರಲಿ, ನಿಮಗಾಗಿ ಯಾವಾಗಲೂ ಒಂದು ಆಸನವಿರುತ್ತದೆ.",
-    feat_1: "ಒತ್ತಡ ರಹಿತ<br/>ರಜೆಗಳು",
-    feat_2: "ಅನ್ವೇಷಕರ<br/>ಸಮುದಾಯ",
-    feat_3: "ಬಜೆಟ್ ಸ್ನೇಹಿ<br/>ಸಾಹಸಗಳು",
-    book_badge: "02 ನಿಮ್ಮ ಪಲಾಯನವನ್ನು ಆರಿಸಿ",
-    book_title: "ಪ್ರತಿಯೊಂದು ರೀತಿಯ ಪ್ರಯಾಣಿಕರಿಗಾಗಿ<br/>ಆಯ್ದ ಟ್ರಿಪ್‌ಗಳು",
-    comm_badge: "03 ಪ್ರಯಾಣಕ್ಕಿಂತ ಹೆಚ್ಚು",
-    comm_title: "ಇದು ಮನೆಯಂತೆ ಭಾಸವಾಗುವ<br/>ಸಮುದಾಯ",
-    comm_desc: "ಒಂಟಿಯಾಗಿ ಬನ್ನಿ, ಜೀವನಪರ್ಯಂತ ಕಥೆಗಳು ಮತ್ತು ಸ್ನೇಹಿತರೊಂದಿಗೆ ಹೋಗಿ.",
-    coll_badge: "04 ಗಮ್ಯಸ್ಥಾನವು ಕೇವಲ ಒಂದು ಆರಂಭ",
-    coll_title: "ಕ್ಷಣಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ,<br/>ವಸ್ತುಗಳನ್ನಲ್ಲ",
-    coll_desc: "ಪ್ರತಿ ಟ್ರಿಪ್ ಒಂದು ಕಥೆಯನ್ನು ಬರೆಯುತ್ತದೆ. ನಿಮ್ಮ ಮುಂದಿನ ಅಧ್ಯಾಯ ಯಾವುದು?",
-    coll_cta: "ನಿಮ್ಮ ಟ್ರಿಪ್ ಬುಕ್ ಮಾಡಿ &rarr;"
-  }
-};
+// ===== i18n is managed globally via web/i18n.js =====
+// Supporting en (English), hi (Hindi), mr (Marathi), kn (Kannada)
 
-function changeLanguage(lang) {
-  localStorage.setItem('site_lang', lang);
-  document.getElementById('langSelect').value = lang;
-  
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[lang] && translations[lang][key]) {
-      el.innerHTML = translations[lang][key];
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('site_lang') || 'en';
-  changeLanguage(savedLang);
-});
 
 // ===== NAVBAR SCROLL =====
 const navbar = document.getElementById('navbar');
@@ -288,6 +147,11 @@ function selectWebTrip(tripId) {
   document.getElementById('consentCheck').checked = false;
   document.getElementById('captchaAns').value = '';
 
+  // Reset reCAPTCHA widget if loaded
+  if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
+    try { window.grecaptcha.reset(); } catch (_) {}
+  }
+
   // Generate CAPTCHA
   _captchaA = Math.floor(Math.random() * 10) + 1;
   _captchaB = Math.floor(Math.random() * 10) + 1;
@@ -370,7 +234,44 @@ async function submitWebBooking() {
   if (!/^\d{10}$/.test(phone.replace(/\D/g, ''))) return alert('Please enter a valid 10-digit phone number.');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert('Please enter a valid email address.');
   if (!consent) return alert('You must accept the risks involved before booking.');
-  if (captchaAns !== _captchaA + _captchaB) return alert(`Security check failed. Hint: ${_captchaA} + ${_captchaB} = ?`);
+
+  // 4. reCAPTCHA Verification with Math Captcha Fallback
+  let recaptchaToken = null;
+  if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+    try {
+      recaptchaToken = window.grecaptcha.getResponse();
+    } catch (_) {}
+  }
+
+  if (recaptchaToken) {
+    try {
+      const verifyRes = await fetch('/api/verify-recaptcha', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: recaptchaToken })
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset();
+        return alert('reCAPTCHA security check failed. Please complete the reCAPTCHA again.');
+      }
+    } catch (netErr) {
+      console.warn('reCAPTCHA verification endpoint error:', netErr);
+      // Fallback to math captcha if reCAPTCHA verification fails to reach network
+      if (captchaAns !== _captchaA + _captchaB) {
+        const fallback = document.getElementById('fallbackCaptchaBlock');
+        if (fallback) fallback.style.display = 'block';
+        return alert(`Security check failed. Hint: ${_captchaA} + ${_captchaB} = ?`);
+      }
+    }
+  } else {
+    // If user hasn't ticked reCAPTCHA or in test/headless mode
+    if (captchaAns !== _captchaA + _captchaB) {
+      const fallback = document.getElementById('fallbackCaptchaBlock');
+      if (fallback) fallback.style.display = 'block';
+      return alert(`Please complete the reCAPTCHA security check, or enter the security answer: ${_captchaA} + ${_captchaB} = ?`);
+    }
+  }
 
   _isSubmittingBooking = true;
   const btn = document.getElementById('bookSubmitBtn');
@@ -461,6 +362,9 @@ async function submitWebBooking() {
     _isSubmittingBooking = false;
     btn.disabled = false;
     btn.textContent = 'Confirm Booking →';
+    if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
+      try { window.grecaptcha.reset(); } catch (_) {}
+    }
   }
 }
 

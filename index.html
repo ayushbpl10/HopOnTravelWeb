@@ -13,9 +13,14 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com https://www.google.com/recaptcha/; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google reCAPTCHA v2 -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- Universal i18n Engine -->
+  <script src="i18n.js"></script>
   
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
@@ -112,7 +117,7 @@
     <div class="tmpl-hero-content">
       <div class="hero-announcement-pill">
         <span class="hero-pulse-dot"></span>
-        <span>Weekend Ka Asli Plan • Ab Toh Ghoom Le</span>
+        <span data-i18n="hero_pill">Weekend Ka Asli Plan • Ab Toh Ghoom Le</span>
       </div>
       <div class="tmpl-small-text" data-i18n="hero_small">Zindagi Laptop Screen Par Nahi,</div>
       <h1 class="tmpl-main-title" data-i18n="hero_title">Ab Toh<br/>Ghoom Le! 🏔️🎒</h1>
@@ -121,7 +126,7 @@
       </p>
       <div class="tmpl-hero-actions">
         <a href="#book" class="tmpl-btn tmpl-btn-yellow" data-i18n="hero_cta">🎒 Find Your Weekend Escape &rarr;</a>
-        <a href="vendor.html" class="btn-ghost" style="border-radius: 50px; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.5); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
+        <a href="vendor.html" class="btn-ghost" style="border-radius: 50px; padding: 12px 24px; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.5); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;" data-i18n="hero_vendor_cta">
           🚌 Organise Trips? Partner Free &rarr;
         </a>
       </div>
@@ -130,19 +135,19 @@
       <div class="hero-trust-bar">
         <div class="hero-trust-item">
           <span class="hero-trust-icon">⭐</span>
-          <span>4.9/5 Rating (10k+ Travellers)</span>
+          <span data-i18n="trust_rating">4.9/5 Rating (10k+ Travellers)</span>
         </div>
         <div class="hero-trust-item">
           <span class="hero-trust-icon">📍</span>
-          <span>Live Bus Radar</span>
+          <span data-i18n="trust_radar">Live Bus Radar</span>
         </div>
         <div class="hero-trust-item">
           <span class="hero-trust-icon">🛡️</span>
-          <span>Safe for Solo & Girls</span>
+          <span data-i18n="trust_safety">Safe for Solo & Girls</span>
         </div>
         <div class="hero-trust-item">
           <span class="hero-trust-icon">💰</span>
-          <span>Zero Middleman Cuts</span>
+          <span data-i18n="trust_commission">Zero Middleman Cuts</span>
         </div>
       </div>
     </div>
@@ -151,11 +156,11 @@
   <!-- ===== DUAL-AUDIENCE SHOWCASE: FOR TRAVELLERS & VENDORS ===== -->
   <section class="dual-audience-section" id="community-hub">
     <div class="dual-audience-header">
-      <div class="tmpl-section-badge" style="justify-content: center;">EXPERIENCE THE REVOLUTION</div>
-      <h2 style="font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.2rem; color: #fff;">
+      <div class="tmpl-section-badge" style="justify-content: center;" data-i18n="dual_label">EXPERIENCE THE REVOLUTION</div>
+      <h2 style="font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.2rem; color: #fff;" data-i18n="dual_title">
         Built for Wild Explorers.<br/><span style="color: var(--yellow);">Supercharged for Passionate Organisers.</span>
       </h2>
-      <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.7;">
+      <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.7;" data-i18n="dual_sub">
         Whether you're packing your backpack for a midnight Sahyadri trek or filling a 40-seater luxury bus into the Western Ghats, Ab Toh Ghoom Le turns travel chaos into pure, effortless magic.
       </p>
     </div>
@@ -164,43 +169,43 @@
       <!-- CARD 1: FOR TRAVELLERS -->
       <div class="audience-card card-traveller">
         <div>
-          <span class="audience-badge badge-traveller">🎒 FOR TRAVELLERS</span>
-          <h3>Turn "Plan Banate Hain" into "Bhai Bus Mein Baith Gaya!" 🏕️</h3>
-          <p class="card-tagline">
+          <span class="audience-badge badge-traveller" data-i18n="dual_traveller_badge">🎒 FOR TRAVELLERS</span>
+          <h3 data-i18n="dual_traveller_title">Turn "Plan Banate Hain" into "Bhai Bus Mein Baith Gaya!" 🏕️</h3>
+          <p class="card-tagline" data-i18n="dual_traveller_tagline">
             No more boring weekends on the couch scrolling reels of sunsets. Go chase them in real life with India's most vibrant community of young explorers!
           </p>
           <ul class="audience-perks">
             <li class="audience-perk-item">
               <span class="audience-perk-icon">👫</span>
               <div class="audience-perk-text">
-                <strong>Solo Traveller Safe Haven</strong>
-                <span>Over 45% of our adventurers join completely solo and leave with lifelong friends, deep conversations, and shared bonfire memories.</span>
+                <strong data-i18n="dual_traveller_p1_title">Solo Traveller Safe Haven</strong>
+                <span data-i18n="dual_traveller_p1_desc">Over 45% of our adventurers join completely solo and leave with lifelong friends, deep conversations, and shared bonfire memories.</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">📍</span>
               <div class="audience-perk-text">
-                <strong>Live Bus Radar in Your Pocket</strong>
-                <span>Never stand anxious on the highway at midnight. Track your bus live on the map and see your captain cruising towards you.</span>
+                <strong data-i18n="dual_traveller_p2_title">Live Bus Radar in Your Pocket</strong>
+                <span data-i18n="dual_traveller_p2_desc">Never stand anxious on the highway at midnight. Track your bus live on the map and see your captain cruising towards you.</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">🍲</span>
               <div class="audience-perk-text">
-                <strong>Authentic Sahyadri Village Food</strong>
-                <span>Hot Maharashtrian pitla-bhakri, sizzling campfire barbecue, and aromatic morning chai served with pure local warmth.</span>
+                <strong data-i18n="dual_traveller_p3_title">Authentic Sahyadri Village Food</strong>
+                <span data-i18n="dual_traveller_p3_desc">Hot Maharashtrian pitla-bhakri, sizzling campfire barbecue, and aromatic morning chai served with pure local warmth.</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">🎟️</span>
               <div class="audience-perk-text">
-                <strong>Instant Verified Digital Ticket</strong>
-                <span>Zero hassle checkout. Download your boarding pass instantly on WhatsApp & Web, complete with captain contact details.</span>
+                <strong data-i18n="dual_traveller_p4_title">Instant Verified Digital Ticket</strong>
+                <span data-i18n="dual_traveller_p4_desc">Zero hassle checkout. Download your boarding pass instantly on WhatsApp & Web, complete with captain contact details.</span>
               </div>
             </li>
           </ul>
         </div>
-        <a href="#book" class="audience-cta-btn btn-traveller">
+        <a href="#book" class="audience-cta-btn btn-traveller" data-i18n="dual_traveller_btn">
           <span>Find Your Next Weekend Trek</span>
           <span>&rarr;</span>
         </a>
@@ -209,43 +214,43 @@
       <!-- CARD 2: FOR TOUR VENDORS & ORGANISERS -->
       <div class="audience-card card-vendor">
         <div>
-          <span class="audience-badge badge-vendor">🚌 FOR TRIP ORGANISERS</span>
-          <h3>Fill Every Seat. Keep 100% of Your Earnings. 🚀</h3>
-          <p class="card-tagline">
+          <span class="audience-badge badge-vendor" data-i18n="dual_vendor_badge">🚌 FOR TRIP ORGANISERS</span>
+          <h3 data-i18n="dual_vendor_title">Fill Every Seat. Keep 100% of Your Earnings. 🚀</h3>
+          <p class="card-tagline" data-i18n="dual_vendor_tagline">
             Stop begging for bookings in Instagram DMs or paying 20% platform commissions. Scale your travel business with tools built exclusively for tour captains.
           </p>
           <ul class="audience-perks">
             <li class="audience-perk-item">
               <span class="audience-perk-icon">💰</span>
               <div class="audience-perk-text">
-                <strong>0% Commission — 100% Yours</strong>
-                <span>Every single rupee your travellers pay goes straight into your bank account or UPI. No middleman cuts, ever.</span>
+                <strong data-i18n="dual_vendor_p1_title">0% Commission — 100% Yours</strong>
+                <span data-i18n="dual_vendor_p1_desc">Every single rupee your travellers pay goes straight into your bank account or UPI. No middleman cuts, ever.</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">🤖</span>
               <div class="audience-perk-text">
-                <strong>AI WhatsApp Itinerary Importer</strong>
-                <span>Paste your raw WhatsApp itinerary message — our smart AI parser extracts dates, packages, pricing, and itinerary in 20 seconds flat!</span>
+                <strong data-i18n="dual_vendor_p2_title">AI WhatsApp Itinerary Importer</strong>
+                <span data-i18n="dual_vendor_p2_desc">Paste your raw WhatsApp itinerary message — our smart AI parser extracts dates, packages, pricing, and itinerary in 20 seconds flat!</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">📡</span>
               <div class="audience-perk-text">
-                <strong>End "Bus Kahan Hai?" Calls Forever</strong>
-                <span>Broadcast your live bus GPS coordinates from any phone browser with one click. Boarding is 10x faster and zero stress.</span>
+                <strong data-i18n="dual_vendor_p3_title">End "Bus Kahan Hai?" Calls Forever</strong>
+                <span data-i18n="dual_vendor_p3_desc">Broadcast your live bus GPS coordinates from any phone browser with one click. Boarding is 10x faster and zero stress.</span>
               </div>
             </li>
             <li class="audience-perk-item">
               <span class="audience-perk-icon">📋</span>
               <div class="audience-perk-text">
-                <strong>One-Click Passenger Manifests</strong>
-                <span>Instantly generate clean, printable passenger lists with seat counts, pickup points, and emergency contacts.</span>
+                <strong data-i18n="dual_vendor_p4_title">One-Click Passenger Manifests</strong>
+                <span data-i18n="dual_vendor_p4_desc">Instantly generate clean, printable passenger lists with seat counts, pickup points, and emergency contacts.</span>
               </div>
             </li>
           </ul>
         </div>
-        <a href="vendor.html" class="audience-cta-btn btn-vendor">
+        <a href="vendor.html" class="audience-cta-btn btn-vendor" data-i18n="dual_vendor_btn">
           <span>Partner Free & Launch a Trip</span>
           <span>&rarr;</span>
         </a>
@@ -261,23 +266,23 @@
 
       <!-- Step Indicators -->
       <div class="book-steps-indicator">
-        <div class="bsi-step active" id="bsi-1"><span class="bsi-num">1</span><span class="bsi-label">Choose Trip</span></div>
+        <div class="bsi-step active" id="bsi-1"><span class="bsi-num">1</span><span class="bsi-label" data-i18n="step_1_label">Choose Trip</span></div>
         <div class="bsi-line"></div>
-        <div class="bsi-step" id="bsi-2"><span class="bsi-num">2</span><span class="bsi-label">Your Details</span></div>
+        <div class="bsi-step" id="bsi-2"><span class="bsi-num">2</span><span class="bsi-label" data-i18n="step_2_label">Your Details</span></div>
         <div class="bsi-line"></div>
-        <div class="bsi-step" id="bsi-3"><span class="bsi-num">3</span><span class="bsi-label">Confirmation</span></div>
+        <div class="bsi-step" id="bsi-3"><span class="bsi-num">3</span><span class="bsi-label" data-i18n="step_3_label">Confirmation</span></div>
       </div>
 
       <!-- Step 1: Browse Trips -->
       <div class="book-panel" id="step-1">
         <div class="book-search-row">
-          <input type="text" id="tripSearch" class="book-search-input" placeholder="🔍  Search trips by name..." oninput="filterWebTrips(this.value)" />
+          <input type="text" id="tripSearch" class="book-search-input" data-i18n-placeholder="search_placeholder" placeholder="🔍  Search trips by name..." oninput="filterWebTrips(this.value)" />
         </div>
         <div id="tripsLoadingMsg" class="book-loading">
           <div class="book-spinner"></div>
-          <span>Loading trips from database...</span>
+          <span data-i18n="loading_trips">Loading trips from database...</span>
         </div>
-        <div id="tripsErrorMsg" class="book-error" style="display:none">
+        <div id="tripsErrorMsg" class="book-error" style="display:none" data-i18n="error_trips">
           ⚠️ Could not load trips. Please check your internet connection and try again.
         </div>
         <div class="web-trips-grid" id="webTripsGrid"></div>
@@ -286,54 +291,59 @@
       <!-- Step 2: Traveller Details -->
       <div class="book-panel" id="step-2" style="display:none">
         <div class="book-form-header">
-          <button class="book-back-btn" onclick="goToStep(1)">← Back to Trips</button>
+          <button class="book-back-btn" onclick="goToStep(1)" data-i18n="step2_back_btn">← Back to Trips</button>
           <div class="selected-trip-badge" id="selectedTripBadge"></div>
         </div>
         <div class="book-form-grid">
           <div class="book-form-left">
-            <h3 class="book-form-title">Select Package & Batch</h3>
+            <h3 class="book-form-title" data-i18n="step2_package_title">Select Package & Batch</h3>
             <div class="book-field">
-              <label class="book-label">Departure Batch *</label>
+              <label class="book-label" data-i18n="step2_batch_label">Departure Batch *</label>
               <select id="batchSelect" class="book-select"></select>
             </div>
             <div class="book-field">
-              <label class="book-label">Package *</label>
+              <label class="book-label" data-i18n="step2_package_label">Package *</label>
               <select id="packageSelect" class="book-select" onchange="updatePriceDisplay()"></select>
             </div>
             <div class="book-field">
-              <label class="book-label">Number of Travellers *</label>
+              <label class="book-label" data-i18n="step2_seats_label">Number of Travellers *</label>
               <input type="number" id="seatsInput" class="book-input" value="1" min="1" max="10" oninput="updatePriceDisplay()" onchange="updatePriceDisplay()" />
             </div>
             <div class="book-price-box">
-              <span class="book-price-label">Total Amount</span>
+              <span class="book-price-label" data-i18n="step2_total_amount">Total Amount</span>
               <span class="book-price-value" id="priceDisplay">₹0</span>
             </div>
           </div>
           <div class="book-form-right">
-            <h3 class="book-form-title">Traveller Details</h3>
+            <h3 class="book-form-title" data-i18n="step2_traveller_title">Traveller Details</h3>
             <div class="book-field">
-              <label class="book-label">Full Name *</label>
-              <input type="text" id="travelerName" class="book-input" placeholder="Your full name" />
+              <label class="book-label" data-i18n="step2_name_label">Full Name *</label>
+              <input type="text" id="travelerName" class="book-input" data-i18n-placeholder="step2_name_ph" placeholder="Your full name" />
             </div>
             <div class="book-field">
-              <label class="book-label">WhatsApp Number *</label>
-              <input type="tel" id="travelerPhone" class="book-input" placeholder="+91 98765 43210" />
+              <label class="book-label" data-i18n="step2_phone_label">WhatsApp Number *</label>
+              <input type="tel" id="travelerPhone" class="book-input" data-i18n-placeholder="step2_phone_ph" placeholder="+91 98765 43210" />
             </div>
             <div class="book-field">
-              <label class="book-label">Email Address *</label>
-              <input type="email" id="travelerEmail" class="book-input" placeholder="you@example.com" />
+              <label class="book-label" data-i18n="step2_email_label">Email Address *</label>
+              <input type="email" id="travelerEmail" class="book-input" data-i18n-placeholder="step2_email_ph" placeholder="you@example.com" />
             </div>
             <div class="book-consent">
               <input type="checkbox" id="consentCheck" class="book-checkbox" />
-              <label for="consentCheck" class="book-consent-label">I understand and accept the risks involved in treks or physically demanding activities.</label>
+              <label for="consentCheck" class="book-consent-label" data-i18n="step2_consent">I understand and accept the risks involved in treks or physically demanding activities.</label>
             </div>
-            <div class="book-captcha">
-              <label class="book-label">Security Check: <span id="captchaQ" class="book-captcha-q"></span> = ?</label>
-              <input type="number" id="captchaAns" class="book-input" placeholder="Your answer" style="max-width:120px" />
+            <!-- Google reCAPTCHA v2 (Dark Theme) -->
+            <div class="recaptcha-wrapper" style="margin: 14px 0 8px 0; min-height: 78px; max-width: 100%; overflow-x: auto;">
+              <div class="g-recaptcha" id="g-recaptcha-booking" data-sitekey="6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM" data-theme="dark"></div>
+            </div>
+            <!-- Fallback math captcha for automated test suites / offline -->
+            <div class="book-captcha" id="fallbackCaptchaBlock" style="display:none;">
+              <label class="book-label"><span data-i18n="step2_captcha_label">Security Check:</span> <span id="captchaQ" class="book-captcha-q"></span> = ?</label>
+              <input type="number" id="captchaAns" class="book-input" data-i18n-placeholder="step2_captcha_ph" placeholder="Your answer" style="max-width:120px" />
             </div>
             <!-- Anti-bot Honeypot Field (Hidden from real users, filled by automated bot scripts) -->
             <input type="text" id="hp_field" name="b_hp_field" style="display:none!important; opacity:0; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" />
-            <button class="book-submit-btn" id="bookSubmitBtn" onclick="submitWebBooking()">Confirm Booking →</button>
+            <button class="book-submit-btn" id="bookSubmitBtn" onclick="submitWebBooking()" data-i18n="step2_confirm_btn">Confirm Booking →</button>
           </div>
         </div>
       </div>
@@ -342,31 +352,31 @@
       <div class="book-panel" id="step-3" style="display:none">
         <div class="book-ticket">
           <div class="book-ticket-header">
-            <span>🎉 BOOKING CONFIRMED</span>
-            <div class="book-ticket-status confirmed">PENDING PAYMENT</div>
+            <span data-i18n="step3_badge">🎉 BOOKING CONFIRMED</span>
+            <div class="book-ticket-status confirmed" data-i18n="step3_status_pending">PENDING PAYMENT</div>
           </div>
           <div class="book-ticket-body">
-            <div class="book-ticket-row"><span>Traveller</span><strong id="conf-name"></strong></div>
-            <div class="book-ticket-row"><span>Trip</span><strong id="conf-trip"></strong></div>
-            <div class="book-ticket-row"><span>Package</span><strong id="conf-package"></strong></div>
-            <div class="book-ticket-row"><span>Seats</span><strong id="conf-seats"></strong></div>
-            <div class="book-ticket-row total-row"><span>Total</span><strong id="conf-total" class="conf-price"></strong></div>
+            <div class="book-ticket-row"><span data-i18n="step3_traveller">Traveller</span><strong id="conf-name"></strong></div>
+            <div class="book-ticket-row"><span data-i18n="step3_trip">Trip</span><strong id="conf-trip"></strong></div>
+            <div class="book-ticket-row"><span data-i18n="step3_package">Package</span><strong id="conf-package"></strong></div>
+            <div class="book-ticket-row"><span data-i18n="step3_seats">Seats</span><strong id="conf-seats"></strong></div>
+            <div class="book-ticket-row total-row"><span data-i18n="step3_total">Total</span><strong id="conf-total" class="conf-price"></strong></div>
           </div>
           <div class="book-ticket-divider"><div class="notch left"></div><div class="notch right"></div></div>
           <div class="book-ticket-footer">
-            <div class="book-ticket-id-label">Booking ID</div>
+            <div class="book-ticket-id-label" data-i18n="step3_booking_id">Booking ID</div>
             <div class="book-ticket-id" id="conf-bookingId"></div>
           </div>
           <div class="book-ticket-actions" style="display:flex; flex-direction:column; gap:12px;">
-            <a id="conf-portal-link" href="traveller.html" class="book-wa-btn" style="background: linear-gradient(45deg, #FFB800, #ff8c00); color:#000; font-weight:800; border:none; box-shadow: 0 4px 15px rgba(255,184,0,0.4); text-align:center; text-decoration:none; display:block;">
+            <a id="conf-portal-link" href="traveller.html" class="book-wa-btn" style="background: linear-gradient(45deg, #FFB800, #ff8c00); color:#000; font-weight:800; border:none; box-shadow: 0 4px 15px rgba(255,184,0,0.4); text-align:center; text-decoration:none; display:block;" data-i18n="step3_track_btn">
               📍 View Ticket & Track Bus in Traveller Portal →
             </a>
-            <a href="download.html" class="book-new-btn" style="text-align:center; text-decoration:none; display:block; background:rgba(255,255,255,0.05); color:#fff;">
+            <a href="download.html" class="book-new-btn" style="text-align:center; text-decoration:none; display:block; background:rgba(255,255,255,0.05); color:#fff;" data-i18n="ticket_download_app">
               📲 Download Mobile App
             </a>
-            <button class="book-new-btn" style="background: transparent; border: 1px solid #333; color:#aaa; margin-top:0.5rem;" onclick="goToStep(1); document.getElementById('step-1').scrollIntoView({behavior:'smooth'})">Book Another Trip</button>
+            <button class="book-new-btn" style="background: transparent; border: 1px solid #333; color:#aaa; margin-top:0.5rem;" onclick="goToStep(1); document.getElementById('step-1').scrollIntoView({behavior:'smooth'})" data-i18n="step3_another_btn">Book Another Trip</button>
           </div>
-          <p class="book-ticket-note">📌 Save your Booking ID. Download the Ab Toh Ghoom Le app to complete your payment, track your bus live, and view your itinerary.</p>
+          <p class="book-ticket-note" data-i18n="ticket_note">📌 Save your Booking ID. Download the Ab Toh Ghoom Le app to complete your payment, track your bus live, and view your itinerary.</p>
         </div>
       </div>
     </div>
@@ -379,26 +389,26 @@
       <img src="bg_road.png" alt="Travel Smart" class="tmpl-split-bg" />
     </div>
     <div class="tmpl-split-right">
-      <div class="tmpl-section-badge">02 THE PLATFORM ADVANTAGE</div>
-      <h2>Chaos-Free Travel.<br/><span style="color:var(--yellow)">Pure Adventure.</span></h2>
-      <p>We eliminated everything that ruins group trips — midnight pickup panic, hidden commissions, and endless coordination chaos. What's left is pure adrenaline, breathtaking sunrises, and unforgettable memories.</p>
+      <div class="tmpl-section-badge" data-i18n="features_label">02 THE PLATFORM ADVANTAGE</div>
+      <h2 data-i18n="features_title">Chaos-Free Travel.<br/><span style="color:var(--yellow)">Pure Adventure.</span></h2>
+      <p data-i18n="features_sub">We eliminated everything that ruins group trips — midnight pickup panic, hidden commissions, and endless coordination chaos. What's left is pure adrenaline, breathtaking sunrises, and unforgettable memories.</p>
       
       <div class="tmpl-features">
         <div class="tmpl-feature">
           <div class="tmpl-feature-icon">📍</div>
-          <span>Live Bus<br/>Radar</span>
+          <span data-i18n="feat_gps_title">Live Bus<br/>Radar</span>
         </div>
         <div class="tmpl-feature">
           <div class="tmpl-feature-icon">💸</div>
-          <span>Zero Commission<br/>Direct UPI</span>
+          <span data-i18n="feat_upi_title">Zero Commission<br/>Direct UPI</span>
         </div>
         <div class="tmpl-feature">
           <div class="tmpl-feature-icon">🛡️</div>
-          <span>Certified<br/>Captains</span>
+          <span data-i18n="feat_safety_title">Certified<br/>Captains</span>
         </div>
         <div class="tmpl-feature">
           <div class="tmpl-feature-icon">🤖</div>
-          <span>AI WhatsApp<br/>Parser</span>
+          <span data-i18n="vbento_2_title">AI WhatsApp<br/>Parser</span>
         </div>
       </div>
     </div>
@@ -440,39 +450,33 @@
         <div class="step">
           <div class="step-num">01</div>
           <div class="step-icon">🔍</div>
-          <h3>Discover Trips</h3>
-          <p>Browse curated treks, camping trips, and weekend getaways across Maharashtra and beyond. Filter by price or destination.</p>
+          <h3 data-i18n="hiw_step1_title">Discover Trips</h3>
+          <p data-i18n="hiw_step1_desc">Browse curated treks, camping trips, and weekend getaways across Maharashtra and beyond. Filter by price or destination.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-num">02</div>
           <div class="step-icon">🎟️</div>
-          <h3>Select & Book</h3>
-          <p>Pick your preferred date batch and travel package. Add optional extras like a couple tent or non-veg meal.</p>
+          <h3 data-i18n="hiw_step2_title">Select & Book</h3>
+          <p data-i18n="hiw_step2_desc">Pick your preferred date batch and travel package. Add optional extras like a couple tent or non-veg meal.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-num">03</div>
           <div class="step-icon">📍</div>
-          <h3>Track Your Bus</h3>
-          <p>On trip day, open the app and join as a traveller. See the live bus position and share your location for easy pickup.</p>
+          <h3 data-i18n="hiw_step3_title">Track Your Bus</h3>
+          <p data-i18n="hiw_step3_desc">On trip day, open the app and join as a traveller. See the live bus position and share your location for easy pickup.</p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="step-num">04</div>
           <div class="step-icon">🏕️</div>
-          <h3>Enjoy the Adventure</h3>
-          <p>Relax, meet fellow travellers, and enjoy a stress-free trip managed end-to-end by your certified trip captain.</p>
+          <h3 data-i18n="hiw_step4_title">Enjoy the Adventure</h3>
+          <p data-i18n="hiw_step4_desc">Relax, meet fellow travellers, and enjoy a stress-free trip managed end-to-end by your certified trip captain.</p>
         </div>
       </div>
     </div>
   </section>
-
-
-
-  <!-- Removed old sections -->
-
-  <!-- Removed old sections -->
 
   <!-- ===== SECTION 03: MORE THAN TRAVEL ===== -->
   <section class="tmpl-community-section" id="community">
@@ -499,10 +503,10 @@
   <section class="tmpl-community-section" id="app-access" style="background: linear-gradient(135deg, #1a202c, #2d3748); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 6rem 8%; position: relative; overflow: hidden;">
     
     <div class="tmpl-content-left" style="z-index: 10; max-width: 500px; flex: 1; min-width: 300px; padding-bottom: 2rem;">
-      <div class="tmpl-section-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; border-color: #FFD700; margin-bottom: 1rem; display: inline-block;">05 VIP CLUB</div>
-      <h2 style="color: white; font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">Unlock Exclusive<br/>App Access 🌟</h2>
-      <p style="color: #e2e8f0; font-size: 1.2rem; margin-bottom: 2.5rem; line-height: 1.6;">Experience the future of group travel. Get early access to the Ab Toh Ghoom Le mobile app before our public launch. Book trips, track your bus live, and meet fellow travellers.</p>
-      <a href="download.html" class="tmpl-btn tmpl-btn-yellow" style="box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); display: inline-block;">Join VIP Club &rarr;</a>
+      <div class="tmpl-section-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; border-color: #FFD700; margin-bottom: 1rem; display: inline-block;" data-i18n="app_badge">05 VIP CLUB</div>
+      <h2 style="color: white; font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;" data-i18n="app_title">Unlock Exclusive<br/>App Access 🌟</h2>
+      <p style="color: #e2e8f0; font-size: 1.2rem; margin-bottom: 2.5rem; line-height: 1.6;" data-i18n="app_desc">Experience the future of group travel. Get early access to the Ab Toh Ghoom Le mobile app before our public launch. Book trips, track your bus live, and meet fellow travellers.</p>
+      <a href="download.html" class="tmpl-btn tmpl-btn-yellow" style="box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); display: inline-block;" data-i18n="app_download_apk">Join VIP Club &rarr;</a>
     </div>
 
     <div class="app-screenshots-gallery" style="flex: 1; display: flex; gap: 1.5rem; justify-content: center; min-width: 300px; z-index: 10; align-items: center;">
@@ -522,7 +526,7 @@
         <div class="logo" style="font-size:1.5rem;margin-bottom:.5rem">
           <span class="logo-hop">AbToh</span><span class="logo-on">Ghoom</span><span class="logo-travel">Le</span>
         </div>
-        <p>India's premier group travel platform.<br/>Making adventures accessible for everyone.</p>
+        <p data-i18n="footer_tagline">India's premier group travel platform.<br/>Making adventures accessible for everyone.</p>
         <div class="footer-social">
 
           <a href="mailto:AbTohGhoomLe@gmail.com" aria-label="Email">
@@ -531,22 +535,22 @@
         </div>
       </div>
       <div class="footer-links-group">
-        <h4>Vendors</h4>
-        <a href="vendor-portal.html">Vendor Portal & Dashboard</a>
-        <a href="vendor.html">Partner With Us</a>
+        <h4 data-i18n="footer_portals">Vendors</h4>
+        <a href="vendor-portal.html" data-i18n="footer_vendor_portal">Vendor Portal & Dashboard</a>
+        <a href="vendor.html" data-i18n="footer_partner">Partner With Us</a>
       </div>
       <div class="footer-links-group">
-        <h4>Travellers</h4>
-        <a href="traveller.html">Traveller Portal & Tickets</a>
-        <a href="download.html">Download App</a>
+        <h4 data-i18n="footer_quick_links">Travellers</h4>
+        <a href="traveller.html" data-i18n="footer_traveller_portal">Traveller Portal & Tickets</a>
+        <a href="download.html" data-i18n="footer_download_app">Download App</a>
       </div>
       <div class="footer-links-group">
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy Policy</a>
+        <h4 data-i18n="footer_legal">Legal</h4>
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Ab Toh Ghoom Le. Made with ❤️ in India.</p>
+      <p data-i18n="footer_rights">© 2026 Ab Toh Ghoom Le. Made with ❤️ in India.</p>
     </div>
   </footer>
 
