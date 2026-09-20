@@ -11,6 +11,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com;" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
   
   <!-- Firebase SDK via CDN -->
   <script type="module">
@@ -46,15 +47,22 @@
     <div class="pnav-inner">
       <a href="index.html" class="pnav-logo">
         <span class="brand-hop">AbToh</span><span class="brand-on">Ghoom</span><span class="brand-hop">Le</span>
-        <span class="brand-tag">Vendor Hub</span>
+        <span class="brand-tag" data-i18n="brand_tag_vendor">Vendor Hub</span>
       </a>
       <div class="pnav-actions">
-        <a href="vendor.html" class="p-btn p-btn-dark p-btn-sm">Public Info Page</a>
+        <!-- Language Selector -->
+        <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Select Language" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 0.35rem 0.75rem; font-size: 0.85rem; font-family: inherit; cursor: pointer; outline: none;">
+          <option value="en" style="background: #141414; color: #fff;">English</option>
+          <option value="hi" style="background: #141414; color: #fff;">हिंदी</option>
+          <option value="mr" style="background: #141414; color: #fff;">मराठी</option>
+          <option value="kn" style="background: #141414; color: #fff;">ಕನ್ನಡ</option>
+        </select>
+        <a href="vendor.html" class="p-btn p-btn-dark p-btn-sm" data-i18n="public_info_page">Public Info Page</a>
         <div id="vendorNavChip" style="display:none;"></div>
-        <button id="loginDemoVendorNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoVendor()">
+        <button id="loginDemoVendorNavBtn" class="p-btn p-btn-sm" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #a7f3d0;" onclick="loginAsDemoVendor()" data-i18n="btn_demo_organiser">
           ⚡ Demo Organiser
         </button>
-        <button id="vendorLoginBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginVendorWithGoogle()">
+        <button id="vendorLoginBtn" class="p-btn p-btn-yellow p-btn-sm" onclick="loginVendorWithGoogle()" data-i18n="btn_vendor_signin">
           Vendor Sign in with Google
         </button>
       </div>
@@ -89,28 +97,28 @@
           <p style="color: var(--portal-muted); font-size: 0.95rem;">Manage your published trips, passenger manifests, and live route status.</p>
         </div>
         <div class="portal-header-actions">
-          <button class="p-btn p-btn-yellow" onclick="openCreateTripModal()">+ Create New Trip</button>
-          <button class="p-btn p-btn-dark" onclick="openAiImportModal()">🤖 AI WhatsApp Import</button>
-          <a id="publicStorefrontLink" href="#" target="_blank" class="p-btn p-btn-dark">🏪 Public Storefront</a>
+          <button class="p-btn p-btn-yellow" onclick="openCreateTripModal()" data-i18n="vp_btn_create_trip">+ Create New Trip</button>
+          <button class="p-btn p-btn-dark" onclick="openAiImportModal()" data-i18n="vp_btn_ai_import">🤖 AI WhatsApp Import</button>
+          <a id="publicStorefrontLink" href="#" target="_blank" class="p-btn p-btn-dark" data-i18n="vp_tab_storefront">🏪 Public Storefront</a>
         </div>
       </div>
 
       <!-- Metrics Overview -->
       <div class="p-stats-grid">
         <div class="p-stat-card">
-          <div class="p-stat-label">Active Trips</div>
+          <div class="p-stat-label" data-i18n="vp_stat_trips">Active Trips</div>
           <div class="p-stat-val" id="vStatTotalTrips">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Confirmed Bookings</div>
+          <div class="p-stat-label" data-i18n="vp_stat_seats">Confirmed Bookings</div>
           <div class="p-stat-val" id="vStatConfirmedBookings" style="color: var(--portal-success);">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Pending Verifications</div>
+          <div class="p-stat-label" data-i18n="vp_stat_bookings">Pending Verifications</div>
           <div class="p-stat-val" id="vStatPendingBookings" style="color: var(--portal-warning);">0</div>
         </div>
         <div class="p-stat-card">
-          <div class="p-stat-label">Confirmed Revenue</div>
+          <div class="p-stat-label" data-i18n="vp_stat_revenue">Confirmed Revenue</div>
           <div class="p-stat-val" id="vStatTotalRevenue" style="color: var(--portal-primary);">₹0</div>
         </div>
       </div>
@@ -120,22 +128,22 @@
         <div style="display: flex; align-items: center; gap: 0.8rem;">
           <span style="font-size: 1.8rem; animation: pulse 1.5s infinite;">📡</span>
           <div>
-            <strong style="color: #fff; font-size: 1.05rem;">Live Captain GPS Broadcasting is ACTIVE</strong>
+            <strong style="color: #fff; font-size: 1.05rem;" data-i18n="vp_broadcast_active">Live Captain GPS Broadcasting is ACTIVE</strong>
             <p id="liveBroadcastingTripTitle" style="color: var(--portal-muted); font-size: 0.85rem; margin-top: 0.2rem;">Broadcasting location for: Harishchandragad Trek</p>
           </div>
         </div>
-        <button class="p-btn p-btn-danger p-btn-sm" onclick="stopLiveBroadcast()">■ Stop Broadcasting</button>
+        <button class="p-btn p-btn-danger p-btn-sm" onclick="stopLiveBroadcast()" data-i18n="vp_broadcast_stop">■ Stop Broadcasting</button>
       </div>
 
       <!-- Tab Buttons -->
       <div class="p-tabs">
-        <button class="p-tab-btn active" onclick="switchVendorTab('trips')" id="vTabBtn-trips">
+        <button class="p-tab-btn active" onclick="switchVendorTab('trips')" id="vTabBtn-trips" data-i18n="vp_tab_trips">
           🏕️ Trip Management
         </button>
-        <button class="p-tab-btn" onclick="switchVendorTab('bookings')" id="vTabBtn-bookings">
+        <button class="p-tab-btn" onclick="switchVendorTab('bookings')" id="vTabBtn-bookings" data-i18n="vp_tab_bookings">
           📋 Bookings & Manifests
         </button>
-        <button class="p-tab-btn" onclick="switchVendorTab('settings')" id="vTabBtn-settings">
+        <button class="p-tab-btn" onclick="switchVendorTab('settings')" id="vTabBtn-settings" data-i18n="vp_tab_settings">
           ⚙️ Settings & Storefront
         </button>
       </div>
@@ -145,7 +153,7 @@
         <div id="vendorTripsListContainer" class="v-trips-grid">
           <div style="text-align: center; padding: 3rem; color: var(--portal-muted); grid-column: 1 / -1;">
             <div class="book-spinner" style="margin: 0 auto 1rem;"></div>
-            <span>Loading your trips...</span>
+            <span data-i18n="loading_trips">Loading your trips...</span>
           </div>
         </div>
       </section>
@@ -155,21 +163,21 @@
         <!-- Filters and Export Actions -->
         <div class="portal-filter-bar">
           <div class="portal-filter-group" style="flex: 1;">
-            <input type="text" id="vBookingSearchInput" class="p-input" placeholder="🔍 Search traveller or ID..." style="max-width: 250px;" oninput="filterVendorBookings()" />
+            <input type="text" id="vBookingSearchInput" class="p-input" data-i18n-placeholder="vp_manifest_search_ph" placeholder="🔍 Search traveller or ID..." style="max-width: 250px;" oninput="filterVendorBookings()" />
             <select id="vBookingTripFilter" class="p-select" style="max-width: 220px;" onchange="filterVendorBookings()">
-              <option value="all">All Trips</option>
+              <option value="all" data-i18n="filter_all">All Trips</option>
             </select>
             <div id="vBookingStatusPills" class="portal-filter-group">
-              <button class="p-btn p-btn-dark p-btn-sm active" onclick="setBookingStatusFilter('all', this)">All</button>
-              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('pending', this)">Pending</button>
-              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('confirmed', this)">Confirmed</button>
+              <button class="p-btn p-btn-dark p-btn-sm active" onclick="setBookingStatusFilter('all', this)" data-i18n="filter_all">All</button>
+              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('pending', this)" data-i18n="step3_status_pending">Pending</button>
+              <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('confirmed', this)" data-i18n="tp_stat_completed">Confirmed</button>
               <button class="p-btn p-btn-dark p-btn-sm" onclick="setBookingStatusFilter('cancelled', this)">Cancelled</button>
             </div>
           </div>
           
           <div class="portal-filter-group">
-            <button class="p-btn p-btn-yellow p-btn-sm" onclick="exportBookingsToCSV()">📥 Export CSV</button>
-            <button class="p-btn p-btn-dark p-btn-sm" onclick="printPassengerManifest()">🖨️ Print Manifest</button>
+            <button class="p-btn p-btn-yellow p-btn-sm" onclick="exportBookingsToCSV()" data-i18n="vp_manifest_export_excel">📥 Export CSV</button>
+            <button class="p-btn p-btn-dark p-btn-sm" onclick="printPassengerManifest()" data-i18n="vp_manifest_export_pdf">🖨️ Print Manifest</button>
           </div>
         </div>
 
@@ -178,14 +186,14 @@
           <table class="p-table" id="vBookingsTable">
             <thead>
               <tr>
-                <th>Booking ID</th>
-                <th>Traveller</th>
-                <th>Trip & Package</th>
-                <th>Seats</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th data-i18n="vp_th_booking_id">Booking ID</th>
+                <th data-i18n="vp_th_traveller">Traveller</th>
+                <th data-i18n="step3_package">Trip & Package</th>
+                <th data-i18n="vp_th_seats">Seats</th>
+                <th data-i18n="vp_th_amount">Amount</th>
+                <th data-i18n="vp_th_status">Status</th>
+                <th data-i18n="tp_th_date">Date</th>
+                <th data-i18n="tp_th_actions">Actions</th>
               </tr>
             </thead>
             <tbody id="vBookingsTableBody">

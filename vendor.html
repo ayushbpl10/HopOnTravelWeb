@@ -11,6 +11,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://unpkg.com https://*.tile.openstreetmap.org wss://*.firebaseio.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com;" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
 
   <!-- Firebase SDK -->
   <script type="module">
@@ -195,12 +196,20 @@
       <span>AbToh</span><span>Ghoom</span><span>Le</span>
     </a>
     <div class="vnav-links">
-      <a href="index.html">Home</a>
-      <a href="#benefits">Benefits</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="traveller.html">Traveller Portal</a>
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="#benefits" data-i18n="nav_benefits">Benefits</a>
+      <a href="#how-it-works" data-i18n="nav_how_it_works">How It Works</a>
+      <a href="traveller.html" data-i18n="nav_traveller_portal">Traveller Portal</a>
     </div>
-    <a href="vendor-portal.html" class="vnav-cta" style="background:var(--yellow); color:#000; font-weight:800;">Vendor Portal & Login 🚀</a>
+    <div style="display:flex; gap:0.8rem; align-items:center;">
+      <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Select Language" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; font-size: 0.85rem; font-family: inherit; cursor: pointer; outline: none;">
+        <option value="en" style="background: #141414; color: #fff;">English</option>
+        <option value="hi" style="background: #141414; color: #fff;">हिंदी</option>
+        <option value="mr" style="background: #141414; color: #fff;">मराठी</option>
+        <option value="kn" style="background: #141414; color: #fff;">ಕನ್ನಡ</option>
+      </select>
+      <a href="vendor-portal.html" class="vnav-cta" style="background:var(--yellow); color:#000; font-weight:800;" data-i18n="nav_vendor_portal">Vendor Portal & Login 🚀</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -208,88 +217,88 @@
     <div class="vhero-glow"></div>
     <div class="vhero-glow2"></div>
     <div class="vhero-content">
-      <div class="vhero-badge">🔥 #1 PLATFORM FOR TREK LEADERS, CAMP HOSTS & TOUR CAPTAINS</div>
-      <h1>Fill Every Seat.<br/>Broadcast Live GPS.<br/><span>0% Commission.</span></h1>
-      <p>Stop chasing bookings across messy WhatsApp DMs and answering 50 frantic "Bus kahan tak pahunchi?" calls. Ab Toh Ghoom Le gives you an AI WhatsApp importer, real-time GPS broadcasting, digital manifests, and 100% direct UPI payments. Built by trek leaders for trek leaders.</p>
+      <div class="vhero-badge" data-i18n="vlanding_badge">🔥 #1 PLATFORM FOR TREK LEADERS, CAMP HOSTS & TOUR CAPTAINS</div>
+      <h1 data-i18n="vlanding_title">Fill Every Seat.<br/>Broadcast Live GPS.<br/><span>0% Commission.</span></h1>
+      <p data-i18n="vlanding_desc">Stop chasing bookings across messy WhatsApp DMs and answering 50 frantic "Bus kahan tak pahunchi?" calls. Ab Toh Ghoom Le gives you an AI WhatsApp importer, real-time GPS broadcasting, digital manifests, and 100% direct UPI payments. Built by trek leaders for trek leaders.</p>
       <div class="vhero-actions">
-        <a href="vendor-portal.html" class="btn-yellow">🚀 Open Vendor Dashboard &rarr;</a>
-        <a href="#benefits" class="btn-ghost">See Captain Perks &rarr;</a>
+        <a href="vendor-portal.html" class="btn-yellow" data-i18n="vlanding_open_dash">🚀 Open Vendor Dashboard &rarr;</a>
+        <a href="#benefits" class="btn-ghost" data-i18n="vlanding_see_perks">See Captain Perks &rarr;</a>
       </div>
       <div class="vhero-stats">
-        <div class="vstat"><span class="vstat-num">100%</span><div class="vstat-label">Direct UPI Earnings (Zero Cuts)</div></div>
-        <div class="vstat"><span class="vstat-num">30s</span><div class="vstat-label">AI WhatsApp Import</div></div>
-        <div class="vstat"><span class="vstat-num">Live</span><div class="vstat-label">Captain Bus Radar</div></div>
+        <div class="vstat"><span class="vstat-num">100%</span><div class="vstat-label" data-i18n="trust_commission">Direct UPI Earnings (Zero Cuts)</div></div>
+        <div class="vstat"><span class="vstat-num">30s</span><div class="vstat-label" data-i18n="vbento_2_title">AI WhatsApp Import</div></div>
+        <div class="vstat"><span class="vstat-num">Live</span><div class="vstat-label" data-i18n="trust_radar">Captain Bus Radar</div></div>
       </div>
     </div>
   </section>
 
   <!-- BENEFITS BENTO -->
   <section class="vsection vbento" id="benefits">
-    <div class="vsection-label">Why Organisers Choose Us</div>
-    <h2 class="vsection-title">Everything you need to scale,<br/>zero middlemen taking a cut</h2>
-    <p class="vsection-sub">We built this platform alongside Sahyadri trek captains, camping hosts, and luxury bus organizers. Every tool solves a real Friday-night headache.</p>
+    <div class="vsection-label" data-i18n="vlanding_bento_label">Why Organisers Choose Us</div>
+    <h2 class="vsection-title" data-i18n="vlanding_bento_title">Everything you need to scale,<br/>zero middlemen taking a cut</h2>
+    <p class="vsection-sub" data-i18n="vlanding_bento_sub">We built this platform alongside Sahyadri trek captains, camping hosts, and luxury bus organizers. Every tool solves a real Friday-night headache.</p>
 
     <div class="vbento-grid">
       <div class="vbento-card featured">
         <span class="vbento-icon">💰</span>
-        <h3>Zero Middleman Cuts. 100% Money Is Yours</h3>
-        <p>Every single rupee your travellers pay goes straight into your bank account or UPI. We don't take 15-20% cuts like corporate travel aggregators. You take all the adventure risks — you deserve 100% of the profits.</p>
+        <h3 data-i18n="vbento_1_title">Zero Middleman Cuts. 100% Money Is Yours</h3>
+        <p data-i18n="vbento_1_desc">Every single rupee your travellers pay goes straight into your bank account or UPI. We don't take 15-20% cuts like corporate travel aggregators. You take all the adventure risks — you deserve 100% of the profits.</p>
         <span class="vbento-tag">100% YOUR REVENUE</span>
       </div>
       <div class="vbento-card">
         <span class="vbento-icon">📍</span>
-        <h3>Live Captain GPS Radar</h3>
-        <p>Broadcast your bus location with one tap from any phone browser. Travellers see the bus cruising toward them in real-time. No more 50 midnight calls while navigating traffic!</p>
+        <h3 data-i18n="vbento_3_title">Live Captain GPS Radar</h3>
+        <p data-i18n="vbento_3_desc">Broadcast your bus location with one tap from any phone browser. Travellers see the bus cruising toward them in real-time. No more 50 midnight calls while navigating traffic!</p>
       </div>
       <div class="vbento-card">
         <span class="vbento-icon">🤖</span>
-        <h3>AI WhatsApp Itinerary Importer</h3>
-        <p>Copy-paste your raw WhatsApp broadcast text — our smart AI parser extracts dates, packages, pricing, inclusions, and boarding points in under 30 seconds.</p>
+        <h3 data-i18n="vbento_2_title">AI WhatsApp Itinerary Importer</h3>
+        <p data-i18n="vbento_2_desc">Copy-paste your raw WhatsApp broadcast text — our smart AI parser extracts dates, packages, pricing, inclusions, and boarding points in under 30 seconds.</p>
         <span class="vbento-tag">AI POWERED</span>
       </div>
       <div class="vbento-card">
         <span class="vbento-icon">📋</span>
-        <h3>One-Click Passenger Manifests</h3>
-        <p>Export CSV sheets or generate printable passenger manifests with traveller names, seats, and emergency contacts ready for police or forest checkpoints.</p>
+        <h3 data-i18n="vbento_5_title">One-Click Passenger Manifests</h3>
+        <p data-i18n="vbento_5_desc">Export CSV sheets or generate printable passenger manifests with traveller names, seats, and emergency contacts ready for police or forest checkpoints.</p>
       </div>
       <div class="vbento-card">
         <span class="vbento-icon">🛡️</span>
-        <h3>Verified Organiser Storefront</h3>
-        <p>Get your own custom branded storefront link (e.g. <code>?id=yourhandle</code>) with a verified badge, Instagram link, custom terms, and direct UPI QR.</p>
+        <h3 data-i18n="vbento_4_title">Direct UPI Bank Payments</h3>
+        <p data-i18n="vbento_4_desc">Travellers pay directly to your Google Pay, PhonePe, or Paytm UPI ID. Verify payment screenshots and approve bookings in 1 click.</p>
       </div>
       <div class="vbento-card">
         <span class="vbento-icon">⚡</span>
-        <h3>Real-Time Seat Management</h3>
-        <p>Instant booking synchronization across batches. Manage multi-city boarding points (Pune, Mumbai, Base Village) without double-booking errors.</p>
+        <h3 data-i18n="vbento_6_title">Automated WhatsApp Notifications</h3>
+        <p data-i18n="vbento_6_desc">Send instant confirmation messages and boarding instructions directly to travellers on WhatsApp without typing manually.</p>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
   <section class="vsection vhow" id="how-it-works">
-    <div class="vsection-label">The Process</div>
-    <h2 class="vsection-title">List your first trip in<br/>under 5 minutes</h2>
+    <div class="vsection-label" data-i18n="vhow_label">The Process</div>
+    <h2 class="vsection-title" data-i18n="vhow_title">List your first trip in<br/>under 5 minutes</h2>
 
     <div class="vhow-steps">
       <div class="vhow-step">
         <div class="vhow-num">01</div>
-        <h3>Sign In with Google</h3>
-        <p>Open the Vendor Portal and log in with your Google account. That's your identity, verified instantly.</p>
+        <h3 data-i18n="vhow_s1_title">Sign In with Google</h3>
+        <p data-i18n="vhow_s1_desc">Open the Vendor Portal and log in with your Google account. That's your identity, verified instantly.</p>
       </div>
       <div class="vhow-step">
         <div class="vhow-num">02</div>
-        <h3>Create Your Trip</h3>
-        <p>Fill in destination, dates, packages, and pricing. Or paste a description and let AI do it for you.</p>
+        <h3 data-i18n="vhow_s2_title">Create Your Trip</h3>
+        <p data-i18n="vhow_s2_desc">Fill in destination, dates, packages, and pricing. Or paste a description and let AI do it for you.</p>
       </div>
       <div class="vhow-step">
         <div class="vhow-num">03</div>
-        <h3>Go Live Instantly</h3>
-        <p>Your trip appears on the main app for thousands of travellers to discover, filter, and book.</p>
+        <h3 data-i18n="vhow_s3_title">Go Live Instantly</h3>
+        <p data-i18n="vhow_s3_desc">Your trip appears on the main app for thousands of travellers to discover, filter, and book.</p>
       </div>
       <div class="vhow-step">
         <div class="vhow-num">04</div>
-        <h3>Manage & Track</h3>
-        <p>On trip day, share your live location. Passengers track your bus in real-time. Zero phone calls needed.</p>
+        <h3 data-i18n="vhow_s4_title">Manage & Track</h3>
+        <p data-i18n="vhow_s4_desc">On trip day, share your live location. Passengers track your bus in real-time. Zero phone calls needed.</p>
       </div>
     </div>
   </section>
@@ -298,32 +307,32 @@
   <section class="vsection vscreens" id="vendor-app">
     <div class="vscreens-inner">
       <div class="vscreens-text">
-        <div class="vsection-label">The Vendor Experience</div>
-        <h2 class="vsection-title">Your command<br/>centre, in your<br/>pocket</h2>
+        <div class="vsection-label" data-i18n="vlanding_bento_label">The Vendor Experience</div>
+        <h2 class="vsection-title" data-i18n="vlanding_bento_title">Your command<br/>centre, in your<br/>pocket</h2>
         <div class="vfeature-list">
           <div class="vfeature-item">
             <div class="vfeature-emoji">🎟️</div>
             <div>
-              <h4>Live Booking Feed</h4>
-              <p>See new bookings appear in real-time. Every passenger's name, seat count, and contact — right there.</p>
+              <h4 data-i18n="vp_tab_bookings">Live Booking Feed</h4>
+              <p data-i18n="dual_vendor_p1_desc">Travellers pay straight to your UPI. Verify payment screenshots and approve bookings in 1 tap.</p>
             </div>
           </div>
           <div class="vfeature-item">
             <div class="vfeature-emoji">💬</div>
             <div>
-              <h4>Direct Traveller Contact</h4>
-              <p>Reach any passenger instantly via email for payment confirmation, updates, or last-minute changes.</p>
+              <h4 data-i18n="vbento_6_title">Automated WhatsApp Notifications</h4>
+              <p data-i18n="vbento_6_desc">Send instant confirmation messages and boarding instructions directly to travellers on WhatsApp without typing manually.</p>
             </div>
           </div>
           <div class="vfeature-item">
             <div class="vfeature-emoji">🗺️</div>
             <div>
-              <h4>Share Your Live Location</h4>
-              <p>One tap to start broadcasting your real-time GPS position to all passengers on the day of departure.</p>
+              <h4 data-i18n="vbento_3_title">Share Your Live Location</h4>
+              <p data-i18n="vbento_3_desc">One tap to start broadcasting your real-time GPS position to all passengers on the day of departure.</p>
             </div>
           </div>
         </div>
-        <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="btn-yellow" style="margin-top: 2.5rem; display: inline-flex;">Get Vendor Access →</a>
+        <a href="vendor-portal.html" class="btn-yellow" style="margin-top: 2.5rem; display: inline-flex;" data-i18n="vlanding_open_dash">Get Vendor Access →</a>
       </div>
 
       <div class="vscreens-phones">
@@ -335,9 +344,9 @@
 
   <!-- TRUST / EARLY VENDORS -->
   <section class="vtrust">
-    <div class="vsection-label">Early Vendor Stories</div>
-    <h2 class="vsection-title" style="margin-bottom: 0.5rem;">Vendors who joined early<br/>are scaling fast</h2>
-    <p style="color:#555; font-size: 1rem;">Join the pioneers already growing their travel business on our platform.</p>
+    <div class="vsection-label" data-i18n="comm_badge">Early Vendor Stories</div>
+    <h2 class="vsection-title" style="margin-bottom: 0.5rem;" data-i18n="comm_title">Vendors who joined early<br/>are scaling fast</h2>
+    <p style="color:#555; font-size: 1rem;" data-i18n="comm_desc">Join the pioneers already growing their travel business on our platform.</p>
 
     <div class="vtrust-cards">
       <div class="vtrust-card">
@@ -379,13 +388,13 @@
   <!-- CTA -->
   <section class="vcta">
     <div class="vcta-glow"></div>
-    <h2>Ready to grow your<br/><span>travel business?</span></h2>
-    <p>Join India's fastest-growing group travel platform. List your first trip today — it's free during beta.</p>
+    <h2 data-i18n="vlanding_cta_title">Ready to grow your<br/><span>travel business?</span></h2>
+    <p data-i18n="vlanding_cta_desc">Join India's fastest-growing group travel platform. List your first trip today — it's free during beta.</p>
     <div class="vcta-actions">
-      <a href="mailto:abtohghoomle@gmail.com?subject=Vendor%20Partnership%20Request" class="btn-yellow" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">Apply to Become a Vendor →</a>
-      <a href="index.html" class="btn-ghost">Explore the App First</a>
+      <a href="vendor-portal.html" class="btn-yellow" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;" data-i18n="vlanding_open_dash">Open Vendor Dashboard →</a>
+      <a href="index.html" class="btn-ghost" data-i18n="btn_back_home">Explore the App First</a>
     </div>
-    <p class="vcta-note">📩 Email us at abtohghoomle@gmail.com &nbsp;·&nbsp; We respond within 24 hours</p>
+    <p class="vcta-note" data-i18n="footer_love">Built with ❤️ for Indian Travellers & Organisers</p>
   </section>
 
   <!-- FOOTER -->
@@ -393,8 +402,8 @@
     <a href="index.html" class="vfooter-logo">
       <span>AbToh</span><span>Ghoom</span>Le
     </a>
-    <p>© 2026 Ab Toh Ghoom Le. Made with ❤️ in India.</p>
-    <a href="privacy.html" style="color:#444; font-size: 0.85rem; text-decoration: none;">Privacy Policy</a>
+    <p data-i18n="footer_rights">© 2026 Ab Toh Ghoom Le. Made with ❤️ in India.</p>
+    <a href="privacy.html" style="color:#444; font-size: 0.85rem; text-decoration: none;" data-i18n="footer_privacy">Privacy Policy</a>
   </footer>
 
   <script src="vendor.js"></script>
