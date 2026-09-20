@@ -1234,7 +1234,7 @@ body {
   color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: 12px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-family: inherit;
   box-sizing: border-box;
   transition: border-color 0.2s;
@@ -1611,6 +1611,15 @@ body {
   .portal-filter-group input, .portal-filter-group select {
     flex: 1;
     max-width: 100% !important;
+  }
+
+  /* Touch target sizes & preventing iOS zoom */
+  .p-input, .p-select, .p-textarea {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+  .p-btn {
+    min-height: 40px;
   }
 }
 
