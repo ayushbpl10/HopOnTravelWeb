@@ -335,7 +335,21 @@ async function submitTripPageBooking() {
 
   // 4. reCAPTCHA Verification with Math Captcha Fallback
   let recaptchaToken = null;
-  if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+  if (window.grecaptcha && typeof window.grecaptcha.execute === 'function') {
+    try {
+      recaptchaToken = await new Promise((resolve) => {
+        window.grecaptcha.ready(async () => {
+          try {
+            const t = await window.grecaptcha.execute('6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM', { action: 'booking' });
+            resolve(t);
+          } catch (err) {
+            console.warn('grecaptcha.execute failed:', err);
+            resolve(null);
+          }
+        });
+      });
+    } catch (_) {}
+  } else if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
     try {
       recaptchaToken = window.grecaptcha.getResponse();
     } catch (_) {}
@@ -350,8 +364,12 @@ async function submitTripPageBooking() {
       });
       const verifyData = await verifyRes.json();
       if (!verifyData.success) {
-        if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset();
-        return alert('reCAPTCHA security check failed. Please complete the reCAPTCHA again.');
+        console.warn('reCAPTCHA verification returned unsuccessful:', verifyData);
+        if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) {
+          const fallback = document.getElementById('tbFallbackCaptchaBlock');
+          if (fallback) fallback.style.display = 'flex';
+          return alert(`Security check failed. Hint: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
+        }
       }
     } catch (netErr) {
       console.warn('reCAPTCHA verification endpoint error:', netErr);
@@ -362,11 +380,11 @@ async function submitTripPageBooking() {
       }
     }
   } else {
-    // If reCAPTCHA was not ticked or in test/headless mode
+    // If headless/offline or no reCAPTCHA token returned
     if (captchaAns !== window._tbCaptchaA + window._tbCaptchaB) {
       const fallback = document.getElementById('tbFallbackCaptchaBlock');
       if (fallback) fallback.style.display = 'flex';
-      return alert(`Please complete the reCAPTCHA security check, or enter: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
+      return alert(`Please complete the security check: ${window._tbCaptchaA} + ${window._tbCaptchaB} = ?`);
     }
   }
 

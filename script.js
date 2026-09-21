@@ -237,7 +237,21 @@ async function submitWebBooking() {
 
   // 4. reCAPTCHA Verification with Math Captcha Fallback
   let recaptchaToken = null;
-  if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
+  if (window.grecaptcha && typeof window.grecaptcha.execute === 'function') {
+    try {
+      recaptchaToken = await new Promise((resolve) => {
+        window.grecaptcha.ready(async () => {
+          try {
+            const t = await window.grecaptcha.execute('6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM', { action: 'booking' });
+            resolve(t);
+          } catch (err) {
+            console.warn('grecaptcha.execute failed:', err);
+            resolve(null);
+          }
+        });
+      });
+    } catch (_) {}
+  } else if (window.grecaptcha && typeof window.grecaptcha.getResponse === 'function') {
     try {
       recaptchaToken = window.grecaptcha.getResponse();
     } catch (_) {}
@@ -252,12 +266,15 @@ async function submitWebBooking() {
       });
       const verifyData = await verifyRes.json();
       if (!verifyData.success) {
-        if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset();
-        return alert('reCAPTCHA security check failed. Please complete the reCAPTCHA again.');
+        console.warn('reCAPTCHA verification returned unsuccessful:', verifyData);
+        if (captchaAns !== _captchaA + _captchaB) {
+          const fallback = document.getElementById('fallbackCaptchaBlock');
+          if (fallback) fallback.style.display = 'block';
+          return alert(`Security check failed. Hint: ${_captchaA} + ${_captchaB} = ?`);
+        }
       }
     } catch (netErr) {
       console.warn('reCAPTCHA verification endpoint error:', netErr);
-      // Fallback to math captcha if reCAPTCHA verification fails to reach network
       if (captchaAns !== _captchaA + _captchaB) {
         const fallback = document.getElementById('fallbackCaptchaBlock');
         if (fallback) fallback.style.display = 'block';
@@ -265,11 +282,11 @@ async function submitWebBooking() {
       }
     }
   } else {
-    // If user hasn't ticked reCAPTCHA or in test/headless mode
+    // If headless/offline or no reCAPTCHA token returned
     if (captchaAns !== _captchaA + _captchaB) {
       const fallback = document.getElementById('fallbackCaptchaBlock');
       if (fallback) fallback.style.display = 'block';
-      return alert(`Please complete the reCAPTCHA security check, or enter the security answer: ${_captchaA} + ${_captchaB} = ?`);
+      return alert(`Please complete the security check: ${_captchaA} + ${_captchaB} = ?`);
     }
   }
 

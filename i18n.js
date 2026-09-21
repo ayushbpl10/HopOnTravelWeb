@@ -487,7 +487,8 @@ const AppTranslations = {
     geo_banner_mr_text: "📍 Maharashtra detected • Website is displayed in Marathi.",
     geo_banner_kn_text: "📍 Karnataka detected • Website is displayed in Kannada.",
     geo_switch_to_en: "🌐 Switch to English",
-    geo_banner_dismiss: "✕"
+    geo_banner_dismiss: "✕",
+    recaptcha_badge_text: "Protected by Google reCAPTCHA"
   },
 
   hi: {
@@ -972,7 +973,8 @@ const AppTranslations = {
     geo_banner_mr_text: "📍 महाराष्ट्र स्थान मिला • वेबसाइट मराठी में दिखाई जा रही है।",
     geo_banner_kn_text: "📍 कर्नाटक स्थान मिला • वेबसाइट कन्नड़ में दिखाई जा रही है।",
     geo_switch_to_en: "🌐 Switch to English / अंग्रेज़ी में देखें",
-    geo_banner_dismiss: "✕"
+    geo_banner_dismiss: "✕",
+    recaptcha_badge_text: "गूगल reCAPTCHA द्वारा सुरक्षित"
   },
 
   mr: {
@@ -1457,7 +1459,8 @@ const AppTranslations = {
     geo_banner_mr_text: "📍 महाराष्ट्र स्थान आढळले • वेबसाइट मराठीत दाखवली आहे.",
     geo_banner_kn_text: "📍 कर्नाटक स्थान आढळले • वेबसाइट कन्नडमध्ये दाखवली आहे.",
     geo_switch_to_en: "🌐 Switch to English / इंग्रजीत पहा",
-    geo_banner_dismiss: "✕"
+    geo_banner_dismiss: "✕",
+    recaptcha_badge_text: "गुगल reCAPTCHA द्वारे सुरक्षित"
   },
 
   kn: {
@@ -1942,7 +1945,8 @@ const AppTranslations = {
     geo_banner_mr_text: "📍 ಮಹಾರಾಷ್ಟ್ರ ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ • ವೆಬ್‌ಸೈಟ್ ಮರಾಠಿಯಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ.",
     geo_banner_kn_text: "📍 ಕರ್ನಾಟಕ ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ • ವೆಬ್‌ಸೈಟ್ ಕನ್ನಡದಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ.",
     geo_switch_to_en: "🌐 Switch to English / ಇಂಗ್ಲಿಷ್‌ಗೆ ಬದಲಾಯಿಸಿ",
-    geo_banner_dismiss: "✕"
+    geo_banner_dismiss: "✕",
+    recaptcha_badge_text: "ಗೂಗಲ್ reCAPTCHA ದಿಂದ ಸುರಕ್ಷಿತ"
   }
 };
 
