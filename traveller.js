@@ -606,8 +606,8 @@ function initLeafletMap(lat, lng) {
   if (!_trackingMap) {
     _trackingMap = L.map('leafletMap').setView([lat, lng], 13);
 
-    // Dark styled tiles (CartoDB Dark Matter)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    // Dark styled tiles (CartoDB Dark Matter with official registered API key)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_3s8w_1_cf3f4008cc7a18c889b10e3d', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19
