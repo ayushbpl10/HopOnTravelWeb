@@ -481,7 +481,13 @@ const AppTranslations = {
     dl_perk2_desc: "Track your trip's bus in real-time on trip departure day.",
     dl_perk3_title: "Founding Member Badge",
     dl_perk3_desc: "Be forever recognized as an original Ab Toh Ghoom Le explorer.",
-    dl_footer_text: "© 2026 Ab Toh Ghoom Le · Made with ❤️ in India ·"
+    dl_footer_text: "© 2026 Ab Toh Ghoom Le · Made with ❤️ in India ·",
+
+    // Geo-Location Regional Language Banner
+    geo_banner_mr_text: "📍 Maharashtra detected • Website is displayed in Marathi.",
+    geo_banner_kn_text: "📍 Karnataka detected • Website is displayed in Kannada.",
+    geo_switch_to_en: "🌐 Switch to English",
+    geo_banner_dismiss: "✕"
   },
 
   hi: {
@@ -960,7 +966,13 @@ const AppTranslations = {
     dl_perk2_desc: "ट्रिप प्रस्थान के दिन अपनी बस को रीयल-टाइम में ट्रैक करें।",
     dl_perk3_title: "संस्थापक सदस्य बैज",
     dl_perk3_desc: "अब तो घूम ले के मूल एक्सप्लोरर के रूप में हमेशा पहचाने जाएं।",
-    dl_footer_text: "© 2026 अब तो घूम ले · भारत में ❤️ से निर्मित ·"
+    dl_footer_text: "© 2026 अब तो घूम ले · भारत में ❤️ से निर्मित ·",
+
+    // Geo-Location Regional Language Banner (hi)
+    geo_banner_mr_text: "📍 महाराष्ट्र स्थान मिला • वेबसाइट मराठी में दिखाई जा रही है।",
+    geo_banner_kn_text: "📍 कर्नाटक स्थान मिला • वेबसाइट कन्नड़ में दिखाई जा रही है।",
+    geo_switch_to_en: "🌐 Switch to English / अंग्रेज़ी में देखें",
+    geo_banner_dismiss: "✕"
   },
 
   mr: {
@@ -1439,7 +1451,13 @@ const AppTranslations = {
     dl_perk2_desc: "सहल निघण्याच्या दिवशी तुमच्या गाडीचे रिअल-टाइम लोकेशन ट्रॅक करा.",
     dl_perk3_title: "संस्थापक सदस्य बॅज",
     dl_perk3_desc: "आता तर फिरून घे चे मूळ अन्वेषक म्हणून कायम ओळखले जा.",
-    dl_footer_text: "© 2026 आता तर फिरून घे · भारतात ❤️ ने बनवले ·"
+    dl_footer_text: "© 2026 आता तर फिरून घे · भारतात ❤️ ने बनवले ·",
+
+    // Geo-Location Regional Language Banner (mr)
+    geo_banner_mr_text: "📍 महाराष्ट्र स्थान आढळले • वेबसाइट मराठीत दाखवली आहे.",
+    geo_banner_kn_text: "📍 कर्नाटक स्थान आढळले • वेबसाइट कन्नडमध्ये दाखवली आहे.",
+    geo_switch_to_en: "🌐 Switch to English / इंग्रजीत पहा",
+    geo_banner_dismiss: "✕"
   },
 
   kn: {
@@ -1918,19 +1936,29 @@ const AppTranslations = {
     dl_perk2_desc: "ಪ್ರವಾಸದ ದಿನದಂದು ನಿಮ್ಮ ಬಸ್ ಅನ್ನು ನೈಜ ಸಮಯದಲ್ಲಿ ಟ್ರ್ಯಾಕ್ ಮಾಡಿ.",
     dl_perk3_title: "ಸಂಸ್ಥಾಪಕ ಸದಸ್ಯ ಬ್ಯಾಡ್ಜ್",
     dl_perk3_desc: "ಈಗಲಾದರೂ ತಿರುಗಾಡು ನ ಮೂಲ ಪರಿಶೋಧಕರಾಗಿ ಶಾಶ್ವತವಾಗಿ ಗುರುತಿಸಲ್ಪಡಿ.",
-    dl_footer_text: "© 2026 ಈಗಲಾದರೂ ತಿರುಗಾಡು · ಭಾರತದಲ್ಲಿ ❤️ ನೊಂದಿಗೆ ನಿರ್ಮಿಸಲಾಗಿದೆ ·"
+    dl_footer_text: "© 2026 ಈಗಲಾದರೂ ತಿರುಗಾಡು · ಭಾರತದಲ್ಲಿ ❤️ ನೊಂದಿಗೆ ನಿರ್ಮಿಸಲಾಗಿದೆ ·",
+
+    // Geo-Location Regional Language Banner (kn)
+    geo_banner_mr_text: "📍 ಮಹಾರಾಷ್ಟ್ರ ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ • ವೆಬ್‌ಸೈಟ್ ಮರಾಠಿಯಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ.",
+    geo_banner_kn_text: "📍 ಕರ್ನಾಟಕ ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ • ವೆಬ್‌ಸೈಟ್ ಕನ್ನಡದಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ.",
+    geo_switch_to_en: "🌐 Switch to English / ಇಂಗ್ಲಿಷ್‌ಗೆ ಬದಲಾಯಿಸಿ",
+    geo_banner_dismiss: "✕"
   }
 };
 
 /**
  * Change active language across the DOM
  * @param {string} lang - 'en' | 'hi' | 'mr' | 'kn'
+ * @param {boolean} [isManual] - whether user explicitly triggered this change
  */
-function changeLanguage(lang) {
+function changeLanguage(lang, isManual = false) {
   const selectedLang = AppTranslations[lang] ? lang : 'en';
   if (typeof localStorage !== 'undefined') {
     try {
       localStorage.setItem('site_lang', selectedLang);
+      if (isManual) {
+        localStorage.setItem('site_lang_manual', selectedLang);
+      }
     } catch (_) {}
   }
 
@@ -1940,6 +1968,10 @@ function changeLanguage(lang) {
   document.querySelectorAll('select.lang-select-dropdown, #langSelect').forEach(sel => {
     sel.value = selectedLang;
   });
+
+  if (isManual && selectedLang === 'en') {
+    hideGeoHighlightBanner();
+  }
 
   // 1. Text & HTML content
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1972,6 +2004,190 @@ function changeLanguage(lang) {
 }
 
 /**
+ * Show the highlighted banner inviting the user to translate/switch to English
+ * @param {string} regionalLang - 'mr' | 'kn'
+ * @param {string} regionName - 'Maharashtra' | 'Karnataka'
+ */
+function showGeoHighlightBanner(regionalLang, regionName, force = false) {
+  if (typeof document === 'undefined') return;
+
+  let isTestParam = false;
+  if (typeof window !== 'undefined' && window.location) {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      isTestParam = p.has('region') || p.has('state') || p.has('lang');
+    } catch (_) {}
+  }
+
+  // Don't show if user already dismissed, unless forced or simulating region
+  if (!force && !isTestParam) {
+    try {
+      if (sessionStorage.getItem('geo_banner_dismissed') === 'true') return;
+      if (localStorage.getItem('site_lang_manual') === 'en') return;
+    } catch (_) {}
+  }
+
+  let existing = document.getElementById('geoLangBanner');
+  if (!existing) {
+    existing = document.createElement('div');
+    existing.id = 'geoLangBanner';
+    existing.className = 'geo-lang-banner';
+    document.body.appendChild(existing);
+  }
+
+  const isMarathi = regionalLang === 'mr';
+  const labelText = isMarathi
+    ? (AppTranslations.mr.geo_banner_mr_text || '📍 महाराष्ट्र स्थान आढळले • वेबसाइट मराठीत दाखवली आहे.')
+    : (AppTranslations.kn.geo_banner_kn_text || '📍 ಕರ್ನಾಟಕ ಸ್ಥಳ ಪತ್ತೆಯಾಗಿದೆ • ವೆಬ್‌ಸೈಟ್ ಕನ್ನಡದಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತಿದೆ.');
+  const btnText = isMarathi
+    ? (AppTranslations.mr.geo_switch_to_en || '🌐 Switch to English / इंग्रजीत पहा')
+    : (AppTranslations.kn.geo_switch_to_en || '🌐 Switch to English / ಇಂಗ್ಲಿಷ್‌ಗೆ ಬದಲಾಯಿಸಿ');
+
+  existing.innerHTML = `
+    <div class="geo-lang-text">
+      <span>${labelText}</span>
+    </div>
+    <button type="button" class="geo-lang-btn" id="geoSwitchToEnBtn" onclick="switchToEnglish()">
+      ${btnText}
+    </button>
+    <button type="button" class="geo-lang-close" aria-label="Dismiss" onclick="hideGeoHighlightBanner()">✕</button>
+  `;
+
+  // Highlight language selector in navbar
+  document.querySelectorAll('select.lang-select-dropdown, #langSelect').forEach(sel => {
+    sel.classList.add('lang-select-highlight');
+  });
+}
+
+/**
+ * Dismiss the geo highlight banner
+ */
+function hideGeoHighlightBanner() {
+  if (typeof document === 'undefined') return;
+  const banner = document.getElementById('geoLangBanner');
+  if (banner) {
+    banner.style.animation = 'geoSlideDown 0.3s ease reverse forwards';
+    setTimeout(() => {
+      if (banner.parentNode) banner.parentNode.removeChild(banner);
+    }, 300);
+  }
+  try {
+    sessionStorage.setItem('geo_banner_dismissed', 'true');
+  } catch (_) {}
+  document.querySelectorAll('select.lang-select-dropdown, #langSelect').forEach(sel => {
+    sel.classList.remove('lang-select-highlight');
+  });
+}
+
+/**
+ * Directly switch to English and record user preference
+ */
+function switchToEnglish() {
+  try {
+    localStorage.setItem('site_lang_manual', 'en');
+  } catch (_) {}
+  changeLanguage('en', true);
+  hideGeoHighlightBanner();
+}
+
+/**
+ * Detect user location (Maharashtra -> 'mr', Karnataka -> 'kn', others -> 'en')
+ * and apply language setting accordingly.
+ */
+async function detectLocationAndSetLanguage() {
+  // 1. Allow URL query overrides (?region=MH, ?region=KA, ?lang=mr, ?lang=kn)
+  let urlLang = null;
+  let urlRegion = null;
+  if (typeof window !== 'undefined' && window.location) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      urlLang = params.get('lang');
+      urlRegion = params.get('region') || params.get('state');
+    } catch (_) {}
+  }
+
+  if (urlLang && AppTranslations[urlLang]) {
+    changeLanguage(urlLang, false);
+    if (urlLang === 'mr' || urlLang === 'kn') {
+      showGeoHighlightBanner(urlLang, urlLang === 'mr' ? 'Maharashtra' : 'Karnataka');
+    }
+    return;
+  }
+
+  if (urlRegion) {
+    const uReg = urlRegion.toUpperCase();
+    if (uReg === 'MH' || uReg.includes('MAHA')) {
+      changeLanguage('mr', false);
+      showGeoHighlightBanner('mr', 'Maharashtra');
+      return;
+    } else if (uReg === 'KA' || uReg.includes('KARN')) {
+      changeLanguage('kn', false);
+      showGeoHighlightBanner('kn', 'Karnataka');
+      return;
+    } else {
+      changeLanguage('en', false);
+      return;
+    }
+  }
+
+  // 2. If user previously made an explicit manual language selection, respect it
+  let manualLang = null;
+  try {
+    manualLang = localStorage.getItem('site_lang_manual');
+  } catch (_) {}
+
+  if (manualLang && AppTranslations[manualLang]) {
+    changeLanguage(manualLang, false);
+    if (manualLang === 'mr' || manualLang === 'kn') {
+      showGeoHighlightBanner(manualLang, manualLang === 'mr' ? 'Maharashtra' : 'Karnataka');
+    }
+    return;
+  }
+
+  // 3. Query server /api/geo-lang or client-side geo signals
+  let detectedLang = 'en';
+  let isRegional = false;
+  let regionName = 'Other';
+
+  try {
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 1200) : null;
+    const res = await fetch('/api/geo-lang', {
+      signal: controller ? controller.signal : undefined
+    });
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const geo = await res.json();
+      if (geo && geo.lang) {
+        detectedLang = geo.lang;
+        isRegional = !!geo.isRegional;
+        regionName = geo.regionName || regionName;
+      }
+    }
+  } catch (err) {
+    // Fallback: check browser timezone / language
+    try {
+      const navLangs = (navigator.languages || [navigator.language || '']).map(l => (l || '').toLowerCase());
+      if (navLangs.some(l => l.startsWith('mr'))) {
+        detectedLang = 'mr';
+        isRegional = true;
+        regionName = 'Maharashtra';
+      } else if (navLangs.some(l => l.startsWith('kn'))) {
+        detectedLang = 'kn';
+        isRegional = true;
+        regionName = 'Karnataka';
+      }
+    } catch (_) {}
+  }
+
+  changeLanguage(detectedLang, false);
+
+  if (isRegional && (detectedLang === 'mr' || detectedLang === 'kn')) {
+    showGeoHighlightBanner(detectedLang, regionName);
+  }
+}
+
+/**
  * Retrieve translation for a specific key
  * @param {string} key
  * @param {string} [fallback]
@@ -1988,26 +2204,36 @@ function t(key, fallback = '') {
   return AppTranslations[lang][key] !== undefined ? AppTranslations[lang][key] : (fallback || key);
 }
 
-// Auto-initialize language on DOM load
+// Auto-initialize language and geo detection on DOM load
 if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
-    let initialLang = 'en';
-    if (typeof localStorage !== 'undefined') {
-      try {
-        initialLang = localStorage.getItem('site_lang') || 'en';
-      } catch (_) {}
-    }
-    changeLanguage(initialLang);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      detectLocationAndSetLanguage();
+    });
+  } else {
+    detectLocationAndSetLanguage();
+  }
 }
 
 // Expose globally
 if (typeof window !== 'undefined') {
   window.AppTranslations = AppTranslations;
   window.changeLanguage = changeLanguage;
+  window.showGeoHighlightBanner = showGeoHighlightBanner;
+  window.hideGeoHighlightBanner = hideGeoHighlightBanner;
+  window.switchToEnglish = switchToEnglish;
+  window.detectLocationAndSetLanguage = detectLocationAndSetLanguage;
   window.t = t;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { AppTranslations, changeLanguage, t };
+  module.exports = {
+    AppTranslations,
+    changeLanguage,
+    showGeoHighlightBanner,
+    hideGeoHighlightBanner,
+    switchToEnglish,
+    detectLocationAndSetLanguage,
+    t
+  };
 }
