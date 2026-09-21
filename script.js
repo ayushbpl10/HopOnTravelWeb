@@ -336,7 +336,14 @@ async function submitWebBooking() {
       createdAt: Date.now(),
       bookingId,
       vendorId: vendorId || null,
-      source: 'website'
+      source: 'website',
+      captchaVerified: true,
+      securityVerification: {
+        provider: recaptchaToken ? 'google_recaptcha_v3' : 'math_captcha',
+        verified: true,
+        siteKey: '6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM',
+        timestamp: Date.now()
+      }
     };
 
     await addDoc(collection(db, 'bookings'), bookingData);

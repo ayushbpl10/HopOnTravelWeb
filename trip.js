@@ -428,7 +428,14 @@ async function submitTripPageBooking() {
       createdAt: Date.now(),
       bookingId,
       vendorId: tripData.vendorId || null,
-      source: 'web_trip_page'
+      source: 'web_trip_page',
+      captchaVerified: true,
+      securityVerification: {
+        provider: recaptchaToken ? 'google_recaptcha_v3' : 'math_captcha',
+        verified: true,
+        siteKey: '6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM',
+        timestamp: Date.now()
+      }
     };
 
     if (db && collection && addDoc) {
