@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Vendor & Organiser Documentation Hub – Ab Toh Ghoom Le</title>
-  <meta name="description" content="Comprehensive interactive guide for tour operators and trip organisers to onboard, publish adventures, manage passenger manifests, and broadcast live GPS on Ab Toh Ghoom Le." />
+  <meta name="description" content="Official interactive guide for tour operators and trip organisers. Learn how to navigate and use the Ab Toh Ghoom Le website hub and mobile app: 0% commission, AI WhatsApp importer, live GPS radar, passenger manifests, and QR check-in." />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -43,6 +43,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 1rem;
     }
     .doc-logo {
       text-decoration: none;
@@ -51,6 +52,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-shrink: 0;
     }
     .doc-logo span:first-child { color: #fff; }
     .doc-logo span:nth-child(2) { color: #00b0ff; }
@@ -105,16 +107,26 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 22px rgba(255, 184, 0, 0.5);
     }
+    .doc-btn-cyan {
+      background: linear-gradient(135deg, #00b0ff, #0081cb);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 176, 255, 0.35);
+    }
+    .doc-btn-cyan:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(0, 176, 255, 0.5);
+    }
 
     /* MAIN CONTAINER & SIDEBAR LAYOUT */
     .docs-wrapper {
       flex: 1;
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       width: 100%;
-      padding: 6rem 1.5rem 4rem;
+      padding: 5.8rem 1.5rem 4rem;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 290px 1fr;
       gap: 2.5rem;
       align-items: flex-start;
     }
@@ -122,14 +134,14 @@
     /* SIDEBAR */
     .docs-sidebar {
       position: sticky;
-      top: 90px;
+      top: 85px;
       background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       padding: 1.5rem 1.2rem;
-      max-height: calc(100vh - 120px);
+      max-height: calc(100vh - 110px);
       overflow-y: auto;
     }
     .sidebar-title {
@@ -138,23 +150,31 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: #00b0ff;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+    .sidebar-section-divider {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 1.2rem 0 0.5rem 0.5rem;
     }
     .sidebar-nav {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.3rem;
     }
     .sidebar-nav a {
       color: #94a3b8;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      padding: 0.55rem 0.85rem;
+      padding: 0.5rem 0.8rem;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -163,7 +183,7 @@
     }
     .sidebar-nav a:hover, .sidebar-nav a.active {
       color: #fff;
-      background: rgba(0, 176, 255, 0.1);
+      background: rgba(0, 176, 255, 0.12);
       border-left: 3px solid #00b0ff;
     }
 
@@ -174,13 +194,13 @@
 
     /* HERO BANNER */
     .doc-hero {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.75));
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 24px;
       padding: clamp(1.8rem, 5vw, 3rem);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -188,7 +208,7 @@
       content: "";
       position: absolute;
       top: -50px; right: -50px;
-      width: 200px; height: 200px;
+      width: 250px; height: 250px;
       background: radial-gradient(circle, rgba(255, 184, 0, 0.15), transparent 70%);
       pointer-events: none;
     }
@@ -218,21 +238,31 @@
     .doc-hero p {
       color: #cbd5e1;
       font-size: 1.05rem;
-      max-width: 750px;
+      max-width: 780px;
       line-height: 1.7;
       margin-bottom: 1.8rem;
     }
-    
-    /* SEARCH / FILTER */
+
+    /* SEARCH & FILTER CONTROLS */
+    .doc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
     .doc-search-box {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: rgba(6, 9, 19, 0.7);
+      background: rgba(6, 9, 19, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 50px;
-      padding: 0.6rem 1.25rem;
-      max-width: 550px;
+      padding: 0.65rem 1.25rem;
+      max-width: 580px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .doc-search-box:focus-within {
+      border-color: #00b0ff;
+      box-shadow: 0 0 15px rgba(0, 176, 255, 0.25);
     }
     .doc-search-box input {
       background: transparent;
@@ -246,8 +276,61 @@
     .doc-search-box input::placeholder {
       color: #64748b;
     }
+    .search-kbd {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      font-family: monospace;
+    }
+    .search-status-bar {
+      font-size: 0.85rem;
+      color: #38bdf8;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
 
-    /* QUICK PILLS (MOBILE / TABLET) */
+    /* PLATFORM FILTER TABS */
+    .platform-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .p-tab-btn {
+      padding: 0.55rem 1.1rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .p-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .p-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 176, 255, 0.2), rgba(0, 176, 255, 0.35));
+      border-color: #00b0ff;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(0, 176, 255, 0.3);
+    }
+
+    /* MOBILE QUICK PILLS */
     .quick-pills {
       display: none;
       gap: 0.6rem;
@@ -258,18 +341,18 @@
     }
     .quick-pill {
       flex-shrink: 0;
-      padding: 0.4rem 0.9rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 50px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #cbd5e1;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
     }
     .quick-pill:hover, .quick-pill.active {
-      background: rgba(0, 176, 255, 0.15);
+      background: rgba(0, 176, 255, 0.18);
       border-color: #00b0ff;
       color: #fff;
     }
@@ -283,8 +366,8 @@
       border-radius: 22px;
       padding: clamp(1.5rem, 4vw, 2.8rem);
       margin-bottom: 2rem;
-      scroll-margin-top: 100px;
-      transition: border-color 0.3s ease;
+      scroll-margin-top: 95px;
+      transition: border-color 0.3s ease, transform 0.2s ease;
     }
     .doc-section:hover {
       border-color: rgba(0, 176, 255, 0.3);
@@ -304,6 +387,16 @@
       color: #38bdf8;
       margin-bottom: 0.8rem;
     }
+    .section-badge-yellow {
+      background: rgba(255, 184, 0, 0.12);
+      border-color: rgba(255, 184, 0, 0.35);
+      color: #FFB800;
+    }
+    .section-badge-green {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #34d399;
+    }
     .doc-section h2 {
       font-size: clamp(1.5rem, 3.5vw, 2rem);
       font-weight: 900;
@@ -319,6 +412,46 @@
       font-size: 1rem;
       line-height: 1.75;
       margin-bottom: 1.2rem;
+    }
+
+    /* FEATURE ARCHITECTURE FLOW */
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin: 1.8rem 0;
+    }
+    .flow-step-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .flow-step-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .flow-web { background: rgba(0, 176, 255, 0.2); color: #38bdf8; }
+    .flow-app { background: rgba(255, 184, 0, 0.2); color: #FFB800; }
+    .flow-step-card h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .flow-step-card p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 0;
     }
 
     /* FEATURE GRID */
@@ -364,7 +497,7 @@
       margin-bottom: 0;
     }
 
-    /* CODE & CALLOUT BOXES */
+    /* CALLOUT BOXES */
     .callout {
       background: rgba(0, 176, 255, 0.06);
       border: 1px solid rgba(0, 176, 255, 0.3);
@@ -384,6 +517,18 @@
       border-left: 4px solid #FFB800;
       color: #fef08a;
     }
+    .callout-green {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-left: 4px solid #10b981;
+      color: #a7f3d0;
+    }
+
+    /* CODE SAMPLE & COPY WIDGET */
+    .code-widget {
+      position: relative;
+      margin: 1rem 0;
+    }
     .code-sample {
       background: #020617;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -393,8 +538,26 @@
       font-size: 0.88rem;
       color: #a7f3d0;
       line-height: 1.6;
-      margin: 1rem 0;
       overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
     }
 
     /* STEP BY STEP TIMELINE */
@@ -441,6 +604,110 @@
       margin-bottom: 0;
     }
 
+    /* COMPARISON MATRIX TABLE */
+    .matrix-wrapper {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    .matrix-table th {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.9rem 1.1rem;
+      color: #fff;
+      font-weight: 800;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .matrix-table td {
+      padding: 0.85rem 1.1rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(6, 9, 19, 0.5);
+    }
+    .matrix-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .badge-check {
+      color: #34d399;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-dash {
+      color: #64748b;
+    }
+
+    /* ACCORDION FAQ */
+    .faq-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover {
+      border-color: rgba(255, 184, 0, 0.3);
+    }
+    .faq-question {
+      padding: 1.1rem 1.25rem;
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-answer {
+      padding: 0 1.25rem 1.1rem;
+      color: #94a3b8;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      display: none;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+    .faq-item.open .faq-toggle {
+      transform: rotate(180deg);
+    }
+    .faq-toggle {
+      transition: transform 0.2s ease;
+      font-size: 0.85rem;
+      color: #FFB800;
+    }
+
+    /* TOAST NOTIFICATION */
+    .doc-toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #0284c7;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .doc-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
     /* FOOTER */
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -460,10 +727,10 @@
     }
 
     /* RESPONSIVE BREAKPOINTS */
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .docs-wrapper {
         grid-template-columns: 1fr;
-        padding: 5.5rem 1rem 3rem;
+        padding: 5.2rem 1.2rem 3rem;
       }
       .docs-sidebar {
         display: none;
@@ -495,7 +762,7 @@
       }
       .doc-section {
         border-radius: 18px;
-        padding: 1.4rem 1.1rem;
+        padding: 1.35rem 1rem;
       }
       .step-item {
         gap: 0.8rem;
@@ -534,20 +801,35 @@
     <!-- DESKTOP STICKY SIDEBAR -->
     <aside class="docs-sidebar">
       <div class="sidebar-title">🧭 Table of Contents</div>
+      
+      <div class="sidebar-section-divider">Getting Started</div>
       <ul class="sidebar-nav">
-        <li><a href="#quickstart" class="active">⚡ Quick Start Onboarding</a></li>
+        <li><a href="#overview" class="active">📍 How to Navigate Docs</a></li>
+        <li><a href="#quickstart">⚡ 3-Minute Quick Start</a></li>
         <li><a href="#signin">🔑 Authentication & Profile</a></li>
+      </ul>
+
+      <div class="sidebar-section-divider">Website Operations Hub</div>
+      <ul class="sidebar-nav">
         <li><a href="#publishing">🏕️ Publishing Adventures</a></li>
         <li><a href="#ai-parser">✨ AI WhatsApp Importer</a></li>
         <li><a href="#batches">📅 Batches & Capacities</a></li>
         <li><a href="#manifests">📋 Bookings & Manifests</a></li>
         <li><a href="#gps-radar">📡 Live GPS Bus Radar</a></li>
         <li><a href="#storefront">🛍️ Branded Public Profile</a></li>
-        <li><a href="#mobile-app">📱 Mobile App Captain Mode</a></li>
-        <li><a href="#faq">❓ FAQ & Help</a></li>
       </ul>
-      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); text-align: center;">
+
+      <div class="sidebar-section-divider">Mobile App Captain Mode</div>
+      <ul class="sidebar-nav">
+        <li><a href="#mobile-app">📱 Captain Mobile App</a></li>
+        <li><a href="#matrix">⚖️ Web vs App Comparison</a></li>
+        <li><a href="#payments">💰 0% Commission Policy</a></li>
+        <li><a href="#faq">❓ Organiser FAQ</a></li>
+      </ul>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; display: flex; flex-direction: column; gap: 0.5rem;">
         <a href="vendor-portal.html" class="doc-btn doc-btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem;">Open Vendor Portal &rarr;</a>
+        <a href="download.html" class="doc-btn doc-btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem;">Download Mobile App &rarr;</a>
       </div>
     </aside>
 
@@ -556,19 +838,34 @@
 
       <!-- HERO BANNER -->
       <section class="doc-hero">
-        <div class="doc-hero-badge">Official Guidebook</div>
+        <div class="doc-hero-badge">Official Vendor Playbook</div>
         <h1>How to Navigate & Use Ab Toh Ghoom Le</h1>
-        <p>Master the Web Operations Hub and Mobile Application to scale your adventure club, automate traveller manifests, accept direct UPI payments, and broadcast live GPS radar.</p>
+        <p>Master the Web Operations Hub and Captain Mobile Application to scale your adventure club, automate traveller passenger manifests, receive direct 100% UPI earnings, and broadcast live GPS bus radar.</p>
         
-        <div class="doc-search-box">
-          <span>🔍</span>
-          <input type="text" id="docsSearch" placeholder="Search features (e.g. WhatsApp, GPS Radar, Manifests, UPI)..." oninput="filterDocs(this.value)" />
+        <div class="doc-controls">
+          <!-- SEARCH BOX -->
+          <div class="doc-search-box">
+            <span>🔍</span>
+            <input type="text" id="docsSearch" placeholder="Search features (e.g. WhatsApp, GPS Radar, Manifests, UPI, Scanner)..." oninput="filterDocs(this.value)" />
+            <span class="search-kbd">/</span>
+            <button id="clearSearchBtn" onclick="clearSearch()" style="display:none; background:none; border:none; color:#94a3b8; cursor:pointer; font-size:1rem;">✕</button>
+          </div>
+          <div id="searchStatusBar" class="search-status-bar"></div>
+
+          <!-- PLATFORM FILTER TABS -->
+          <div class="platform-tabs">
+            <button class="p-tab-btn active" onclick="switchCategory('all')">🌟 All Features</button>
+            <button class="p-tab-btn" onclick="switchCategory('web')">🌐 Web Operations Hub</button>
+            <button class="p-tab-btn" onclick="switchCategory('app')">📱 Mobile App Captain Mode</button>
+            <button class="p-tab-btn" onclick="switchCategory('fasttrack')">⚡ Fast Track</button>
+          </div>
         </div>
       </section>
 
       <!-- MOBILE QUICK NAVIGATION PILLS -->
       <div class="quick-pills">
-        <a href="#quickstart" class="quick-pill active">⚡ Quick Start</a>
+        <a href="#overview" class="quick-pill active">📍 How to Navigate</a>
+        <a href="#quickstart" class="quick-pill">⚡ Quick Start</a>
         <a href="#signin" class="quick-pill">🔑 Sign-In</a>
         <a href="#publishing" class="quick-pill">🏕️ Publish Trips</a>
         <a href="#ai-parser" class="quick-pill">✨ WhatsApp AI</a>
@@ -576,11 +873,67 @@
         <a href="#gps-radar" class="quick-pill">📡 GPS Radar</a>
         <a href="#storefront" class="quick-pill">🛍️ Storefront</a>
         <a href="#mobile-app" class="quick-pill">📱 Mobile App</a>
+        <a href="#matrix" class="quick-pill">⚖️ Comparison</a>
+        <a href="#faq" class="quick-pill">❓ FAQ</a>
       </div>
 
-      <!-- SECTION 1: QUICK START -->
-      <section id="quickstart" class="doc-section">
-        <div class="section-badge">Fast Track</div>
+      <!-- SECTION: HOW TO NAVIGATE THE DOCS ROUTE -->
+      <section id="overview" class="doc-section" data-cat="general">
+        <div class="section-badge">Navigation Guide</div>
+        <h2>📍 How to Onboard & Navigate This Documentation Route</h2>
+        <p>This documentation page lives on the dedicated web route <code>/docs</code> (accessible via <a href="docs.html" style="color:#00b0ff;">abtohghoomle.com/docs</a>). It is designed to act as your continuous operational handbook for both desktop and mobile operations.</p>
+
+        <div class="grid-3">
+          <div class="f-card">
+            <div class="f-card-icon">🧭</div>
+            <h3>Direct URL Routing</h3>
+            <p>Access this manual anytime from anywhere: visit <code>/docs</code> or click <strong>"Guide & Docs 📖"</strong> in the main website navbar, mobile drawer, or vendor portal header.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">⚡</div>
+            <h3>Platform Filter Switcher</h3>
+            <p>Use the tabs above (<em>Web Hub</em> vs <em>Mobile App</em>) to instantly filter the guides relevant to your current screen.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">⌨️</div>
+            <h3>Keyboard Quick Search</h3>
+            <p>Press the <kbd style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">/</kbd> key on your keyboard anytime to jump straight into the instant search bar.</p>
+          </div>
+        </div>
+
+        <p><strong>The End-to-End Operational Lifecycle:</strong></p>
+        <div class="flow-steps">
+          <div class="flow-step-card">
+            <span class="flow-step-badge flow-web">Step 1 • Web Hub</span>
+            <h4>Import Itinerary</h4>
+            <p>Paste WhatsApp text into the AI parser in 5 seconds to generate dates, pricing, and stops.</p>
+          </div>
+          <div class="flow-step-card">
+            <span class="flow-step-badge flow-web">Step 2 • Web Storefront</span>
+            <h4>Publish & Share</h4>
+            <p>Share your branded link in Instagram Bio. Travellers pay you directly via UPI.</p>
+          </div>
+          <div class="flow-step-card">
+            <span class="flow-step-badge flow-web">Step 3 • Web Hub</span>
+            <h4>Generate Manifest</h4>
+            <p>Approve bookings and export Excel/CSV passenger list or print conductor sheets.</p>
+          </div>
+          <div class="flow-step-card">
+            <span class="flow-step-badge flow-app">Step 4 • Mobile App</span>
+            <h4>Scan & Verify</h4>
+            <p>Scan passenger digital QR boarding passes in 1 second, even with 0 mountain internet.</p>
+          </div>
+          <div class="flow-step-card">
+            <span class="flow-step-badge flow-web">Step 5 • Web & App</span>
+            <h4>Broadcast Radar</h4>
+            <p>Turn on GPS radar so travellers track your bus on live map without calling you.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: QUICK START -->
+      <section id="quickstart" class="doc-section" data-cat="fasttrack">
+        <div class="section-badge section-badge-yellow">Fast Track</div>
         <h2>⚡ 3-Minute Quick Start Guide</h2>
         <p>Follow these 4 essential steps to get your first adventure live and open for bookings in minutes:</p>
 
@@ -589,7 +942,7 @@
             <div class="step-num step-num-yellow">1</div>
             <div class="step-text">
               <h4>Open the Vendor Hub & Sign In</h4>
-              <p>Navigate to <a href="vendor-portal.html" style="color:#FFB800;">abtohghoomle.com/vendor-portal.html</a> and click <strong>"Vendor Sign in with Google"</strong>. You can also test all features instantly using the demo account button.</p>
+              <p>Navigate to <a href="vendor-portal.html" style="color:#FFB800;">abtohghoomle.com/vendor-portal.html</a> and click <strong>"Vendor Sign in with Google"</strong>. You can also test all features instantly using the demo account button without creating an account.</p>
             </div>
           </li>
           <li class="step-item">
@@ -621,8 +974,8 @@
         </div>
       </section>
 
-      <!-- SECTION 2: AUTHENTICATION & PROFILE -->
-      <section id="signin" class="doc-section">
+      <!-- SECTION: AUTHENTICATION & PROFILE -->
+      <section id="signin" class="doc-section" data-cat="web">
         <div class="section-badge">Identity Setup</div>
         <h2>🔑 Authentication & Brand Profile</h2>
         <p>Building trust with travellers starts with a verified organiser profile:</p>
@@ -640,7 +993,7 @@
           </div>
         </div>
 
-        <p><strong>Configuring Your Public Profile:</strong></p>
+        <p><strong>Configuring Your Public Profile (Under Settings Tab):</strong></p>
         <ul style="padding-left: 1.25rem; margin-bottom: 1.2rem; color: #cbd5e1;">
           <li><strong>Club / Brand Name:</strong> e.g., <em>Sahyadri Trekkers Pune</em></li>
           <li><strong>Organiser WhatsApp & Phone:</strong> Displayed on participant tickets for emergency calls.</li>
@@ -649,11 +1002,11 @@
         </ul>
       </section>
 
-      <!-- SECTION 3: PUBLISHING ADVENTURES -->
-      <section id="publishing" class="doc-section">
+      <!-- SECTION: PUBLISHING ADVENTURES -->
+      <section id="publishing" class="doc-section" data-cat="web">
         <div class="section-badge">Trip Management</div>
         <h2>🏕️ Creating & Publishing Adventures</h2>
-        <p>You can create a trip listing on the website in three distinct ways:</p>
+        <p>You can create a trip listing on the website in three distinct ways depending on your workflow:</p>
 
         <div class="grid-3">
           <div class="f-card">
@@ -672,22 +1025,27 @@
             <p>Full control over cover photos, day-by-day itineraries, difficulty level, and pickup schedules.</p>
           </div>
         </div>
+
+        <div style="margin-top: 1.2rem;">
+          <a href="vendor-portal.html" class="doc-btn doc-btn-cyan" style="font-size:0.85rem;">Try Trip Builder in Vendor Portal &rarr;</a>
+        </div>
       </section>
 
-      <!-- SECTION 4: AI WHATSAPP IMPORTER -->
-      <section id="ai-parser" class="doc-section">
-        <div class="section-badge">AI Automation</div>
+      <!-- SECTION: AI WHATSAPP IMPORTER -->
+      <section id="ai-parser" class="doc-section" data-cat="web">
+        <div class="section-badge section-badge-green">AI Automation</div>
         <h2>✨ AI WhatsApp Itinerary Importer</h2>
         <p>Organisers usually spend 20 minutes copying trip details from WhatsApp into website forms. Our parser reduces this to <strong>5 seconds</strong>:</p>
 
-        <div class="callout">
+        <div class="callout callout-green">
           <span>📋</span>
-          <div><strong>How to use:</strong> Open your WhatsApp group, copy the trip message, open <strong>"✨ AI WhatsApp Import"</strong> in the dashboard, paste the message, and click <strong>"Parse with AI"</strong>.</div>
+          <div><strong>How to use:</strong> Open your WhatsApp group, copy the trip message, open <strong>"✨ AI WhatsApp Import"</strong> in the vendor portal, paste the message, and click <strong>"Parse with AI"</strong>.</div>
         </div>
 
-        <p><strong>Example WhatsApp message that works instantly:</strong></p>
-        <div class="code-sample">
-*Rajmachi Fireflies Night Trek & Camping*
+        <p><strong>Example WhatsApp message that works instantly (Click to Copy):</strong></p>
+        <div class="code-widget">
+          <button class="copy-btn" onclick="copySampleText()">📋 Copy Sample</button>
+          <pre class="code-sample" id="sampleMsgBlock">*Rajmachi Fireflies Night Trek & Camping*
 Dates: 12-13 October 2026
 Cost: Rs 1399/- per head
 Pickup Points:
@@ -695,14 +1053,14 @@ Pickup Points:
 - Thane Teen Hath Naka: 11:15 PM
 Includes: Transport from Mumbai by private bus, Dinner, Breakfast, Tent stay, Guide.
 Excludes: Personal expenses.
-Difficulty: Easy to Moderate
+Difficulty: Easy to Moderate</pre>
         </div>
 
         <p>The parser automatically extracts the title, price (1399), category (Trekking), batch dates, stops, and inclusions!</p>
       </section>
 
-      <!-- SECTION 5: BATCHES & CAPACITIES -->
-      <section id="batches" class="doc-section">
+      <!-- SECTION: BATCHES & CAPACITIES -->
+      <section id="batches" class="doc-section" data-cat="web">
         <div class="section-badge">Inventory Control</div>
         <h2>📅 Batches & Seat Capacities</h2>
         <p>Manage multiple departure weekends without duplicating trip listings:</p>
@@ -713,8 +1071,8 @@ Difficulty: Easy to Moderate
         </ul>
       </section>
 
-      <!-- SECTION 6: MANIFESTS & BOOKINGS -->
-      <section id="manifests" class="doc-section">
+      <!-- SECTION: MANIFESTS & BOOKINGS -->
+      <section id="manifests" class="doc-section" data-cat="web">
         <div class="section-badge">Operations & Admin</div>
         <h2>📋 Bookings & Passenger Manifests</h2>
         <p>Everything you need for smooth boarding on the night of departure:</p>
@@ -723,7 +1081,7 @@ Difficulty: Easy to Moderate
           <div class="f-card">
             <div class="f-card-icon">📥</div>
             <h3>1-Click CSV Spreadsheet Export</h3>
-            <p>Export all booked travellers with full names, phone numbers, pickup stops, and payment totals to Excel/CSV.</p>
+            <p>Export all booked travellers with full names, phone numbers, pickup stops, and payment totals to Excel/CSV for your records and driver permits.</p>
           </div>
           <div class="f-card">
             <div class="f-card-icon">🖨️</div>
@@ -738,9 +1096,9 @@ Difficulty: Easy to Moderate
         </div>
       </section>
 
-      <!-- SECTION 7: LIVE GPS RADAR -->
-      <section id="gps-radar" class="doc-section">
-        <div class="section-badge">Real-Time Tracking</div>
+      <!-- SECTION: LIVE GPS RADAR -->
+      <section id="gps-radar" class="doc-section" data-cat="web">
+        <div class="section-badge section-badge-yellow">Real-Time Tracking</div>
         <h2>📡 Live GPS Bus Radar</h2>
         <p>Say goodbye to 50 frantic phone calls asking <em>"Bhaiya bus kahan pahunchi?"</em></p>
 
@@ -748,15 +1106,15 @@ Difficulty: Easy to Moderate
           <li class="step-item">
             <div class="step-num">1</div>
             <div class="step-text">
-              <h4>Start Radar from Your Phone</h4>
-              <p>On departure night, open the trip on your mobile browser or app and click <strong>"Start GPS Radar"</strong>.</p>
+              <h4>Start Radar from Your Phone or Web</h4>
+              <p>On departure night, open the trip in your mobile browser or Captain app and click <strong>"Start GPS Radar"</strong>.</p>
             </div>
           </li>
           <li class="step-item">
             <div class="step-num">2</div>
             <div class="step-text">
               <h4>Secure Coordinate Transmission</h4>
-              <p>Your coordinates update smoothly every 30 seconds to the cloud database.</p>
+              <p>Your coordinates update smoothly every 30 seconds to the cloud database with minimal battery usage.</p>
             </div>
           </li>
           <li class="step-item">
@@ -769,8 +1127,8 @@ Difficulty: Easy to Moderate
         </ul>
       </section>
 
-      <!-- SECTION 8: BRANDED PUBLIC STOREFRONT -->
-      <section id="storefront" class="doc-section">
+      <!-- SECTION: BRANDED PUBLIC STOREFRONT -->
+      <section id="storefront" class="doc-section" data-cat="web">
         <div class="section-badge">Marketing & Sales</div>
         <h2>🛍️ Your Branded Public Storefront</h2>
         <p>Every organiser gets their own commission-free website storefront:</p>
@@ -780,9 +1138,9 @@ https://abtohghoomle.com/vendor.html?id=YOUR_ORGANISER_ID
         <p>Put this link in your <strong>Instagram Bio</strong>, WhatsApp updates, and promotional posts. When travellers visit, they see only <em>your</em> logo, <em>your</em> bio, and <em>your</em> upcoming trips!</p>
       </section>
 
-      <!-- SECTION 9: MOBILE APP -->
-      <section id="mobile-app" class="doc-section">
-        <div class="section-badge">Mobile Application</div>
+      <!-- SECTION: MOBILE APP CAPTAIN MODE -->
+      <section id="mobile-app" class="doc-section" data-cat="app">
+        <div class="section-badge section-badge-yellow">Mobile Application</div>
         <h2>📱 Mobile App: Trip Captain Mode</h2>
         <p>The Ab Toh Ghoom Le mobile app (Android & iOS) provides superpowers on the trail:</p>
 
@@ -804,36 +1162,160 @@ https://abtohghoomle.com/vendor.html?id=YOUR_ORGANISER_ID
           </div>
         </div>
 
+        <div class="callout callout-yellow">
+          <span>📲</span>
+          <div><strong>Installing the Captain App:</strong> Download the pre-release APK or iOS build directly from <a href="download.html" style="color:#FFB800; font-weight:700;">abtohghoomle.com/download.html</a>. Log in with the same Google account you use on the website hub.</div>
+        </div>
+
         <div style="text-align: center; margin-top: 1.5rem;">
           <a href="download.html" class="doc-btn doc-btn-yellow" data-i18n="nav_download">Download Captain App 🚀</a>
         </div>
       </section>
 
-      <!-- SECTION 10: FAQ -->
-      <section id="faq" class="doc-section">
+      <!-- SECTION: PLATFORM COMPARISON MATRIX -->
+      <section id="matrix" class="doc-section" data-cat="general">
+        <div class="section-badge">Platform Overview</div>
+        <h2>⚖️ Website Hub vs Mobile App: When to Use Which?</h2>
+        <p>Both platforms work together seamlessly. Here is a breakdown of which platform is best for each task:</p>
+
+        <div class="matrix-wrapper">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Feature / Capability</th>
+                <th>Website Hub (Desktop & Mobile Browser)</th>
+                <th>Mobile App (Captain Mode)</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>AI WhatsApp Importer</strong></td>
+                <td><span class="badge-check">✓ Full AI Parser</span></td>
+                <td><span class="badge-dash">—</span></td>
+                <td>Initial trip creation in 5 seconds</td>
+              </tr>
+              <tr>
+                <td><strong>1-Click Route Templates</strong></td>
+                <td><span class="badge-check">✓ 4 Presets Ready</span></td>
+                <td><span class="badge-dash">—</span></td>
+                <td>Publishing popular Maharashtra treks</td>
+              </tr>
+              <tr>
+                <td><strong>CSV / Excel Export</strong></td>
+                <td><span class="badge-check">✓ 1-Click Spreadsheet</span></td>
+                <td><span class="badge-dash">—</span></td>
+                <td>Permit submissions & financial accounting</td>
+              </tr>
+              <tr>
+                <td><strong>Printable Conductor Sheet</strong></td>
+                <td><span class="badge-check">✓ Clean Printer Mode</span></td>
+                <td><span class="badge-dash">—</span></td>
+                <td>Handing paper lists to bus drivers</td>
+              </tr>
+              <tr>
+                <td><strong>Live GPS Bus Radar</strong></td>
+                <td><span class="badge-check">✓ Browser Radar</span></td>
+                <td><span class="badge-check">✓ Background GPS Service</span></td>
+                <td>Real-time tracking on departure day</td>
+              </tr>
+              <tr>
+                <td><strong>QR Ticket Scanner</strong></td>
+                <td><span class="badge-dash">—</span></td>
+                <td><span class="badge-check">✓ 1-Second Camera Scan</span></td>
+                <td>Boarding travellers at bus pickup stops</td>
+              </tr>
+              <tr>
+                <td><strong>Offline Trail Access</strong></td>
+                <td><span class="badge-dash">— (Requires Internet)</span></td>
+                <td><span class="badge-check">✓ 100% Offline SQLite Cache</span></td>
+                <td>Mountain summits & dead zones</td>
+              </tr>
+              <tr>
+                <td><strong>Push Booking Notifications</strong></td>
+                <td><span class="badge-dash">— (Browser Only)</span></td>
+                <td><span class="badge-check">✓ Instant Mobile Push</span></td>
+                <td>Instant alerts on new bookings</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION: 0% COMMISSION & DIRECT PAYMENTS -->
+      <section id="payments" class="doc-section" data-cat="general">
+        <div class="section-badge section-badge-green">Direct Earnings</div>
+        <h2>💰 0% Platform Commission Policy</h2>
+        <p>Traditional travel aggregators charge anywhere between 15% to 25% of your trip ticket revenue. Ab Toh Ghoom Le operates on a <strong>100% Direct Organiser Revenue Model</strong>:</p>
+
+        <div class="grid-2">
+          <div class="f-card">
+            <div class="f-card-icon">⚡</div>
+            <h3>Direct UPI Settlement</h3>
+            <p>When a traveller books, they send payment directly to your personal UPI ID (GPay / PhonePe / Paytm / BHIM) or bank account. No middleman holding your funds for 14 days.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">🛡️</div>
+            <h3>Instant Booking Verification</h3>
+            <p>Travellers enter their UPI Transaction Reference (UTR) upon completing payment. You review and verify it on your dashboard with 1 click.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: FAQ -->
+      <section id="faq" class="doc-section" data-cat="general">
         <div class="section-badge">Assistance</div>
         <h2>❓ Organiser FAQ & Support</h2>
+        <p>Frequently asked questions about navigating the website and mobile app:</p>
 
-        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
-            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: Does Ab Toh Ghoom Le charge commission per booking?</h4>
-            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: No. Zero commission. Travellers pay directly to your UPI ID or bank account.</p>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem;">
+          <div class="faq-item open">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Q: Does Ab Toh Ghoom Le charge any commission per booking?</span>
+              <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+              A: No. Zero commission. Travellers pay directly to your personal UPI ID or bank account. All revenues belong 100% to you.
+            </div>
           </div>
 
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
-            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: Can I edit an existing trip after publishing?</h4>
-            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: Yes! Go to your Vendor Dashboard, find the trip card, and click "Edit" to modify dates, price, or pickup points anytime.</p>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Q: Can I edit an existing trip after publishing?</span>
+              <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+              A: Yes! Go to your Vendor Dashboard, find the trip card, and click "Edit" to modify dates, price, or pickup points anytime.
+            </div>
           </div>
 
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
-            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: How do travellers receive their tickets?</h4>
-            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: Travellers receive an instant digital booking confirmation card with their Booking ID (e.g. ATGL-49074) and can look up their live ticket on <a href="traveller.html" style="color:#00b0ff;">traveller.html</a> anytime.</p>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Q: How do travellers receive their tickets?</span>
+              <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+              A: Travellers receive an instant digital booking confirmation card with their Booking ID (e.g. ATGL-49074) and can look up their live ticket on <a href="traveller.html" style="color:#00b0ff;">traveller.html</a> anytime.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Q: Can I use the mobile app and website at the same time?</span>
+              <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-answer">
+              A: Absolutely. Most organisers use the desktop website hub for listing trips, writing itineraries, and exporting passenger spreadsheets, and use the mobile app on departure night for GPS radar broadcasting, offline manifests, and scanning QR boarding tickets.
+            </div>
           </div>
         </div>
       </section>
 
     </main>
   </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="docToast" class="doc-toast">Copied to clipboard!</div>
 
   <!-- FOOTER -->
   <footer>
@@ -845,23 +1327,116 @@ https://abtohghoomle.com/vendor.html?id=YOUR_ORGANISER_ID
     function filterDocs(query) {
       const q = (query || '').toLowerCase().trim();
       const sections = document.querySelectorAll('.doc-section');
+      const clearBtn = document.getElementById('clearSearchBtn');
+      const statusBar = document.getElementById('searchStatusBar');
+      let matchCount = 0;
+
+      if (clearBtn) clearBtn.style.display = q ? 'inline-block' : 'none';
+
       sections.forEach(sec => {
         if (!q) {
           sec.style.display = 'block';
           return;
         }
         const text = sec.textContent.toLowerCase();
-        sec.style.display = text.includes(q) ? 'block' : 'none';
+        const matches = text.includes(q);
+        sec.style.display = matches ? 'block' : 'none';
+        if (matches) matchCount++;
+      });
+
+      if (statusBar) {
+        if (q) {
+          statusBar.style.display = 'flex';
+          statusBar.textContent = `Found ${matchCount} guide section${matchCount === 1 ? '' : 's'} matching "${q}"`;
+        } else {
+          statusBar.style.display = 'none';
+        }
+      }
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('docsSearch');
+      if (input) {
+        input.value = '';
+        filterDocs('');
+        input.focus();
+      }
+    }
+
+    // Platform Category Switcher
+    function switchCategory(cat) {
+      const tabs = document.querySelectorAll('.p-tab-btn');
+      tabs.forEach(t => t.classList.remove('active'));
+      const activeBtn = Array.from(tabs).find(t => t.textContent.toLowerCase().includes(cat) || (cat === 'all' && t.textContent.includes('All')));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const sections = document.querySelectorAll('.doc-section');
+      sections.forEach(sec => {
+        if (cat === 'all') {
+          sec.style.display = 'block';
+          return;
+        }
+        const secCat = sec.getAttribute('data-cat') || 'general';
+        if (cat === 'fasttrack') {
+          sec.style.display = (secCat === 'fasttrack' || sec.id === 'quickstart') ? 'block' : 'none';
+        } else if (cat === 'web') {
+          sec.style.display = (secCat === 'web' || secCat === 'general' || secCat === 'fasttrack') ? 'block' : 'none';
+        } else if (cat === 'app') {
+          sec.style.display = (secCat === 'app' || secCat === 'general') ? 'block' : 'none';
+        }
       });
     }
 
+    // Toggle FAQ Accordions
+    function toggleFaq(el) {
+      const parent = el.closest('.faq-item');
+      if (parent) {
+        parent.classList.toggle('open');
+      }
+    }
+
+    // Copy Sample Message to Clipboard
+    function copySampleText() {
+      const sampleText = document.getElementById('sampleMsgBlock')?.textContent || '';
+      if (!navigator.clipboard) {
+        const textarea = document.createElement('textarea');
+        textarea.value = sampleText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      } else {
+        navigator.clipboard.writeText(sampleText).catch(() => {});
+      }
+
+      const toast = document.getElementById('docToast');
+      if (toast) {
+        toast.textContent = 'Copied WhatsApp itinerary sample!';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+    }
+
+    // Keyboard shortcut '/' to search
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        const searchInput = document.getElementById('docsSearch');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.select();
+        }
+      }
+    });
+
     // Scrollspy for active sidebar link
     window.addEventListener('scroll', () => {
-      const scrollPos = window.scrollY + 150;
+      const scrollPos = window.scrollY + 160;
       const sections = document.querySelectorAll('.doc-section');
       const sidebarLinks = document.querySelectorAll('.sidebar-nav a, .quick-pill');
 
       sections.forEach(sec => {
+        if (sec.style.display === 'none') return;
         const top = sec.offsetTop;
         const height = sec.offsetHeight;
         const id = sec.getAttribute('id');
@@ -876,6 +1451,23 @@ https://abtohghoomle.com/vendor.html?id=YOUR_ORGANISER_ID
           });
         }
       });
+    });
+
+    // Check URL parameters on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('search') || params.get('q');
+      const tab = params.get('tab') || params.get('mode');
+      if (q) {
+        const input = document.getElementById('docsSearch');
+        if (input) {
+          input.value = q;
+          filterDocs(q);
+        }
+      }
+      if (tab) {
+        switchCategory(tab);
+      }
     });
   </script>
 </body>
