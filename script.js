@@ -466,8 +466,11 @@ if (window._fbApp) {
 
 // ===== GSAP ANIMATIONS =====
 function initAnimations() {
+  if (typeof gsap === 'undefined') return;
   // Register ScrollTrigger
-  gsap.registerPlugin(ScrollTrigger);
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
   // 1. Hero Content Load Animation
   const heroTimeline = gsap.timeline();
