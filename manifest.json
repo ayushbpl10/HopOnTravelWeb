@@ -3,19 +3,32 @@
   "short_name": "AbTohGhoomLe",
   "icons": [
     {
-      "src": "./app_icon.png",
-      "sizes": "192x192 512x512 1024x1024",
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./favicon.png",
-      "sizes": "48x48",
-      "type": "image/png"
+      "src": "/app_icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "theme_color": "#00b0ff",
-  "background_color": "#f8fafc",
+  "background_color": "#060913",
   "display": "standalone",
-  "start_url": "./"
+  "start_url": "/"
 }
