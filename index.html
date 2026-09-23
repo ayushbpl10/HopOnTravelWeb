@@ -95,21 +95,21 @@
         <li><a href="traveller.html" data-i18n="nav_traveller_portal">Traveller Portal</a></li>
         <li><a href="vendor-portal.html" data-i18n="nav_for_vendors">Vendor Portal</a></li>
         <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-        <li>
-          <div class="lang-selector">
-            <select id="langSelect" class="lang-select-dropdown" onchange="changeLanguage(this.value, true)" aria-label="Language selector">
-              <option value="en">English</option>
-              <option value="hi">हिंदी</option>
-              <option value="mr">मराठी</option>
-              <option value="kn">ಕನ್ನಡ</option>
-            </select>
-          </div>
-        </li>
       </ul>
-      <a href="download.html" class="nav-cta" style="background: linear-gradient(45deg, #FFB800, #ff8c00); color: #000; box-shadow: 0 4px 15px rgba(255,184,0,0.4); border: none; font-weight: 800;" data-i18n="nav_download">Download App 🚀</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <div class="lang-selector">
+          <select id="langSelect" class="lang-select-dropdown" onchange="changeLanguage(this.value, true)" aria-label="Language selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="mr">मराठी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+        </div>
+        <a href="download.html" class="nav-cta" style="background: linear-gradient(45deg, #FFB800, #ff8c00); color: #000; box-shadow: 0 4px 15px rgba(255,184,0,0.4); border: none; font-weight: 800;" data-i18n="nav_download">Download App 🚀</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="#book" data-i18n="nav_book_now">Book Now</a>

@@ -85,10 +85,26 @@
 
     @media (max-width: 768px) {
       .tgrid-2 { grid-template-columns: 1fr; }
-      .theader-row { flex-direction: column; }
+      .theader-row { flex-direction: column; gap: 1rem; }
       .tprice-box { text-align: left; }
-      .ttitle { font-size: 1.8rem; }
+      .ttitle { font-size: clamp(1.6rem, 5vw, 2.2rem); }
       .thero-img { height: 260px; }
+      .tcontainer { padding: 85px 4% 40px; }
+      .tcontent { padding: 1.5rem; }
+      .tnav { padding: 0.8rem 4%; }
+    }
+    @media (max-width: 480px) {
+      .tnav-logo { font-size: 1.1rem; }
+      .tnav-cta { padding: 0.4rem 0.8rem; font-size: 0.78rem; }
+      .thero-img { height: 210px; }
+      .tcontent { padding: 1.2rem 1rem; }
+      .tcard { border-radius: 18px; }
+      .tbox { padding: 1.1rem 1rem; }
+      .titinerary-header { padding: 1rem; font-size: 0.92rem; }
+      .tpickup-item { padding: 0.85rem; }
+    }
+    @media (max-width: 360px) {
+      .tnav-cta[data-i18n="nav_traveller_portal"] { display: none; }
     }
   </style>
 

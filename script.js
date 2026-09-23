@@ -11,16 +11,25 @@ window.addEventListener('scroll', () => {
 // ===== HAMBURGER MENU =====
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('active');
-});
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('active');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
   });
-});
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+    }
+  });
+}
 
 // ===== SCROLL ANIMATIONS =====
 const observer = new IntersectionObserver((entries) => {
