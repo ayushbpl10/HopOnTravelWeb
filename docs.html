@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor & Organiser Documentation Hub – Ab Toh Ghoom Le</title>
+  <meta name="description" content="Comprehensive interactive guide for tour operators and trip organisers to onboard, publish adventures, manage passenger manifests, and broadcast live GPS on Ab Toh Ghoom Le." />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="icon" type="image/png" sizes="1024x1024" href="./app_icon.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./app_icon.png" />
+  <link rel="shortcut icon" href="./favicon.ico" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="i18n.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #060913;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 176, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(255, 184, 0, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.04) 0%, transparent 60%);
+      color: #f1f5f9;
+      line-height: 1.7;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP NAVBAR */
+    .doc-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0.85rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(6, 9, 19, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .doc-logo {
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .doc-logo span:first-child { color: #fff; }
+    .doc-logo span:nth-child(2) { color: #00b0ff; }
+    .doc-logo span:nth-child(3) { color: #FFB800; }
+    .doc-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(0, 176, 255, 0.15);
+      border: 1px solid rgba(0, 176, 255, 0.4);
+      color: #38bdf8;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+    }
+    .doc-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .doc-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .doc-btn-ghost {
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .doc-btn-ghost:hover {
+      color: #fff;
+      border-color: rgba(0, 176, 255, 0.4);
+      background: rgba(0, 176, 255, 0.08);
+      transform: translateY(-1px);
+    }
+    .doc-btn-yellow {
+      background: linear-gradient(135deg, #FFB800, #ff8c00);
+      color: #000;
+      border: none;
+      box-shadow: 0 4px 15px rgba(255, 184, 0, 0.35);
+    }
+    .doc-btn-yellow:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(255, 184, 0, 0.5);
+    }
+
+    /* MAIN CONTAINER & SIDEBAR LAYOUT */
+    .docs-wrapper {
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 6rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    /* SIDEBAR */
+    .docs-sidebar {
+      position: sticky;
+      top: 90px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.5rem 1.2rem;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .sidebar-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #00b0ff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .sidebar-nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.55rem 0.85rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      color: #fff;
+      background: rgba(0, 176, 255, 0.1);
+      border-left: 3px solid #00b0ff;
+    }
+
+    /* DOCS CONTENT */
+    .docs-content {
+      min-width: 0;
+    }
+
+    /* HERO BANNER */
+    .doc-hero {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-hero::after {
+      content: "";
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255, 184, 0, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .doc-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(255, 184, 0, 0.15);
+      border: 1px solid rgba(255, 184, 0, 0.4);
+      color: #FFB800;
+      margin-bottom: 1rem;
+    }
+    .doc-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .doc-hero p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 750px;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+    
+    /* SEARCH / FILTER */
+    .doc-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(6, 9, 19, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50px;
+      padding: 0.6rem 1.25rem;
+      max-width: 550px;
+    }
+    .doc-search-box input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.95rem;
+      width: 100%;
+      font-family: inherit;
+    }
+    .doc-search-box input::placeholder {
+      color: #64748b;
+    }
+
+    /* QUICK PILLS (MOBILE / TABLET) */
+    .quick-pills {
+      display: none;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .quick-pill {
+      flex-shrink: 0;
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .quick-pill:hover, .quick-pill.active {
+      background: rgba(0, 176, 255, 0.15);
+      border-color: #00b0ff;
+      color: #fff;
+    }
+
+    /* SECTION CARD */
+    .doc-section {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: clamp(1.5rem, 4vw, 2.8rem);
+      margin-bottom: 2rem;
+      scroll-margin-top: 100px;
+      transition: border-color 0.3s ease;
+    }
+    .doc-section:hover {
+      border-color: rgba(0, 176, 255, 0.3);
+    }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      background: rgba(0, 176, 255, 0.12);
+      border: 1px solid rgba(0, 176, 255, 0.35);
+      color: #38bdf8;
+      margin-bottom: 0.8rem;
+    }
+    .doc-section h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .doc-section p {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    /* FEATURE GRID */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .f-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.4rem 1.2rem;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .f-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 184, 0, 0.3);
+    }
+    .f-card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+    .f-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .f-card p {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* CODE & CALLOUT BOXES */
+    .callout {
+      background: rgba(0, 176, 255, 0.06);
+      border: 1px solid rgba(0, 176, 255, 0.3);
+      border-left: 4px solid #00b0ff;
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .callout-yellow {
+      background: rgba(255, 184, 0, 0.06);
+      border: 1px solid rgba(255, 184, 0, 0.3);
+      border-left: 4px solid #FFB800;
+      color: #fef08a;
+    }
+    .code-sample {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      font-family: monospace;
+      font-size: 0.88rem;
+      color: #a7f3d0;
+      line-height: 1.6;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    /* STEP BY STEP TIMELINE */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00b0ff, #0081cb);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-num-yellow {
+      background: linear-gradient(135deg, #FFB800, #ff8c00);
+      color: #000;
+    }
+    .step-text h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .step-text p {
+      font-size: 0.92rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover {
+      color: #FFB800;
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 900px) {
+      .docs-wrapper {
+        grid-template-columns: 1fr;
+        padding: 5.5rem 1rem 3rem;
+      }
+      .docs-sidebar {
+        display: none;
+      }
+      .quick-pills {
+        display: flex;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .doc-nav {
+        padding: 0.75rem 4%;
+      }
+      .doc-logo {
+        font-size: 1.15rem;
+      }
+      .doc-tag {
+        display: none;
+      }
+      .doc-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.78rem;
+      }
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .doc-section {
+        border-radius: 18px;
+        padding: 1.4rem 1.1rem;
+      }
+      .step-item {
+        gap: 0.8rem;
+      }
+      .step-num {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVBAR -->
+  <nav class="doc-nav">
+    <a href="index.html" class="doc-logo">
+      <span>AbToh</span><span>Ghoom</span><span>Le</span>
+      <span class="doc-tag">Vendor Docs</span>
+    </a>
+
+    <div class="doc-nav-right">
+      <select id="langSelect" class="lang-select-dropdown" onchange="changeLanguage(this.value, true)" aria-label="Select Language" style="background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 0.35rem 0.75rem; font-size: 0.8rem; font-family: inherit; cursor: pointer; outline: none;">
+        <option value="en" style="background: #0f172a; color: #fff;">English</option>
+        <option value="hi" style="background: #0f172a; color: #fff;">हिन्दी</option>
+        <option value="mr" style="background: #0f172a; color: #fff;">मराठी</option>
+        <option value="kn" style="background: #0f172a; color: #fff;">ಕನ್ನಡ</option>
+      </select>
+      <a href="vendor-portal.html" class="doc-btn doc-btn-yellow" data-i18n="nav_for_vendors">Vendor Hub 🚀</a>
+    </div>
+  </nav>
+
+  <!-- MAIN DOCS WRAPPER -->
+  <div class="docs-wrapper">
+
+    <!-- DESKTOP STICKY SIDEBAR -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-title">🧭 Table of Contents</div>
+      <ul class="sidebar-nav">
+        <li><a href="#quickstart" class="active">⚡ Quick Start Onboarding</a></li>
+        <li><a href="#signin">🔑 Authentication & Profile</a></li>
+        <li><a href="#publishing">🏕️ Publishing Adventures</a></li>
+        <li><a href="#ai-parser">✨ AI WhatsApp Importer</a></li>
+        <li><a href="#batches">📅 Batches & Capacities</a></li>
+        <li><a href="#manifests">📋 Bookings & Manifests</a></li>
+        <li><a href="#gps-radar">📡 Live GPS Bus Radar</a></li>
+        <li><a href="#storefront">🛍️ Branded Public Profile</a></li>
+        <li><a href="#mobile-app">📱 Mobile App Captain Mode</a></li>
+        <li><a href="#faq">❓ FAQ & Help</a></li>
+      </ul>
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); text-align: center;">
+        <a href="vendor-portal.html" class="doc-btn doc-btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem;">Open Vendor Portal &rarr;</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="docs-content">
+
+      <!-- HERO BANNER -->
+      <section class="doc-hero">
+        <div class="doc-hero-badge">Official Guidebook</div>
+        <h1>How to Navigate & Use Ab Toh Ghoom Le</h1>
+        <p>Master the Web Operations Hub and Mobile Application to scale your adventure club, automate traveller manifests, accept direct UPI payments, and broadcast live GPS radar.</p>
+        
+        <div class="doc-search-box">
+          <span>🔍</span>
+          <input type="text" id="docsSearch" placeholder="Search features (e.g. WhatsApp, GPS Radar, Manifests, UPI)..." oninput="filterDocs(this.value)" />
+        </div>
+      </section>
+
+      <!-- MOBILE QUICK NAVIGATION PILLS -->
+      <div class="quick-pills">
+        <a href="#quickstart" class="quick-pill active">⚡ Quick Start</a>
+        <a href="#signin" class="quick-pill">🔑 Sign-In</a>
+        <a href="#publishing" class="quick-pill">🏕️ Publish Trips</a>
+        <a href="#ai-parser" class="quick-pill">✨ WhatsApp AI</a>
+        <a href="#manifests" class="quick-pill">📋 Bookings</a>
+        <a href="#gps-radar" class="quick-pill">📡 GPS Radar</a>
+        <a href="#storefront" class="quick-pill">🛍️ Storefront</a>
+        <a href="#mobile-app" class="quick-pill">📱 Mobile App</a>
+      </div>
+
+      <!-- SECTION 1: QUICK START -->
+      <section id="quickstart" class="doc-section">
+        <div class="section-badge">Fast Track</div>
+        <h2>⚡ 3-Minute Quick Start Guide</h2>
+        <p>Follow these 4 essential steps to get your first adventure live and open for bookings in minutes:</p>
+
+        <ul class="steps-list">
+          <li class="step-item">
+            <div class="step-num step-num-yellow">1</div>
+            <div class="step-text">
+              <h4>Open the Vendor Hub & Sign In</h4>
+              <p>Navigate to <a href="vendor-portal.html" style="color:#FFB800;">abtohghoomle.com/vendor-portal.html</a> and click <strong>"Vendor Sign in with Google"</strong>. You can also test all features instantly using the demo account button.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num step-num-yellow">2</div>
+            <div class="step-text">
+              <h4>Create Your First Listing</h4>
+              <p>Click <strong>"✨ AI WhatsApp Import"</strong> to paste your group chat itinerary or choose <strong>"⚡ Use Template"</strong> to load presets like *Harishchandragad* or *Rajmachi* in 1 click.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num step-num-yellow">3</div>
+            <div class="step-text">
+              <h4>Share Your Branded Storefront Link</h4>
+              <p>Copy your unique link (<code style="color:#38bdf8;">abtohghoomle.com/vendor.html?id=YOUR_ID</code>) and paste it into your Instagram bio, WhatsApp status, and link-in-bio trees.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num step-num-yellow">4</div>
+            <div class="step-text">
+              <h4>Manage Bookings & Broadcast Live GPS</h4>
+              <p>Confirm seat payments, download Excel passenger lists with 1 click, and broadcast your bus location so travellers can track you live.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="callout callout-yellow">
+          <span>💡</span>
+          <div><strong>0% Commission Policy:</strong> Ab Toh Ghoom Le never takes a percentage cut of your trip revenue. All booking amounts go directly to your personal UPI ID / bank account.</div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: AUTHENTICATION & PROFILE -->
+      <section id="signin" class="doc-section">
+        <div class="section-badge">Identity Setup</div>
+        <h2>🔑 Authentication & Brand Profile</h2>
+        <p>Building trust with travellers starts with a verified organiser profile:</p>
+
+        <div class="grid-2">
+          <div class="f-card">
+            <div class="f-card-icon">🛡️</div>
+            <h3>Google One-Tap Auth</h3>
+            <p>Secure login with your Google account. Your trips and attendee databases are linked to your authenticated organiser UID.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">⚡</div>
+            <h3>Instant Demo Mode</h3>
+            <p>Click <strong>"⚡ Demo Organiser"</strong> to test creating mock trips and viewing sample passenger manifests without logging in.</p>
+          </div>
+        </div>
+
+        <p><strong>Configuring Your Public Profile:</strong></p>
+        <ul style="padding-left: 1.25rem; margin-bottom: 1.2rem; color: #cbd5e1;">
+          <li><strong>Club / Brand Name:</strong> e.g., <em>Sahyadri Trekkers Pune</em></li>
+          <li><strong>Organiser WhatsApp & Phone:</strong> Displayed on participant tickets for emergency calls.</li>
+          <li><strong>UPI ID:</strong> Your GPay/PhonePe UPI ID where travellers send direct payments.</li>
+          <li><strong>Instagram Handle:</strong> Direct link to your social profile for verified trust.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 3: PUBLISHING ADVENTURES -->
+      <section id="publishing" class="doc-section">
+        <div class="section-badge">Trip Management</div>
+        <h2>🏕️ Creating & Publishing Adventures</h2>
+        <p>You can create a trip listing on the website in three distinct ways:</p>
+
+        <div class="grid-3">
+          <div class="f-card">
+            <div class="f-card-icon">✨</div>
+            <h3>AI WhatsApp Importer</h3>
+            <p>Paste any WhatsApp group broadcast. Our AI parses dates, costs, pickup points, and itinerary automatically.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">⚡</div>
+            <h3>1-Click Route Presets</h3>
+            <p>Choose from popular pre-built treks: Harishchandragad, Rajmachi, Kalsubai, and Devkund Canyon.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">🛠️</div>
+            <h3>Custom Trek Builder</h3>
+            <p>Full control over cover photos, day-by-day itineraries, difficulty level, and pickup schedules.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: AI WHATSAPP IMPORTER -->
+      <section id="ai-parser" class="doc-section">
+        <div class="section-badge">AI Automation</div>
+        <h2>✨ AI WhatsApp Itinerary Importer</h2>
+        <p>Organisers usually spend 20 minutes copying trip details from WhatsApp into website forms. Our parser reduces this to <strong>5 seconds</strong>:</p>
+
+        <div class="callout">
+          <span>📋</span>
+          <div><strong>How to use:</strong> Open your WhatsApp group, copy the trip message, open <strong>"✨ AI WhatsApp Import"</strong> in the dashboard, paste the message, and click <strong>"Parse with AI"</strong>.</div>
+        </div>
+
+        <p><strong>Example WhatsApp message that works instantly:</strong></p>
+        <div class="code-sample">
+*Rajmachi Fireflies Night Trek & Camping*
+Dates: 12-13 October 2026
+Cost: Rs 1399/- per head
+Pickup Points:
+- Dadar TT Circle: 10:00 PM
+- Thane Teen Hath Naka: 11:15 PM
+Includes: Transport from Mumbai by private bus, Dinner, Breakfast, Tent stay, Guide.
+Excludes: Personal expenses.
+Difficulty: Easy to Moderate
+        </div>
+
+        <p>The parser automatically extracts the title, price (1399), category (Trekking), batch dates, stops, and inclusions!</p>
+      </section>
+
+      <!-- SECTION 5: BATCHES & CAPACITIES -->
+      <section id="batches" class="doc-section">
+        <div class="section-badge">Inventory Control</div>
+        <h2>📅 Batches & Seat Capacities</h2>
+        <p>Manage multiple departure weekends without duplicating trip listings:</p>
+        <ul style="padding-left: 1.25rem; margin-bottom: 1.2rem; color: #cbd5e1;">
+          <li><strong>Multi-Batch Dates:</strong> Add upcoming departures (e.g. <em>Batch 1: Oct 12-13</em>, <em>Batch 2: Oct 19-20</em>).</li>
+          <li><strong>Seat Capacities:</strong> Set bus seats (e.g., 30 seats). As tickets are confirmed, seats decrease automatically.</li>
+          <li><strong>Automated Sold Out:</strong> When 30/30 seats are booked, the batch automatically closes to prevent overbooking.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 6: MANIFESTS & BOOKINGS -->
+      <section id="manifests" class="doc-section">
+        <div class="section-badge">Operations & Admin</div>
+        <h2>📋 Bookings & Passenger Manifests</h2>
+        <p>Everything you need for smooth boarding on the night of departure:</p>
+
+        <div class="grid-2">
+          <div class="f-card">
+            <div class="f-card-icon">📥</div>
+            <h3>1-Click CSV Spreadsheet Export</h3>
+            <p>Export all booked travellers with full names, phone numbers, pickup stops, and payment totals to Excel/CSV.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">🖨️</div>
+            <h3>Printable Conductor Sheet</h3>
+            <p>Click <strong>"Print Manifest"</strong> to generate a clean, printer-optimized checklist to hand to your bus team.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <span>🛡️</span>
+          <div><strong>Screenshot & Data Protection:</strong> The platform safeguards traveller contact numbers from scraping bots and unauthorized third parties to maintain privacy compliance.</div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: LIVE GPS RADAR -->
+      <section id="gps-radar" class="doc-section">
+        <div class="section-badge">Real-Time Tracking</div>
+        <h2>📡 Live GPS Bus Radar</h2>
+        <p>Say goodbye to 50 frantic phone calls asking <em>"Bhaiya bus kahan pahunchi?"</em></p>
+
+        <ul class="steps-list">
+          <li class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Start Radar from Your Phone</h4>
+              <p>On departure night, open the trip on your mobile browser or app and click <strong>"Start GPS Radar"</strong>.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Secure Coordinate Transmission</h4>
+              <p>Your coordinates update smoothly every 30 seconds to the cloud database.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Travellers View Live Bus on Leaflet Map</h4>
+              <p>Confirmed travellers can tap <strong>"Live Tracking"</strong> in their traveller portal to watch the bus marker move in real-time!</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- SECTION 8: BRANDED PUBLIC STOREFRONT -->
+      <section id="storefront" class="doc-section">
+        <div class="section-badge">Marketing & Sales</div>
+        <h2>🛍️ Your Branded Public Storefront</h2>
+        <p>Every organiser gets their own commission-free website storefront:</p>
+        <div class="code-sample" style="color: #FFB800;">
+https://abtohghoomle.com/vendor.html?id=YOUR_ORGANISER_ID
+        </div>
+        <p>Put this link in your <strong>Instagram Bio</strong>, WhatsApp updates, and promotional posts. When travellers visit, they see only <em>your</em> logo, <em>your</em> bio, and <em>your</em> upcoming trips!</p>
+      </section>
+
+      <!-- SECTION 9: MOBILE APP -->
+      <section id="mobile-app" class="doc-section">
+        <div class="section-badge">Mobile Application</div>
+        <h2>📱 Mobile App: Trip Captain Mode</h2>
+        <p>The Ab Toh Ghoom Le mobile app (Android & iOS) provides superpowers on the trail:</p>
+
+        <div class="grid-3">
+          <div class="f-card">
+            <div class="f-card-icon">📶</div>
+            <h3>Offline Trail Cache</h3>
+            <p>Access passenger lists, emergency contacts, and route notes even when 0 mobile signal is available on mountain tops.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">🎟️</div>
+            <h3>QR Ticket Check-In</h3>
+            <p>Scan passenger digital tickets at boarding points for 1-second contactless verification.</p>
+          </div>
+          <div class="f-card">
+            <div class="f-card-icon">🔔</div>
+            <h3>Push Booking Alerts</h3>
+            <p>Receive immediate alerts whenever a traveller reserves a seat.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <a href="download.html" class="doc-btn doc-btn-yellow" data-i18n="nav_download">Download Captain App 🚀</a>
+        </div>
+      </section>
+
+      <!-- SECTION 10: FAQ -->
+      <section id="faq" class="doc-section">
+        <div class="section-badge">Assistance</div>
+        <h2>❓ Organiser FAQ & Support</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: Does Ab Toh Ghoom Le charge commission per booking?</h4>
+            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: No. Zero commission. Travellers pay directly to your UPI ID or bank account.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: Can I edit an existing trip after publishing?</h4>
+            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: Yes! Go to your Vendor Dashboard, find the trip card, and click "Edit" to modify dates, price, or pickup points anytime.</p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem;">
+            <h4 style="color:#fff; margin-bottom: 0.3rem;">Q: How do travellers receive their tickets?</h4>
+            <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">A: Travellers receive an instant digital booking confirmation card with their Booking ID (e.g. ATGL-49074) and can look up their live ticket on <a href="traveller.html" style="color:#00b0ff;">traveller.html</a> anytime.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Ab Toh Ghoom Le. All rights reserved. &bull; <a href="index.html">Home</a> &bull; <a href="vendor-portal.html">Vendor Hub</a> &bull; <a href="download.html">Download App</a> &bull; <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    // Live filter search for docs
+    function filterDocs(query) {
+      const q = (query || '').toLowerCase().trim();
+      const sections = document.querySelectorAll('.doc-section');
+      sections.forEach(sec => {
+        if (!q) {
+          sec.style.display = 'block';
+          return;
+        }
+        const text = sec.textContent.toLowerCase();
+        sec.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    // Scrollspy for active sidebar link
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 150;
+      const sections = document.querySelectorAll('.doc-section');
+      const sidebarLinks = document.querySelectorAll('.sidebar-nav a, .quick-pill');
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          sidebarLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '#' + id) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
