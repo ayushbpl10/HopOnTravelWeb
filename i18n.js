@@ -2181,8 +2181,12 @@ async function detectLocationAndSetLanguage() {
         isRegional = true;
         regionName = 'Karnataka';
       }
-    } catch (_) {}
-  }
+  // If user made a manual choice while geo-detection was in-flight, do not overwrite
+  try {
+    if (localStorage.getItem('site_lang_manual')) {
+      return;
+    }
+  } catch (_) {}
 
   changeLanguage(detectedLang, false);
 
