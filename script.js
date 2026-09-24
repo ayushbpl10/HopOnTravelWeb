@@ -115,7 +115,9 @@ function renderTripCards(tripsArr) {
         ${img}
         <div class="web-trip-body">
           <div class="web-trip-title">${escapeHtml(trip.title)}</div>
-          <div class="web-trip-vendor">by ${escapeHtml(trip.vendorName)}</div>
+          <div class="web-trip-vendor">
+            by <a href="vendor.html?id=${encodeURIComponent(String(trip.vendorName || trip.vendorId || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''))}" style="color:var(--text-secondary, #94a3b8); text-decoration:underline; font-weight:500;" title="View all trips by this organiser">${escapeHtml(trip.vendorName)}</a>
+          </div>
           <div class="web-trip-meta">
             <span class="web-trip-price">from ₹${minPrice.toLocaleString('en-IN')}</span>
             <span class="web-trip-seats">${totalSeats} seats left</span>

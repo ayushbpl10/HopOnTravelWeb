@@ -221,6 +221,31 @@
       <section id="vtab-settings" class="p-tab-content" style="display: none;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
+          <!-- Dedicated Storefront Route Card -->
+          <div class="p-stat-card" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(255, 184, 0, 0.08), rgba(255, 184, 0, 0.02)); border: 1px solid rgba(255, 184, 0, 0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <div style="font-size: 0.78rem; font-weight: 700; color: var(--portal-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem;">
+                  ⭐ Your Dedicated Storefront Route
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem;" id="vDedicatedRouteUrlText">
+                  abtohghoomle.com/vendor/sahyadri-trekkers
+                </h3>
+                <p style="color: var(--portal-muted); font-size: 0.88rem; max-width: 650px; line-height: 1.5;">
+                  Share this dedicated link on WhatsApp broadcasts, Instagram bio, and marketing campaigns to showcase all your listed adventures in one branded catalogue.
+                </p>
+              </div>
+              <div style="display: flex; gap: 0.6rem; align-items: center;">
+                <a id="vDedicatedRouteVisitBtn" href="vendor.html?id=demo" target="_blank" class="p-btn p-btn-yellow p-btn-sm" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  🔗 Open Storefront
+                </a>
+                <button id="vDedicatedRouteCopyBtn" class="p-btn p-btn-dark p-btn-sm" onclick="copyDedicatedVendorRoute()" style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                  📋 Copy Link
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Profile Card -->
           <div class="p-stat-card">
             <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 1.5rem;" data-i18n="vp_settings_biz_profile">Business Profile</h3>

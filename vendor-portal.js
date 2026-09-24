@@ -340,6 +340,36 @@ async function handleVendorLogout() {
   }
 }
 
+function updateDedicatedStorefrontRouteDisplay(nameOrSlug, uid) {
+  const slug = String(nameOrSlug || uid || 'demo').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const dedicatedPath = `vendor.html?id=${encodeURIComponent(slug)}`;
+
+  const storefrontLink = document.getElementById('publicStorefrontLink');
+  if (storefrontLink) storefrontLink.href = dedicatedPath;
+
+  const routeDisplay = document.getElementById('vDedicatedRouteUrlText');
+  if (routeDisplay) routeDisplay.textContent = `abtohghoomle.com/vendor/${slug}`;
+
+  const visitBtn = document.getElementById('vDedicatedRouteVisitBtn');
+  if (visitBtn) visitBtn.href = dedicatedPath;
+}
+
+window.copyDedicatedVendorRoute = function() {
+  const routeDisplay = document.getElementById('vDedicatedRouteUrlText');
+  const slugText = routeDisplay ? routeDisplay.textContent.replace('abtohghoomle.com/vendor/', '').trim() : 'demo';
+  const fullUrl = `${window.location.origin}/vendor/${encodeURIComponent(slugText)}`;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(fullUrl).then(() => {
+      alert(`Dedicated Storefront link copied to clipboard:\n${fullUrl}`);
+    }).catch(() => {
+      prompt('Copy your dedicated storefront URL:', fullUrl);
+    });
+  } else {
+    prompt('Copy your dedicated storefront URL:', fullUrl);
+  }
+};
+
 // Vendor Signed In
 async function onVendorSignedIn(user) {
   document.getElementById('vendorLoggedOutBanner').style.display = 'none';
@@ -366,9 +396,8 @@ async function onVendorSignedIn(user) {
 
   document.getElementById('vendorGreetingTitle').textContent = `Welcome, ${user.displayName || 'Organiser'}!`;
   
-  // Update Storefront Link
-  const storefrontLink = document.getElementById('publicStorefrontLink');
-  storefrontLink.href = `vendor.html?id=${encodeURIComponent(user.uid)}`;
+  // Update Storefront Link & Dedicated Route Display
+  updateDedicatedStorefrontRouteDisplay(user.displayName, user.uid);
 
   // Instant demo vendor bypass (avoids Firestore network timeout)
   if (user.uid === DEMO_VENDOR_USER.uid) {
@@ -376,6 +405,7 @@ async function onVendorSignedIn(user) {
     document.getElementById('vSetWhatsApp').value = '+919876543210';
     document.getElementById('vSetInstagram').value = 'https://instagram.com/sahyadri_trekkers_demo';
     document.getElementById('vSetUpi').value = 'sahyadri.trekkers@okhdfcbank';
+    updateDedicatedStorefrontRouteDisplay('Sahyadri Trekkers', user.uid);
     listenToVendorTrips(user.uid);
     listenToVendorBookings(user.uid);
     return;
@@ -389,7 +419,9 @@ async function onVendorSignedIn(user) {
     
     if (snap.exists()) {
       const data = snap.data();
-      document.getElementById('vSetBusinessName').value = data.businessName || data.name || user.displayName || '';
+      const resolvedName = data.businessName || data.name || user.displayName || '';
+      document.getElementById('vSetBusinessName').value = resolvedName;
+      updateDedicatedStorefrontRouteDisplay(resolvedName, user.uid);
       document.getElementById('vSetWhatsApp').value = data.whatsappNumber || data.whatsapp || data.phone || '';
       document.getElementById('vSetInstagram').value = data.instagramUrl || '';
       document.getElementById('vSetUpi').value = data.upiId || (Array.isArray(data.upiIds) ? data.upiIds.join(', ') : '');
@@ -406,6 +438,7 @@ async function onVendorSignedIn(user) {
         createdAt: Date.now()
       });
       document.getElementById('vSetBusinessName').value = user.displayName || '';
+      updateDedicatedStorefrontRouteDisplay(user.displayName, user.uid);
     }
   } catch (err) {
     console.warn('Vendor profile setup error:', err);
@@ -1280,6 +1313,7 @@ async function saveVendorProfileSettings() {
     await setDoc(doc(db, 'users', _vendorUser.uid), updatePayload, { merge: true });
     await setDoc(doc(db, 'vendors', _vendorUser.uid), updatePayload, { merge: true });
 
+    updateDedicatedStorefrontRouteDisplay(businessName, _vendorUser.uid);
     alert('Vendor profile & settings saved successfully!');
   } catch (err) {
     console.error('Error saving vendor settings:', err);

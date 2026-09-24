@@ -63,11 +63,13 @@ async function initTripPage() {
     document.getElementById('tripDesc').textContent = tripData.description || '';
     document.getElementById('tripVendor').textContent = tripData.vendorName || 'Verified Vendor';
 
-    // Set vendor profile link
+    // Set dedicated vendor profile link
     const vendorLink = document.getElementById('vendorLink');
     const vId = tripData.vendorId || tripData.vendorName;
-    if (vId) {
-      vendorLink.href = `vendor.html?id=${encodeURIComponent(vId)}`;
+    if (vendorLink && vId) {
+      const vSlug = String(tripData.vendorName || vId).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      vendorLink.href = `vendor.html?id=${encodeURIComponent(vSlug || vId)}`;
+      vendorLink.title = `View all trips listed by ${tripData.vendorName || 'this organiser'}`;
     }
 
     // Set Image
