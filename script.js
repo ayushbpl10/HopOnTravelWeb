@@ -128,9 +128,9 @@ function renderTripCards(tripsArr) {
             <span class="web-trip-price">from ₹${minPrice.toLocaleString('en-IN')}</span>
             <span class="web-trip-seats">${totalSeats} seats left</span>
           </div>
-          <div style="display:flex; gap:0.5rem; margin-top:0.8rem;">
-            <button class="web-trip-book-btn" style="flex:1;" onclick="selectWebTrip('${trip.id}')">${bookBtnLabel}</button>
-            <a href="trip.html?id=${encodeURIComponent(trip.id)}" class="p-btn p-btn-dark p-btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:0.6rem 0.9rem; font-size:0.85rem; border-radius:10px;">Details</a>
+          <div class="web-trip-actions">
+            <button class="web-trip-book-btn" onclick="selectWebTrip('${trip.id}')">${bookBtnLabel}</button>
+            <a href="trip.html?id=${encodeURIComponent(trip.id)}" class="web-trip-details-btn">Details</a>
           </div>
         </div>
       </div>`;
