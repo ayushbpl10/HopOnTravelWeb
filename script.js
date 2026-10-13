@@ -99,6 +99,7 @@ function renderTripCards(tripsArr) {
     return;
   }
   grid.innerHTML = tripsArr.map(trip => {
+    const isDemo = trip.id === 'demo' || Boolean(trip.isDemo);
     const minPrice = trip.packages && trip.packages.length
       ? Math.min(...trip.packages.map(p => p.price))
       : 0;
@@ -110,8 +111,13 @@ function renderTripCards(tripsArr) {
     const img = trip.images && trip.images[0]
       ? `<img class="web-trip-img" src="${trip.images[0]}" alt="${escapeHtml(trip.title)}" loading="lazy" onerror="this.outerHTML='<div class=web-trip-img>${emoji}</div>'" />`
       : `<div class="web-trip-img">${emoji}</div>`;
+    const demoBadge = isDemo
+      ? `<span class="demo-badge-pill">⚡ INTERACTIVE DEMO</span>`
+      : '';
+    const bookBtnLabel = isDemo ? '⚡ Try Demo Booking →' : 'Book This Trip →';
     return `
-      <div class="web-trip-card" data-id="${trip.id}">
+      <div class="web-trip-card trip-card ${isDemo ? 'is-demo-trip' : ''}" data-id="${trip.id}" style="position:relative;">
+        ${demoBadge}
         ${img}
         <div class="web-trip-body">
           <div class="web-trip-title">${escapeHtml(trip.title)}</div>
@@ -123,7 +129,7 @@ function renderTripCards(tripsArr) {
             <span class="web-trip-seats">${totalSeats} seats left</span>
           </div>
           <div style="display:flex; gap:0.5rem; margin-top:0.8rem;">
-            <button class="web-trip-book-btn" style="flex:1;" onclick="selectWebTrip('${trip.id}')">Book This Trip →</button>
+            <button class="web-trip-book-btn" style="flex:1;" onclick="selectWebTrip('${trip.id}')">${bookBtnLabel}</button>
             <a href="trip.html?id=${encodeURIComponent(trip.id)}" class="p-btn p-btn-dark p-btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:0.6rem 0.9rem; font-size:0.85rem; border-radius:10px;">Details</a>
           </div>
         </div>
@@ -172,6 +178,45 @@ function selectWebTrip(tripId) {
   goToStep(2);
   document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
 }
+
+// Backward compatibility & 1-click Demo launcher
+window.openBookingModal = selectWebTrip;
+window.startDemoTripBooking = function() {
+  selectWebTrip('demo');
+};
+
+// Autofill Demo Traveller details in Step 2
+function autofillDemoTraveller() {
+  const nameInput = document.getElementById('travelerName');
+  const phoneInput = document.getElementById('travelerPhone');
+  const emailInput = document.getElementById('travelerEmail');
+  const consentInput = document.getElementById('consentCheck');
+  const captchaInput = document.getElementById('captchaAns');
+
+  if (nameInput) nameInput.value = 'Pooja Sharma';
+  if (phoneInput) phoneInput.value = '9876543210';
+  if (emailInput) emailInput.value = 'pooja.demo@hopontravel.com';
+  if (consentInput) consentInput.checked = true;
+  if (captchaInput && typeof _captchaA === 'number' && typeof _captchaB === 'number') {
+    captchaInput.value = String(_captchaA + _captchaB);
+  }
+
+  const autofillBtn = document.getElementById('autofillDemoBtn');
+  if (autofillBtn) {
+    const originalText = autofillBtn.textContent;
+    autofillBtn.textContent = '✓ Details Autofilled!';
+    autofillBtn.style.background = 'rgba(34, 197, 94, 0.2)';
+    autofillBtn.style.borderColor = '#22c55e';
+    autofillBtn.style.color = '#22c55e';
+    setTimeout(() => {
+      autofillBtn.textContent = originalText;
+      autofillBtn.style.background = '';
+      autofillBtn.style.borderColor = '';
+      autofillBtn.style.color = '';
+    }, 2000);
+  }
+}
+window.autofillDemoTraveller = autofillDemoTraveller;
 
 // Update live price display
 function updatePriceDisplay() {
@@ -306,16 +351,12 @@ async function submitWebBooking() {
   btn.disabled = true;
   btn.textContent = 'Creating Booking...';
 
+  const isDemo = _selectedTrip && (_selectedTrip.id === 'demo' || Boolean(_selectedTrip.isDemo));
+
   try {
-    if (!window._fbApp) {
+    if (!window._fbApp && !isDemo) {
       alert('Connecting to database... Please wait a few seconds and try again.');
       return;
-    }
-    const { db, auth, collection, addDoc, signInAnonymously, doc, getDoc, updateDoc, query, getDocs, where } = window._fbApp;
-
-    // Sign in anonymously so Firestore rules allow writes
-    if (!auth.currentUser) {
-      await signInAnonymously(auth);
     }
 
     const pkgOpt = pkgSel.selectedOptions[0];
@@ -323,55 +364,69 @@ async function submitWebBooking() {
     const pricePerSeat = parseInt(pkgOpt?.dataset.price, 10) || 0;
     const totalPrice = pricePerSeat * seats;
     const batchId = batchSel.value;
-    const bookingId = 'ATGL-' + Math.floor(10000 + Math.random() * 90000).toString();
+    const bookingId = isDemo ? ('ATGL-DEMO' + Math.floor(1000 + Math.random() * 9000)) : ('ATGL-' + Math.floor(10000 + Math.random() * 90000).toString());
 
-    // Find vendorId (use trip's attached vendorId first, fallback to whatsapp lookup)
-    let vendorId = _selectedTrip.vendorId || null;
-    let vendorWhatsApp = _selectedTrip.vendorWhatsApp || '';
-    if (!vendorId && vendorWhatsApp) {
-      const vq = query(collection(db, 'vendors'), where('whatsappNumber', '==', vendorWhatsApp));
-      const vSnap = await getDocs(vq);
-      if (!vSnap.empty) vendorId = vSnap.docs[0].id;
-    }
+    if (window._fbApp) {
+      try {
+        const { db, auth, collection, addDoc, signInAnonymously, doc, getDoc, updateDoc, query, getDocs, where } = window._fbApp;
 
-    const bookingData = {
-      tripId: _selectedTrip.id,
-      batchId,
-      packageName,
-      travelerName: name,
-      travelerPhone: phone,
-      travelerEmail: email,
-      seats,
-      totalPrice,
-      status: 'pending',
-      createdAt: Date.now(),
-      bookingId,
-      vendorId: vendorId || null,
-      source: 'website',
-      captchaVerified: true,
-      securityVerification: {
-        provider: recaptchaToken ? 'google_recaptcha_v3' : 'math_captcha',
-        verified: true,
-        siteKey: '6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM',
-        timestamp: Date.now()
+        // Sign in anonymously so Firestore rules allow writes
+        if (!auth.currentUser) {
+          await signInAnonymously(auth);
+        }
+
+        // Find vendorId (use trip's attached vendorId first, fallback to whatsapp lookup)
+        let vendorId = _selectedTrip.vendorId || null;
+        let vendorWhatsApp = _selectedTrip.vendorWhatsApp || '';
+        if (!vendorId && vendorWhatsApp) {
+          const vq = query(collection(db, 'vendors'), where('whatsappNumber', '==', vendorWhatsApp));
+          const vSnap = await getDocs(vq);
+          if (!vSnap.empty) vendorId = vSnap.docs[0].id;
+        }
+
+        const bookingData = {
+          tripId: _selectedTrip.id,
+          batchId,
+          packageName,
+          travelerName: name,
+          travelerPhone: phone,
+          travelerEmail: email,
+          seats,
+          totalPrice,
+          status: 'pending',
+          createdAt: Date.now(),
+          bookingId,
+          vendorId: vendorId || null,
+          source: 'website',
+          isDemo: Boolean(isDemo),
+          captchaVerified: true,
+          securityVerification: {
+            provider: recaptchaToken ? 'google_recaptcha_v3' : 'math_captcha',
+            verified: true,
+            siteKey: '6Lexm8UtAAAAABvf5IuhmCniieHVVpsqiuADIAPM',
+            timestamp: Date.now()
+          }
+        };
+
+        await addDoc(collection(db, 'bookings'), bookingData);
+
+        // Update bookedSeats on the trip batch (best-effort)
+        try {
+          const tripRef = doc(db, 'trips', _selectedTrip.id);
+          const tripSnap = await getDoc(tripRef);
+          if (tripSnap.exists()) {
+            const updatedBatches = tripSnap.data().batches.map(b =>
+              b.id === batchId ? { ...b, bookedSeats: b.bookedSeats + seats } : b
+            );
+            await updateDoc(tripRef, { batches: updatedBatches });
+          }
+        } catch (seatErr) {
+          console.warn('Could not update seat count (non-fatal):', seatErr.message);
+        }
+      } catch (fbErr) {
+        if (!isDemo) throw fbErr;
+        console.warn('Demo booking Firestore write skipped/fallback applied:', fbErr.message);
       }
-    };
-
-    await addDoc(collection(db, 'bookings'), bookingData);
-
-    // Update bookedSeats on the trip batch (best-effort — may fail if
-    // Firestore rules don't allow anonymous users to update trips)
-    try {
-      const tripRef = doc(db, 'trips', _selectedTrip.id);
-      const tripSnap = await getDoc(tripRef);
-      if (tripSnap.exists()) {
-        const updatedBatches = tripSnap.data().batches.map(b =>
-          b.id === batchId ? { ...b, bookedSeats: b.bookedSeats + seats } : b
-        );
-        await updateDoc(tripRef, { batches: updatedBatches });
-      }
-    } catch (seatErr) {
-      console.warn('Could not update seat count (non-fatal):', seatErr.message);
     }
 
     // Populate confirmation ticket
@@ -384,7 +439,24 @@ async function submitWebBooking() {
 
     const portalLink = document.getElementById('conf-portal-link');
     if (portalLink) {
-      portalLink.href = `traveller.html?bookingId=${encodeURIComponent(bookingId)}`;
+      portalLink.href = `traveller.html?bookingId=${encodeURIComponent(bookingId)}${isDemo ? '&demo=true' : ''}`;
+    }
+
+    const demoActions = document.getElementById('demoEcosystemActions');
+    if (demoActions) {
+      if (isDemo) {
+        demoActions.style.display = 'flex';
+        const demoTravellerLink = document.getElementById('demoTravellerLink');
+        if (demoTravellerLink) {
+          demoTravellerLink.href = `traveller.html?demo=true&bookingId=${encodeURIComponent(bookingId)}`;
+        }
+        const demoVendorLink = document.getElementById('demoVendorLink');
+        if (demoVendorLink) {
+          demoVendorLink.href = `vendor-portal.html?demo=true&tripId=${encodeURIComponent(_selectedTrip.id)}`;
+        }
+      } else {
+        demoActions.style.display = 'none';
+      }
     }
 
     goToStep(3);
@@ -407,11 +479,13 @@ async function submitWebBooking() {
 const CURATED_SAMPLE_TRIPS = [
   {
     id: 'demo',
-    title: 'Harishchandragad & Kokankada Trek',
-    vendorName: 'Sahyadri Trekkers (Verified Partner)',
-    vendorId: 'demo',
-    packages: [{ name: 'Pune Transport', price: 1299 }, { name: 'Mumbai Transport', price: 1499 }],
-    batches: [{ id: 'b1', dateDuration: '05-06 Sep (Sat-Sun)', totalSeats: 30, bookedSeats: 8 }],
+    isDemo: true,
+    title: '⚡ [DEMO] Harishchandragad Sunrise & Kokankada Trek',
+    vendorName: 'Sahyadri Trekkers (Demo Organiser)',
+    vendorId: 'demo_vendor_sahyadri',
+    vendorWhatsApp: '+919876543210',
+    packages: [{ name: 'Pune Transport (Demo)', price: 1299 }, { name: 'Mumbai Transport (Demo)', price: 1499 }],
+    batches: [{ id: 'b1', dateDuration: 'Upcoming Weekend (Sat-Sun)', totalSeats: 30, bookedSeats: 8 }],
     images: ['https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80']
   },
   {
@@ -457,6 +531,8 @@ async function loadTripsOnReady() {
     _allWebTrips = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     if (!_allWebTrips.length) {
       _allWebTrips = CURATED_SAMPLE_TRIPS;
+    } else if (!_allWebTrips.some(t => t.id === 'demo')) {
+      _allWebTrips.unshift(CURATED_SAMPLE_TRIPS[0]);
     }
     if (loadingMsg) loadingMsg.style.display = 'none';
     renderTripCards(_allWebTrips);

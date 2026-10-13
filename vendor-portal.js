@@ -205,6 +205,18 @@ function handleDemoAuthModalLogin() {
 }
 
 function initVendorPortal() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('demo') === 'true') {
+    loginAsDemoVendor();
+    const paramTripId = urlParams.get('tripId');
+    if (paramTripId) {
+      setTimeout(() => {
+        if (typeof switchVendorTab === 'function') switchVendorTab('bookings');
+      }, 300);
+    }
+    return;
+  }
+
   // Auto-restore demo vendor if active
   if (localStorage.getItem('hopon_demo_vendor') === 'true') {
     _vendorUser = DEMO_VENDOR_USER;

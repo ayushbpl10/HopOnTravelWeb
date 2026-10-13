@@ -451,6 +451,152 @@ body {
 .book-new-btn:hover { border-color: var(--primary); }
 .book-ticket-note { text-align: center; font-size: .8rem; color: var(--muted); padding: 0 1.5rem 1.5rem; line-height: 1.5; }
 
+/* Demo Trip Test-Drive Banner & Elements */
+.demo-testdrive-banner {
+  background: linear-gradient(135deg, rgba(0, 176, 255, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
+  border: 1px solid rgba(0, 176, 255, 0.35);
+  border-radius: 18px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 176, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.demo-testdrive-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 176, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.demo-testdrive-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.demo-testdrive-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(0, 176, 255, 0.2);
+  border: 1px solid rgba(0, 176, 255, 0.4);
+  color: #00b0ff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 0.5rem;
+}
+.demo-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #00b0ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00b0ff;
+  animation: demoPulse 1.8s infinite;
+}
+@keyframes demoPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+.demo-testdrive-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+.demo-testdrive-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 650px;
+}
+.demo-testdrive-btn {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #00b0ff, #0081cb);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0, 176, 255, 0.35);
+  transition: all 0.25s ease;
+}
+.demo-testdrive-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 176, 255, 0.5);
+}
+
+.book-demo-autofill-btn {
+  background: rgba(255, 184, 0, 0.15);
+  border: 1px solid rgba(255, 184, 0, 0.4);
+  color: #ffb800;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+.book-demo-autofill-btn:hover {
+  background: rgba(255, 184, 0, 0.25);
+  border-color: #ffb800;
+  transform: translateY(-1px);
+}
+
+.web-trip-card.is-demo-trip {
+  border: 1.5px solid rgba(0, 176, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 176, 255, 0.15);
+}
+.demo-badge-pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 176, 255, 0.5);
+  color: #00b0ff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  z-index: 2;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .demo-testdrive-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+  }
+  .demo-testdrive-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .book-demo-autofill-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {

@@ -82,6 +82,17 @@ function handleDemoAuthModalLogin() {
 }
 
 function initTravellerPortal() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('demo') === 'true') {
+    loginAsDemoTraveller();
+    const paramBookingId = urlParams.get('bookingId');
+    if (paramBookingId) {
+      const input = document.getElementById('quickBookingIdInput');
+      if (input) input.value = paramBookingId;
+    }
+    return;
+  }
+
   // Auto-restore demo traveller if previously active
   if (localStorage.getItem('hopon_demo_traveller') === 'true') {
     _currentUser = DEMO_TRAVELLER_USER;
@@ -121,7 +132,6 @@ function initTravellerPortal() {
   });
 
   // Check URL query for direct booking tracking (e.g. traveller.html?bookingId=ATGL-12345)
-  const urlParams = new URLSearchParams(window.location.search);
   const paramBookingId = urlParams.get('bookingId');
   if (paramBookingId) {
     const input = document.getElementById('quickBookingIdInput');

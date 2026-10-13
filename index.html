@@ -289,6 +289,21 @@
 
       <!-- Step 1: Browse Trips -->
       <div class="book-panel" id="step-1">
+        <!-- Demo Test-Drive Interactive Banner -->
+        <div id="demoTestDriveBanner" class="demo-testdrive-banner">
+          <div class="demo-testdrive-content">
+            <div class="demo-testdrive-badge">
+              <span class="demo-pulse-dot"></span>
+              <span data-i18n="demo_banner_pill">Interactive Demo Trip</span>
+            </div>
+            <h3 class="demo-testdrive-title" data-i18n="demo_banner_title">Test the Complete Booking Journey</h3>
+            <p class="demo-testdrive-desc" data-i18n="demo_banner_desc">Experience the whole booking flow with zero payment! See how travellers receive instant tickets with live bus radar, and how vendors track manifests in real time.</p>
+          </div>
+          <button type="button" class="demo-testdrive-btn" onclick="startDemoTripBooking()" data-i18n="demo_banner_btn">
+            ⚡ Try Demo Booking Flow →
+          </button>
+        </div>
+
         <div class="book-search-row">
           <input type="text" id="tripSearch" class="book-search-input" data-i18n-placeholder="search_placeholder" placeholder="🔍  Search trips by name..." oninput="filterWebTrips(this.value)" />
         </div>
@@ -307,6 +322,9 @@
         <div class="book-form-header">
           <button class="book-back-btn" onclick="goToStep(1)" data-i18n="step2_back_btn">← Back to Trips</button>
           <div class="selected-trip-badge" id="selectedTripBadge"></div>
+          <button type="button" id="autofillDemoBtn" class="book-demo-autofill-btn" onclick="autofillDemoTraveller()" data-i18n="step2_autofill_demo">
+            ⚡ Autofill Demo Details
+          </button>
         </div>
         <div class="book-form-grid">
           <div class="book-form-left">
@@ -386,6 +404,23 @@
             <div class="book-ticket-id" id="conf-bookingId"></div>
           </div>
           <div class="book-ticket-actions" style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Dual Ecosystem Experience Showcase for Demo Bookings -->
+            <div id="demoEcosystemActions" style="display:none; flex-direction:column; gap:10px; margin-bottom:6px;">
+              <div style="background: rgba(0, 176, 255, 0.08); border: 1px solid rgba(0, 176, 255, 0.25); border-radius: 12px; padding: 12px; text-align: left;">
+                <div style="display:flex; align-items:center; gap:6px; color:#00b0ff; font-weight:700; font-size:0.85rem; margin-bottom:4px;">
+                  <span>⚡ LIVE ECOSYSTEM SIMULATION</span>
+                </div>
+                <div style="font-size:0.82rem; color:#cbd5e1; line-height:1.4;">
+                  Experience both sides of this booking live: explore the traveller's GPS radar ticket or jump into the organiser's passenger manifest!
+                </div>
+              </div>
+              <a id="demoTravellerLink" href="traveller.html?demo=true" class="book-wa-btn" style="background: linear-gradient(135deg, #00b0ff, #0081cb); color:#fff; font-weight:800; border:none; box-shadow: 0 4px 15px rgba(0,176,255,0.3); text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <span>📱 Traveller Experience (Live GPS Radar) →</span>
+              </a>
+              <a id="demoVendorLink" href="vendor-portal.html?demo=true" class="book-wa-btn" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); color:#fff; font-weight:800; border:none; box-shadow: 0 4px 15px rgba(124,58,237,0.3); text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <span>📊 Organiser Experience (Manifests & Captain Hub) →</span>
+              </a>
+            </div>
             <a id="conf-portal-link" href="traveller.html" class="book-wa-btn" style="background: linear-gradient(45deg, #FFB800, #ff8c00); color:#000; font-weight:800; border:none; box-shadow: 0 4px 15px rgba(255,184,0,0.4); text-align:center; text-decoration:none; display:block;" data-i18n="step3_track_btn">
               📍 View Ticket & Track Bus in Traveller Portal →
             </a>
