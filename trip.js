@@ -16,11 +16,12 @@ async function initTripPage() {
 
   const DEMO_TRIP = {
     id: 'demo',
+    isDemo: true,
     title: 'Harishchandragad & Kokankada Trek',
     description: 'Explore the mighty Harishchandragad fort, ancient Kedareshwar cave, and experience the breathtaking drop of Kokankada cliff. Overnight trek with camping & sunrise view.',
     category: 'Trekking',
     destination: 'Harishchandragad',
-    vendorName: 'Sahyadri Trekkers (Verified Partner)',
+    vendorName: 'Sahyadri Trekkers (Demo Organiser)',
     vendorId: 'demo',
     packages: [
       { name: 'Pune Transport Package', price: 999 },
@@ -42,9 +43,73 @@ async function initTripPage() {
     images: ['https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80']
   };
 
+  const ALL_DEMO_TRIPS = {
+    demo: DEMO_TRIP,
+    'rajmachi-demo': {
+      id: 'rajmachi-demo',
+      isDemo: true,
+      title: 'Rajmachi Fireflies & Fort Camping',
+      description: 'Witness millions of glowing fireflies illuminating the Sahyadri forest trails around Rajmachi fort. Lakeside tents, barbecue, and starry night camping.',
+      category: 'Camping',
+      destination: 'Lonavala / Karjat',
+      vendorName: 'Sahyadri Trekkers (Demo Organiser)',
+      vendorId: 'demo',
+      packages: [{ name: 'Standard Camping (Demo)', price: 1399 }],
+      batches: [{ id: 'b2', dateDuration: 'Upcoming Weekend', totalSeats: 25, bookedSeats: 6 }],
+      pickupPoints: [{ location: 'Lonavala Railway Station', time: '04:00 PM' }],
+      inclusions: ['Tent Stay', 'Barbecue', 'Unlimited Dinner', 'Breakfast', 'Guide'],
+      exclusions: ['Train tickets', 'Personal expenses'],
+      structuredItinerary: [
+        { day: 1, title: 'Base Village & Fireflies Trail', description: 'Reach base village, sunset trail, night fireflies exploration and bonfire dinner.' },
+        { day: 2, title: 'Sunrise Fort Trek', description: 'Early morning hike to Shrivardhan fort, breakfast, and return.' }
+      ],
+      images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80']
+    },
+    'pawna-demo': {
+      id: 'pawna-demo',
+      isDemo: true,
+      title: 'Pawna Lake Lakeside Glamping',
+      description: 'Peaceful lakeside camping with live acoustic music, water games, sunset viewpoints, and cozy weatherproof tents under the stars.',
+      category: 'Camping',
+      destination: 'Pawna Lake, Kamshet',
+      vendorName: 'Camp Wanderers (Demo Organiser)',
+      vendorId: 'camp-wanderers',
+      packages: [{ name: 'Lakeside Tent (Demo)', price: 1099 }],
+      batches: [{ id: 'b3', dateDuration: 'Every Weekend', totalSeats: 40, bookedSeats: 15 }],
+      pickupPoints: [{ location: 'Direct Reporting at Campsite / Kamshet Station', time: '04:00 PM' }],
+      inclusions: ['Tent Stay', 'Evening Snacks', 'Barbecue', 'Campfire', 'Breakfast'],
+      exclusions: ['Transport', 'Personal expenses'],
+      structuredItinerary: [
+        { day: 1, title: 'Lakeside Check-in', description: 'Sunset viewpoints, evening music, campfire & barbecue.' },
+        { day: 2, title: 'Sunrise & Breakfast', description: 'Morning lake breeze, breakfast, and checkout.' }
+      ],
+      images: ['https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=80']
+    },
+    'gokarna-demo': {
+      id: 'gokarna-demo',
+      isDemo: true,
+      title: 'Gokarna Beach Trek & Cafe Hopping',
+      description: 'Backpack across 5 pristine coastal beaches (Kudle, Om, Half Moon, Paradise, Nirvana). Beach camping, cliff diving, and cafe sunsets.',
+      category: 'Backpacking',
+      destination: 'Gokarna, Karnataka',
+      vendorName: 'Coastline Explorers (Demo Organiser)',
+      vendorId: 'coastline-explorers',
+      packages: [{ name: 'Full Trip Ex-Pune (Demo)', price: 3999 }],
+      batches: [{ id: 'b4', dateDuration: 'Long Weekend', totalSeats: 20, bookedSeats: 5 }],
+      pickupPoints: [{ location: 'Swargate', time: '06:00 PM' }],
+      inclusions: ['Sleeper Bus Tickets', 'Beach Stay', 'Breakfasts', 'Guide'],
+      exclusions: ['Cafe meals', 'Watersports'],
+      structuredItinerary: [
+        { day: 1, title: 'Overnight Journey', description: 'Departure from Pune/Mumbai to Gokarna.' },
+        { day: 2, title: 'Beach Trek', description: 'Trek across 5 beaches and cafe hopping.' }
+      ],
+      images: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80']
+    }
+  };
+
   try {
-    if (tripId === 'demo') {
-      tripData = DEMO_TRIP;
+    if (ALL_DEMO_TRIPS[tripId]) {
+      tripData = ALL_DEMO_TRIPS[tripId];
     } else {
       const { db, doc, getDoc } = window._fbApp;
       const tripRef = doc(db, 'trips', tripId);
@@ -62,6 +127,12 @@ async function initTripPage() {
     document.getElementById('tripTitle').textContent = tripData.title || 'Trip Details';
     document.getElementById('tripDesc').textContent = tripData.description || '';
     document.getElementById('tripVendor').textContent = tripData.vendorName || 'Verified Vendor';
+
+    const isDemo = tripId === 'demo' || Boolean(tripData.isDemo) || String(tripId).toLowerCase().includes('demo');
+    const demoBadgeEl = document.getElementById('tripDemoBadge');
+    if (demoBadgeEl) {
+      demoBadgeEl.style.display = isDemo ? 'block' : 'none';
+    }
 
     // Set dedicated vendor profile link
     const vendorLink = document.getElementById('vendorLink');

@@ -99,7 +99,7 @@ function renderTripCards(tripsArr) {
     return;
   }
   grid.innerHTML = tripsArr.map(trip => {
-    const isDemo = trip.id === 'demo' || Boolean(trip.isDemo);
+    const isDemo = trip.id === 'demo' || Boolean(trip.isDemo) || String(trip.id).toLowerCase().includes('demo');
     const minPrice = trip.packages && trip.packages.length
       ? Math.min(...trip.packages.map(p => p.price))
       : 0;
@@ -490,28 +490,34 @@ const CURATED_SAMPLE_TRIPS = [
   },
   {
     id: 'rajmachi-demo',
-    title: 'Rajmachi Fireflies & Fort Camping',
-    vendorName: 'Sahyadri Trekkers (Verified Partner)',
-    vendorId: 'demo',
-    packages: [{ name: 'Camping Package', price: 1399 }],
+    isDemo: true,
+    title: '⚡ [DEMO] Rajmachi Fireflies & Fort Camping',
+    vendorName: 'Sahyadri Trekkers (Demo Organiser)',
+    vendorId: 'demo_vendor_sahyadri',
+    vendorWhatsApp: '+919876543210',
+    packages: [{ name: 'Camping Package (Demo)', price: 1399 }],
     batches: [{ id: 'b2', dateDuration: 'Upcoming Weekend', totalSeats: 25, bookedSeats: 6 }],
     images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80']
   },
   {
     id: 'pawna-demo',
-    title: 'Pawna Lake Lakeside Glamping',
-    vendorName: 'Camp Wanderers',
+    isDemo: true,
+    title: '⚡ [DEMO] Pawna Lake Lakeside Glamping',
+    vendorName: 'Camp Wanderers (Demo Organiser)',
     vendorId: 'camp-wanderers',
-    packages: [{ name: 'Lakeside Tent', price: 1099 }],
+    vendorWhatsApp: '+919876543210',
+    packages: [{ name: 'Lakeside Tent (Demo)', price: 1099 }],
     batches: [{ id: 'b3', dateDuration: 'Every Weekend', totalSeats: 40, bookedSeats: 15 }],
     images: ['https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80']
   },
   {
     id: 'gokarna-demo',
-    title: 'Gokarna Beach Trek & Cafe Hopping',
-    vendorName: 'Coastline Explorers',
+    isDemo: true,
+    title: '⚡ [DEMO] Gokarna Beach Trek & Cafe Hopping',
+    vendorName: 'Coastline Explorers (Demo Organiser)',
     vendorId: 'coastline-explorers',
-    packages: [{ name: 'Full Trip Ex-Pune', price: 3999 }],
+    vendorWhatsApp: '+919876543210',
+    packages: [{ name: 'Full Trip Ex-Pune (Demo)', price: 3999 }],
     batches: [{ id: 'b4', dateDuration: 'Long Weekend', totalSeats: 20, bookedSeats: 5 }],
     images: ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80']
   }

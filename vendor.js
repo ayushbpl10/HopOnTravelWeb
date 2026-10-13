@@ -491,19 +491,24 @@ function renderVendorTripsGrid(trips, vendorName) {
   }
 
   grid.innerHTML = trips.map(trip => {
+    const isDemo = trip.id === 'demo' || Boolean(trip.isDemo) || String(trip.id).toLowerCase().includes('demo');
     const img = (trip.images && trip.images.length > 0) ? trip.images[0] : 'hero.png';
     const date = (trip.batches && trip.batches.length > 0) ? trip.batches[0].dateDuration : 'Upcoming Dates';
     const price = (trip.packages && trip.packages.length > 0) ? trip.packages[0].price : (trip.price || 0);
     const category = trip.category || 'Trek';
     const tripDetailUrl = `trip.html?id=${encodeURIComponent(trip.id)}`;
+    const demoBadge = isDemo
+      ? `<span class="demo-badge-pill" style="position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); color: #00b0ff; border: 1px solid rgba(0,176,255,0.5); font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 50px; z-index: 3; letter-spacing: 0.05em; box-shadow: 0 2px 10px rgba(0,176,255,0.25);">⚡ INTERACTIVE DEMO</span>`
+      : '';
 
     return `
-      <div class="vbento-card" style="padding: 0; overflow: hidden; border-radius: 24px; display: flex; flex-direction: column; height: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border); transition: transform 0.25s, border-color 0.25s;">
+      <div class="vbento-card" style="padding: 0; overflow: hidden; border-radius: 24px; display: flex; flex-direction: column; height: 100%; background: rgba(255,255,255,0.03); border: ${isDemo ? '1.5px solid rgba(0,176,255,0.4)' : '1px solid var(--border)'}; transition: transform 0.25s, border-color 0.25s;">
         <div style="position: relative; height: 210px; overflow: hidden;">
           <img src="${img}" alt="${escapeHtml(trip.title)}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onerror="this.src='hero.png'" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
           <span style="position: absolute; top: 14px; left: 14px; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px); color: var(--yellow); padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,184,0,0.3);">
             ${escapeHtml(category)}
           </span>
+          ${demoBadge}
         </div>
         <div style="padding: 1.6rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
           <div>

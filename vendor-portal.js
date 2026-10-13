@@ -86,6 +86,7 @@ const DEMO_VENDOR_USER = {
 const DEMO_VENDOR_TRIPS = [
   {
     id: 'demo',
+    isDemo: true,
     title: 'Harishchandragad & Kokankada Trek',
     destination: 'Harishchandragad, Ahmednagar',
     category: 'Trekking',
@@ -106,6 +107,7 @@ const DEMO_VENDOR_TRIPS = [
   },
   {
     id: 'rajmachi-demo',
+    isDemo: true,
     title: 'Rajmachi Fireflies & Fort Camping',
     destination: 'Lonavala / Karjat',
     category: 'Camping',
@@ -545,11 +547,15 @@ function renderVendorTrips() {
           <span class="p-badge p-badge-confirmed" style="position: absolute; top: 12px; left: 12px;">
             ${escapeHtml(trip.category || 'Trek')}
           </span>
-          ${isLive ? `
+          ${(trip.id === 'demo' || trip.isDemo || String(trip.id).includes('demo') || isDemoAccount()) ? `
+            <span class="demo-badge-pill" style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(0,176,255,0.5); color: #00b0ff; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 100px; z-index: 2; box-shadow: 0 2px 10px rgba(0,176,255,0.25);">
+              ⚡ INTERACTIVE DEMO
+            </span>
+          ` : (isLive ? `
             <span class="p-badge p-badge-confirmed" style="position: absolute; top: 12px; right: 12px; background: rgba(16,185,129,0.9); color:#fff;">
               ● LIVE GPS
             </span>
-          ` : ''}
+          ` : '')}
         </div>
 
         <div style="padding: 1.4rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
