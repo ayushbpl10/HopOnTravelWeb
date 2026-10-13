@@ -609,7 +609,7 @@ body {
     width: 100%;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 330px) {
   .web-trip-actions {
     flex-direction: column;
     gap: 0.5rem;
